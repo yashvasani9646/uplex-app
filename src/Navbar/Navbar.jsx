@@ -21,27 +21,27 @@ const Navbar = () => {
 
     const categories = [
         {
-            title: "Clothing&Fashion",
+            title: "Building Materials & construction",
             submenu: ["T-Shirts", "Jeans", "Shoes", "Jackets"],
         },
         {
-            title: "Stationery Supplies",
+            title: "Toys",
             submenu: ["Notebooks", "Staplers", "Files", "Markers"],
         },
         {
-            title: "Miscellaneous",
+            title: "Luggage & Bags",
             submenu: ["Camping", "Tools", "Medical", "Bags"],
         },
         {
-            title: "Office Equipment",
+            title: "Home & Kitchen",
             submenu: ["Printer", "Scanner", "Laptop", "Chair"],
         },
         {
-            title: "Baby & Kids Products",
+            title: "Jewellery",
             submenu: ["Toys", "Baby Dress", "Bottle", "Walker"],
         },
         {
-            title: "Books & Study Material",
+            title: "Fashion",
             submenu: ["Books", "Notes", "Guide", "Dictionary"],
         },
     ];
@@ -94,6 +94,7 @@ const Navbar = () => {
                         <p className="font-medium cursor-pointer">
                             Partner With Us
                         </p>
+
 
                         <button className="px-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 hover:scale-105 duration-300">
                             Login / Sign Up

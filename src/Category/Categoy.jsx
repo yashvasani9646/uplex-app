@@ -1,137 +1,164 @@
 import { IoChevronForwardOutline } from "react-icons/io5";
-
+import { Link, useNavigate } from "react-router-dom";
 
 const categories = [
     {
-        name: "Clothing & Fashion",
+        name: "Building materials",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/7352c781d62b4693890e0cd3f7f77c7a.jpg",
-        items: "2 Items",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/44c21c18dc72453bb531449db6092abc.png",
+        items: "0 Items",
     },
     {
-        name: "Stationery Supplies",
+        name: "Toys",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/6ffa2c7d6f6944718e6433d9564acbd0.jpg",
-        items: "14 Items",
-    },
-    {
-        name: "Miscellaneous",
-        image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/f2802d79a93f488395aad4ab3bb7f824.png",
-        items: "4 Items",
-    },
-    {
-        name: "Office Equipment",
-        image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/3768df879a0e4ddb894545ae8f276c88.jpg",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/1cff1246f75b416fbcf2e0fd5007ebbd.png",
         items: "1 Items",
     },
     {
-        name: "Baby & Kids Products",
+        name: "Luggage & Bags",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/a5064c66e04c48ea981f762de968f260.png",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/b2bacbe5a94d4f4b8708085c21a86071.png",
         items: "0 Items",
     },
     {
-        name: "Books & Study Material",
+        name: "Home & Kitchen",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/4143a75ead4848fe95fb66b5d9da3a83.png",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/2933ec8480cd42cf867cc6f649a5900a.png",
+        items: "1 Items",
+    },
+    {
+        name: "Jewellery",
+        image:
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/c6fbd44ff1224ae8bd8ef7ed7508661b.jpeg",
         items: "0 Items",
     },
     {
-        name: "Medical",
+        name: "Fashion",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/7ad0ebe4ed6a4100aec641488b79e417.png",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/104fa6563c7e4dd387dc496056a3f77d.png",
         items: "0 Items",
     },
     {
-        name: "Electronics",
+        name: "Furniture & Home Decor",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/c94510a85eee4d9f9bcd0dbf2e3a9915.jpg",
-        items: "3 Items",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/6696ad19650842f2b3dfef39b89b3592.png",
+        items: "4 Items",
     },
     {
-        name: "Furniture",
+        name: "Electronics & Appliances",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/eb93b719bf934837ab34f86cde966981.jpg",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/d074845f65404156898c92b70d25db15.png",
+        items: "4 Items",
+    },
+    {
+        name: "Mobiles & Tablets",
+        image:
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/c192f574bd604ec390bbfdcca6b4faa3.png",
         items: "0 Items",
     },
     {
-        name: "Sports",
+        name: "Vehicles",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/225b40a996964216bf1034f844f79696.jpg",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/0f0eaf0b472c43ebae4baf3389a44db1.png",
         items: "0 Items",
     },
     {
-        name: "Beauty Products",
+        name: "Real Estate",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/5b13c7ec452b49c599541ea167abce31.png",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/c2f0bfdd7fad41ac912ad207148a45c9.png",
         items: "0 Items",
     },
     {
-        name: "Home Decor",
+        name: "Beauty & Personal Care",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/7352c781d62b4693890e0cd3f7f77c7a.jpg",
+            "https://service.digitalks.co.in/s3docs/upleex/categories_image/1b7262d03b794781aa7f7b8988527569.png",
         items: "0 Items",
     },
 ];
 
 const Categoy = () => {
+    const navigate = useNavigate();
+
     return (
-        <div className="w-full bg-white py-10">
-            <div className="max-w-[1400px] mx-auto px-4">
+        <div className="w-full bg-[#f8fafc] py-8">
+            <div className="max-w-[1360px] mx-auto px-4">
+                {/* HEADING */}
+                <div className="text-center">
+                    <h2 className="text-4xl md:text-5xl font-bold text-[#0b1633] leading-tight">
+                        Explore{" "}
+                        <span className="bg-gradient-to-r from-indigo-500 to-sky-500 bg-clip-text text-transparent">
+                            Premium
+                        </span>{" "}
+                        Categories
+                    </h2>
 
-                <h2 className="text-6xl font-bold text-center text-[#0b1633] leading-tight">
-                    Explore{" "}
-                    <span className="bg-gradient-to-r from-indigo-500 to-sky-500 bg-clip-text text-transparent">
-                        Premium
-                    </span>{" "}
-                    Categories
-                </h2>
+                    <p className="text-lg md:text-[22px] text-slate-500 mt-4 font-medium">
+                        Pick from top categories available in your city.
+                    </p>
+                </div>
 
-                <p className="text-center text-[26px] text-slate-500 mt-1 font-medium">
-                    Pick from top categories available in your city.
-                </p>
-
-                <div className="grid grid-cols-6 gap-5 mt-14">
-
+                {/* CATEGORY GRID */}
+                {/* CATEGORY GRID */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 mt-12">
                     {categories.map((item, index) => (
                         <div
                             key={index}
-                            className="relative h-[260px] border border-purple-200 rounded-3xl bg-white px-4 pt-8 pb-5 flex flex-col items-center justify-start hover:shadow-xl transition-all duration-300"
+                            className="group relative h-[225px] bg-[#f8f9ff] border border-[#d9cfff] rounded-[22px] px-4 pt-6 pb-5 flex flex-col items-center justify-start hover:-translate-y-3 hover:shadow-xl transition-all duration-300"
                         >
-
-                            <span className="absolute -top-4 px-5 py-1 rounded-full bg-sky-500 text-white text-sm font-semibold shadow-md">
+                            {/* ITEMS BADGE */}
+                            <span className="absolute -top-3 px-4 py-1 rounded-full bg-[#12a8f5] text-white text-[13px] font-semibold shadow">
                                 {item.items}
                             </span>
 
-                            <img
-                                src={item.image}
-                                alt={item.name}
-                                className="w-28 h-28 object-cover rounded-full"
-                            />
+                            {/* IMAGE */}
+                            <div className="w-[104px] h-[104px] rounded-full overflow-hidden bg-white flex items-center justify-center">
+                                <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
 
-                            {/* Name */}
-                            <p className="mt-6 text-[17px] font-semibold text-center text-gray-800 leading-6">
+                            {/* NAME */}
+                            <p className="mt-5 text-[16px] font-semibold text-center text-[#1f2937] leading-6 line-clamp-2">
                                 {item.name}
                             </p>
 
+                            {/* BUTTON */}
+                            <button
+                                onClick={() => {
+                                    // "0 Items" me se sirf number nikalna
+                                    const itemCount = parseInt(item.items);
+
+                                    //
+                                    if (itemCount === 0) {
+                                        navigate("/page1");
+                                    }
+                                    // Agar item 0 se zyada hai to Allcategory
+                                    else {
+                                        navigate("/page2");
+                                    }
+                                }}
+                                className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+                            >
+                                View All Products →
+                            </button>
                         </div>
                     ))}
-
-                    <div className="col-span-6 mx-auto mt-8">
-                        <div className="px-8 h-11 border border-blue-500 text-blue-600 rounded-full flex items-center gap-2 cursor-pointer hover:bg-blue-100 transition duration-300">
-
-                            <button className="text-[15px] font-medium">
-                                View All Categories
-                            </button>
-
-                            <IoChevronForwardOutline className="text-sm" />
-
-                        </div>
-                    </div>
                 </div>
+                {/* BUTTON */}
+                <div className="flex justify-center mt-12">
+                    <Link
+                        to="/allcategory"
+                        className="h-[54px] px-10 border border-[#5b61ff] text-[#5b61ff] rounded-full flex items-center gap-2 hover:bg-blue-50 transition duration-300"
+                    >
+                        <span className="text-[15px] font-medium">
+                            View All Categories
+                        </span>
 
+                        <IoChevronForwardOutline className="text-sm" />
+                    </Link>
+                </div>
             </div>
         </div>
     );

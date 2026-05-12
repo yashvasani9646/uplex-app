@@ -16,7 +16,7 @@ const images = [img1, img2, img3, img4];
 
 const Herosection = () => {
   return (
-    <div className="w-full bg-gray-100 py-10 mt-[120px]">
+    <div className="w-full bg-gray-100 py-10 mt-[10px]">
 
       <div className="max-w-[1500px] mx-auto px-4">
 
@@ -70,10 +70,8 @@ const Herosection = () => {
                     className="w-full h-full object-cover"
                   />
 
-                  {/* Overlay */}
                   <div className="absolute inset-0 bg-black/45"></div>
 
-                  {/* Text */}
                   <div className="absolute top-1/2 left-20 -translate-y-1/2 text-white max-w-[750px]">
 
                     <h1 className="text-6xl font-bold leading-tight">
