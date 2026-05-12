@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Banner from "./Banner/Banner";
 import LatestBlog from "./Blog/LatestBlog";
 import Categoy from "./Category/Categoy";
-import Allcategory from "./Category/Allcategory";
+import Allcategory from "./Category/AllCategory";
 import Faq from "./FAQ/Faq";
 import Footer from "./Footer/Footer";
 import Herosection from "./HeroSection/Herosection";
@@ -38,7 +38,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/allcategory" element={<Allcategory />} />
           <Route path="/page1" element={<Page1 />} />
-          <Route path="/Buyer" element={<Buyer/>} />
+          <Route path="/Buyer" element={<Buyer />} />
 
         </Routes>
       </div>

@@ -97,8 +97,7 @@ const Categoy = () => {
                     </p>
                 </div>
 
-                {/* CATEGORY GRID */}
-                {/* CATEGORY GRID */}
+             \
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 mt-12">
                     {categories.map((item, index) => (
                         <div
