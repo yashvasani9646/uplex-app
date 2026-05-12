@@ -123,7 +123,7 @@ const Categoy = () => {
                                 {item.name}
                             </p>
 
-                            <button onClick={(()=> navigate("/Buyer"))} className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+                            <button onClick={(() => navigate("/Buyer"))} className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
                             >
                                 View All Products →
                             </button>
