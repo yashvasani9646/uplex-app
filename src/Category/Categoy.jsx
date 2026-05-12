@@ -119,27 +119,11 @@ const Categoy = () => {
                                 />
                             </div>
 
-                            {/* NAME */}
                             <p className="mt-5 text-[16px] font-semibold text-center text-[#1f2937] leading-6 line-clamp-2">
                                 {item.name}
                             </p>
 
-                            {/* BUTTON */}
-                            <button
-                                onClick={() => {
-                                    // "0 Items" me se sirf number nikalna
-                                    const itemCount = parseInt(item.items);
-
-                                    //
-                                    if (itemCount === 0) {
-                                        navigate("/page1");
-                                    }
-                                    // Agar item 0 se zyada hai to Allcategory
-                                    else {
-                                        navigate("/page2");
-                                    }
-                                }}
-                                className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+                            <button onClick={(()=> navigate("/Buyer"))} className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
                             >
                                 View All Products →
                             </button>
