@@ -9,8 +9,8 @@ import {
   HomeIcon,
   CameraOff,
 } from "lucide-react";
-import ReactImageMagnify from "react-image-magnify";
- 
+import { useState } from "react";
+
 const Buyer = () => {
   const thumbnails = [
     "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg",
@@ -20,6 +20,25 @@ const Buyer = () => {
     "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg",
   ];
 
+  const [showZoom, setShowZoom] = useState(false);
+  const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 });
+
+  const imageUrl =
+    "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg";
+
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } =
+      e.currentTarget.getBoundingClientRect();
+
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+
+    setZoomPosition({
+      x: Math.max(0, Math.min(100, x)),
+      y: Math.max(0, Math.min(100, y)),
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-[1400px] mx-auto px-4 py-8">
@@ -28,61 +47,43 @@ const Buyer = () => {
           Back
         </button>
 
-        <div className="mt-8 bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-xl shadow-gray-200 hover:shadow-2xl hover:shadow-gray-300 transition-all duration-300">
+        <div className="mt-8 bg-white border border-gray-200 rounded-2xl overflow-visible shadow-xl shadow-gray-200 hover:shadow-2xl hover:shadow-gray-300 transition-all duration-300">
           <div className="grid grid-cols-1 lg:grid-cols-2">
-            <div className="p-6 border-r border-gray-200">
-              <div className="w-[480px] max-w-full mx-auto bg-white rounded-xl p-4 shadow-md">
-                <ReactImageMagnify
-                  {...{
-                    // Left side main image
-                    smallImage: {
-                      alt: "Product",
-                      src: "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg",
-                      width: 430,
-                      height: 520,
-                    },
+            {/* LEFT SIDE */}
+            <div className="p-6 border-r border-gray-200 overflow-visible relative">
+              {/* Main Image + Zoom */}
+              <div className="relative w-full">
+                <div className="flex items-start gap-6">
+                  {/* Left Image */}
+                  <div
+                    className="w-[480px] max-w-full bg-white rounded-xl p-4 shadow-md shrink-0"
+                    onMouseEnter={() => setShowZoom(true)}
+                    onMouseLeave={() => setShowZoom(false)}
+                    onMouseMove={handleMouseMove}
+                  >
+                    <div className="relative overflow-hidden rounded-lg cursor-crosshair">
+                      <img
+                        src={imageUrl}
+                        alt="Product"
+                        className="w-full h-[520px] object-cover"
+                      />
+                    </div>
+                  </div>
 
-                    // High-resolution image for zoom
-                    largeImage: {
-                      src: "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg",
-                      width: 1800,
-                      height: 2200,
-                    },
-
-                    // Show zoom image on the right side
-                    enlargedImagePosition: "beside",
-
-                    // Right side zoom box size
-                    enlargedImageContainerDimensions: {
-                      width: "220%",
-                      height: "95%",
-                    },
-
-                    // Right side zoom box styling and position
-                    enlargedImageContainerStyle: {
-                      marginLeft: "135px",
-                      marginTop: "-40px",
-                      zIndex: 999,
-                      borderRadius: "16px",
-                      overflow: "hidden",
-                      backgroundColor: "#ffffff",
-                      border: "1px solid #e5e7eb",
-                      boxShadow: "0 10px 25px rgba(0, 0, 0, 0.15)",
-                    },
-
-                    // Lens styling
-                    lensStyle: {
-                      backgroundColor: "rgba(59, 130, 246, 0.15)",
-                      border: "2px solid #3b82f6",
-                    },
-
-                    // Main image styling
-                    imageClassName: "rounded-lg object-cover w-full h-[520px]",
-
-                    // Hide hint text
-                    isHintEnabled: false,
-                  }}
-                />
+                  {/* Right Zoom Panel */}
+                  {showZoom && (
+                    <div className="ml-[158px] w-[682px] h-[480px] rounded-xl overflow-hidden border border-gray-200 bg-white shadow-2xl shrink-0">
+                      <div
+                        className="w-full h-full bg-no-repeat"
+                        style={{
+                          backgroundImage: `url(${imageUrl})`,
+                          backgroundSize: "300%",
+                          backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Thumbnails */}
@@ -124,7 +125,9 @@ const Buyer = () => {
                 <p className="text-xs text-gray-500 mb-1">Selling Price</p>
 
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl font-bold text-gray-900">₹2,000</span>
+                  <span className="text-3xl font-bold text-gray-900">
+                    ₹2,000
+                  </span>
                   <span className="line-through text-gray-400">₹2,500</span>
                 </div>
               </div>
@@ -154,29 +157,27 @@ const Buyer = () => {
               {/* Seller Card */}
               <div className="mt-5 border border-gray-200 rounded-2xl p-5 bg-white shadow-sm">
                 <div className="flex items-start justify-between gap-4">
-                  {/* Left Side */}
                   <div className="flex items-start gap-4 flex-1 min-w-0">
-                    {/* Shop Icon */}
                     <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
                       <HomeIcon size={24} className="text-sky-500" />
                     </div>
 
-                    {/* Seller Info */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-gray-500 font-medium">Sold By</p>
+                      <p className="text-sm text-gray-500 font-medium">
+                        Sold By
+                      </p>
 
                       <h3 className="text-2xl font-bold text-gray-900 leading-tight mt-1">
                         Shreeji Gift & Toys
                       </h3>
 
-                      {/* Address - Single Line */}
                       <p className="text-sm text-gray-500 mt-1 truncate max-w-[420px]">
-                        📍 Ghanshyam Complex, Radhe Shyam Society, Vadinath Chowk, Surat
+                        📍 Ghanshyam Complex, Radhe Shyam Society, Vadinath
+                        Chowk, Surat
                       </p>
                     </div>
                   </div>
 
-                  {/* View Shop Button */}
                   <button className="px-6 py-2.5 rounded-full border-2 border-indigo-500 text-indigo-600 font-semibold hover:bg-indigo-50 transition whitespace-nowrap shrink-0">
                     View Shop
                   </button>
@@ -185,7 +186,6 @@ const Buyer = () => {
 
               {/* Features */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8 text-center">
-                {/* KYC Verified */}
                 <div className="flex flex-col items-center">
                   <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-3">
                     <ShieldCheck size={22} className="text-sky-500" />
@@ -197,7 +197,6 @@ const Buyer = () => {
                   </p>
                 </div>
 
-                {/* Secure Payment */}
                 <div className="flex flex-col items-center">
                   <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mb-3">
                     <ShieldCheck size={22} className="text-green-500" />
@@ -209,7 +208,6 @@ const Buyer = () => {
                   </p>
                 </div>
 
-                {/* Verified Product */}
                 <div className="flex flex-col items-center">
                   <div className="w-14 h-14 rounded-full bg-orange-50 flex items-center justify-center mb-3">
                     <Truck size={22} className="text-orange-500" />
@@ -221,7 +219,6 @@ const Buyer = () => {
                   </p>
                 </div>
 
-                {/* 100% Refund */}
                 <div className="flex flex-col items-center">
                   <div className="w-14 h-14 rounded-full bg-purple-50 flex items-center justify-center mb-3">
                     <RotateCcw size={22} className="text-purple-500" />
@@ -253,21 +250,19 @@ const Buyer = () => {
         {/* Description Content */}
         <div className="mt-8 bg-white border border-gray-200 rounded-2xl p-10">
           <div className="w-[560px] max-w-full mx-auto bg-white border border-gray-200 rounded-2xl shadow-lg py-12 px-8 text-center">
-            {/* Icon */}
             <div className="w-16 h-16 mx-auto rounded-full bg-gray-100 flex items-center justify-center mb-5">
               <CameraOff size={28} className="text-gray-300" />
             </div>
 
-            {/* Title */}
             <h2 className="text-2xl font-bold text-[#0f172a] mb-3">
               No Product Details Available
             </h2>
 
-            {/* Description */}
             <p className="text-gray-500 text-base leading-7">
               Detailed specifications for this product have not been added yet.
               <br />
-              Please check back later or contact the seller for more information.
+              Please check back later or contact the seller for more
+              information.
             </p>
           </div>
         </div>
