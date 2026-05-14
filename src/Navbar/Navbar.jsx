@@ -1,19 +1,18 @@
+// Navbar.jsx
 import { useState } from "react";
 import logo from "../assets/upleex-logo-dark.webp";
+
 import {
     CiLocationOn,
     CiSearch,
     CiMobile1,
-    CiHeart,
     CiMenuFries,
 } from "react-icons/ci";
+
 import {
     IoChevronDownOutline,
-    IoChevronForwardOutline,
     IoCloseOutline,
 } from "react-icons/io5";
-import { FaRegBell } from "react-icons/fa";
-import { MdOutlineShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
     const [openMenu, setOpenMenu] = useState(null);
@@ -21,89 +20,85 @@ const Navbar = () => {
 
     const categories = [
         {
-            title: "Building Materials & construction",
-            submenu: ["T-Shirts", "Jeans", "Shoes", "Jackets"],
+            title: "Building Materials & Construction",
+            submenu: ["Cement", "Steel", "Tiles", "Paint"],
         },
         {
             title: "Toys",
-            submenu: ["Notebooks", "Staplers", "Files", "Markers"],
+            submenu: ["Remote Cars", "Dolls", "Games", "Puzzles"],
         },
         {
             title: "Luggage & Bags",
-            submenu: ["Camping", "Tools", "Medical", "Bags"],
+            submenu: ["Suitcases", "Backpacks", "Travel Bags"],
         },
         {
             title: "Home & Kitchen",
-            submenu: ["Printer", "Scanner", "Laptop", "Chair"],
+            submenu: ["Cookware", "Furniture", "Decor"],
         },
         {
             title: "Jewellery",
-            submenu: ["Toys", "Baby Dress", "Bottle", "Walker"],
+            submenu: ["Necklaces", "Rings", "Bracelets"],
         },
         {
             title: "Fashion",
-            submenu: ["Books", "Notes", "Guide", "Dictionary"],
+            submenu: ["Clothing", "Shoes", "Accessories"],
         },
     ];
 
     return (
-        <div className="w-full bg-white border-b border-gray-100 fixed top-0 z-50">
+        <header className="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50">
+            {/* Same container for both top navbar and category navbar */}
+            <div className="max-w-[1360px] mx-auto px-6 lg:px-8">
+                {/* ================= TOP NAVBAR ================= */}
+                <div className="h-[75px] flex items-center justify-between gap-6">
+                    {/* Left Section */}
+                    <div className="flex items-center gap-8 flex-1">
+                        {/* Logo */}
+                        <img
+                            src={logo}
+                            alt="Upleex"
+                            className="w-[170px] object-contain shrink-0"
+                        />
 
-            <div className="max-w-[1400px] mx-auto px-4 py-3">
 
-                {/* Top Navbar */}
-                <div className="flex items-center justify-between gap-4">
-
-                    {/* Left */}
-                    <div className="flex items-center gap-4">
-
-                        <img src={logo} alt="logo" className="w-32 sm:w-40" />
-
-                        {/* Search Desktop */}
-                        <div className="hidden lg:flex border-2 border-zinc-300 rounded-md overflow-hidden hover:border-blue-400 duration-300">
-
-                            <div className="flex items-center gap-2 px-4 py-3 border-r w-52">
-                                <CiLocationOn className="text-xl text-blue-500" />
-                                <p>Select City</p>
-                                <IoChevronDownOutline className="ml-auto" />
+                        <div className="hidden lg:flex flex-1 max-w-[500px] h-[45px] border border-gray-300 bg-white overflow-hidden">
+                            {/* City Selector */}
+                            <div className="w-[210px] px-4 flex items-center gap-3 border-r border-gray-300 text-gray-700">
+                                <CiLocationOn className="text-[22px] text-indigo-500" />
+                                <span className="text-[16px] font-medium">Select City</span>
+                                <IoChevronDownOutline className="ml-auto text-gray-400 text-sm" />
                             </div>
 
-                            <div className="flex items-center px-4 w-[320px]">
+                            {/* Search Input */}
+                            <div className="flex-1 px-5 flex items-center">
                                 <input
                                     type="text"
-                                    placeholder="Search for Medical"
-                                    className="outline-none w-full"
+                                    placeholder="Search for Electronics"
+                                    className="w-full bg-transparent outline-none text-[16px] text-gray-700 placeholder:text-gray-400"
                                 />
-                                <CiSearch className="text-2xl text-gray-500" />
+                                <CiSearch className="text-[28px] text-gray-400 shrink-0" />
                             </div>
-
                         </div>
-
                     </div>
 
-                    {/* Desktop Right */}
-                    <div className="hidden lg:flex items-center gap-5 text-gray-700">
-
-                        <div className="flex items-center gap-2 cursor-pointer">
-                            <CiMobile1 className="text-lg" />
-                            <p className="font-medium">Download App</p>
-                        </div>
-
-                        <p className="font-medium cursor-pointer">Plan</p>
-
-                        <p className="font-medium cursor-pointer">
-                            Partner With Us
-                        </p>
-
-
-                        <button className="px-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 hover:scale-105 duration-300">
-                            Login / Sign Up
+                    {/* Desktop Right Menu */}
+                    <div className="hidden lg:flex items-center text-[15px] font-medium text-gray-700 shrink-0">
+                        <button className="flex items-center gap-2 px-4 border-r border-gray-300 hover:text-indigo-600">
+                            <CiMobile1 className="text-[20px]" />
+                            Download App
                         </button>
 
-                        <FaRegBell className="text-2xl" />
-                        <MdOutlineShoppingCart className="text-2xl" />
-                        <CiHeart className="text-2xl" />
+                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600">
+                            Plan
+                        </button>
 
+                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600 whitespace-nowrap">
+                            Partner With Us
+                        </button>
+
+                        <button className="ml-4 px-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-lg hover:scale-105 transition duration-300 whitespace-nowrap ">
+                            Login / Sign Up
+                        </button>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -113,33 +108,30 @@ const Navbar = () => {
                     >
                         <CiMenuFries />
                     </button>
-
                 </div>
 
-                {/* Categories Desktop */}
-                <div className="hidden lg:flex items-center gap-2 pt-3 whitespace-nowrap">
-
+                {/* ================= CATEGORY NAVBAR ================= */}
+                <div className="hidden lg:flex items-center gap-1.5 pb-3 max-w-[1100px] w-full ">
                     {categories.map((item, index) => (
                         <div
                             key={index}
                             className="relative"
                             onMouseEnter={() => setOpenMenu(index)}
                             onMouseLeave={() => setOpenMenu(null)}
+
                         >
-                            <div className="px-3 h-11 bg-gray-100 rounded-md flex items-center gap-1 cursor-pointer hover:bg-indigo-500 hover:text-white duration-300">
-                                <span className="text-[15px] font-medium">
-                                    {item.title}
-                                </span>
+                            <button className="h-[50px] px-4 bg-[#f5f5f7] rounded-lg flex items-center gap-2 text-[15px] font-medium text-[#334155] whitespace-nowrap hover:bg-indigo-600 hover:text-white">
+                                {item.title}
+                                <IoChevronDownOutline className="text-[14px] text-gray-400 shrink-0" />
+                            </button>
 
-                                <IoChevronDownOutline className="text-sm" />
-                            </div>
-
+                            {/* Dropdown */}
                             {openMenu === index && (
-                                <div className="absolute top-12 left-0 w-60 bg-white rounded-xl shadow-xl py-2">
+                                <div className="absolute top-[56px] left-0 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 py-2 z-50 ">
                                     {item.submenu.map((sub, i) => (
                                         <div
                                             key={i}
-                                            className="px-4 py-3 hover:bg-indigo-100 cursor-pointer"
+                                            className="px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 cursor-pointer"
                                         >
                                             {sub}
                                         </div>
@@ -148,27 +140,15 @@ const Navbar = () => {
                             )}
                         </div>
                     ))}
-
-                    <div className="px-4 h-11 border border-blue-500 text-blue-600 rounded-full flex items-center gap-2 cursor-pointer ml-auto hover:bg-blue-100">
-                        <button className="text-[15px] font-medium">
-                            View All Categories
-                        </button>
-
-                        <IoChevronForwardOutline className="text-sm" />
-                    </div>
-
                 </div>
-
             </div>
 
-            {/* Mobile Sidebar */}
+            {/* ================= MOBILE SIDEBAR ================= */}
             {mobileMenu && (
-                <div className="fixed inset-0 bg-black/40 z-50 lg:hidden">
-
-                    <div className="w-[280px] h-full bg-white p-5">
-
-                        <div className="flex justify-between items-center mb-6">
-                            <img src={logo} alt="logo" className="w-28" />
+                <div className="fixed inset-0 bg-black/40 z-[60] lg:hidden">
+                    <div className="w-[300px] h-full bg-white p-6 shadow-xl">
+                        <div className="flex items-center justify-between mb-8">
+                            <img src={logo} alt="Upleex" className="w-32" />
 
                             <button
                                 onClick={() => setMobileMenu(false)}
@@ -178,20 +158,16 @@ const Navbar = () => {
                             </button>
                         </div>
 
-                        <div className="space-y-4 text-[17px] font-medium text-gray-700">
-                            <p>Home</p>
+                        <div className="space-y-5 text-lg font-medium text-gray-700">
+                            <p>Download App</p>
                             <p>Plan</p>
                             <p>Partner With Us</p>
-                            <p>Download App</p>
                             <p>Login / Sign Up</p>
                         </div>
-
                     </div>
-
                 </div>
             )}
-
-        </div>
+        </header>
     );
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { FiShield, FiClock } from "react-icons/fi";
 import { FaHeartbeat } from "react-icons/fa";
 
@@ -24,53 +23,52 @@ const Services = () => {
 
             </div>
 
-            <div className="mt-20 grid grid-cols-3 gap-10 text-center ">
-
-                <div className="hover:-translate-y-1 transition-all duration-300 ">
-                    <div className="w-20 h-20 mx-auto rounded-3xl bg-blue-50 flex items-center justify-center ">
-                        <FiShield className="text-4xl text-sky-500" />
+            <div className="mt-20 grid grid-cols-3 gap-10 text-center max-w-[1500px] mx-auto">
+                {/* Card 1 */}
+                <div className="hover:-translate-y-1 transition-all duration-300 max-w-[320px] mx-auto">
+                    <div className="w-[59px] h-[59px] mx-auto rounded-[15px] bg-blue-50 flex items-center justify-center">
+                        <FiShield className="text-3xl text-sky-500" />
                     </div>
 
-                    <h2 className="mt-8 text-3xl font-bold text-[#0b1633]">
+                    <h2 className="mt-8 text-2xl font-bold text-[#0b1633]">
                         Quality Checked
                     </h2>
 
-                    <p className="mt-4 text-xl text-slate-500 ">
+                    <p className="mt-4 text-[15px] leading-7 text-slate-500">
                         We review listings to keep the platform safe and trusted.
                     </p>
                 </div>
 
-                <div className="hover:-translate-y-1 transition-all duration-300 ">
-                    <div className="w-20 h-20 mx-auto rounded-3xl bg-purple-50 flex items-center justify-center ">
-                        <FiClock className="text-4xl text-indigo-500" />
+                {/* Card 2 */}
+                <div className="hover:-translate-y-1 transition-all duration-300 max-w-[320px] mx-auto">
+                    <div className="w-[59px] h-[59px] mx-auto rounded-[15px] bg-purple-50 flex items-center justify-center">
+                        <FiClock className="text-3xl text-indigo-500" />
                     </div>
 
-                    <h2 className="mt-8 text-3xl font-bold text-[#0b1633]">
+                    <h2 className="mt-8 text-2xl font-bold text-[#0b1633]">
                         Flexible Plans
                     </h2>
 
-                    <p className="mt-4 text-xl text-slate-500">
+                    <p className="mt-4 text-[15px] leading-7 text-slate-500">
                         Choose a rental duration that fits your needs and budget.
                     </p>
                 </div>
 
-                <div className="hover:-translate-y-1 transition-all duration-300 ">
-
-                    <div className="w-20 h-20 mx-auto rounded-3xl bg-green-50 flex items-center justify-center ">
-                        <FaHeartbeat className="text-4xl text-green-600" />
+                {/* Card 3 */}
+                <div className="hover:-translate-y-1 transition-all duration-300 max-w-[320px] mx-auto">
+                    <div className="w-[59px] h-[59px] mx-auto rounded-[15px] bg-green-50 flex items-center justify-center">
+                        <FaHeartbeat className="text-3xl text-green-600" />
                     </div>
 
-                    <h2 className="mt-8 text-3xl font-bold text-[#0b1633]">
+                    <h2 className="mt-8 text-2xl font-bold text-[#0b1633]">
                         Easy Support
                     </h2>
 
-                    <p className="mt-4 text-xl text-slate-500">
+                    <p className="mt-4 text-[15px] leading-7 text-slate-500">
                         Get quick help for listings, rentals, and bookings.
                     </p>
                 </div>
-
             </div>
-
         </div>
     );
 };

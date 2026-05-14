@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Banner from "./Banner/Banner";
 import LatestBlog from "./Blog/LatestBlog";
-import Categoy from "./Category/Categoy";
+import Category from "./Category/TopCategory";
 import Allcategory from "./Category/AllCategory";
 import Faq from "./FAQ/Faq";
 import Footer from "./Footer/Footer";
@@ -16,21 +16,23 @@ import Buyer from "./Pages For Category/Buyer";
 
 function Home() {
   return (
-    <>
+    <div>
       <Herosection />
-      <Categoy />
+      <Category />
       <Services />
       <LatestBlog />
       <Faq />
       <Banner />
       <Footer />
-    </>
+    </div>
+
+
   );
 }
 
 function App() {
   return (
-    <>
+    <div>
       <Navbar />
 
       <div className="pt-32">
@@ -42,7 +44,8 @@ function App() {
 
         </Routes>
       </div>
-    </>
+    </div >
+
   );
 }
 

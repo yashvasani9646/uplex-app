@@ -10,6 +10,7 @@ import {
   CameraOff,
 } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Buyer = () => {
   const thumbnails = [
@@ -38,11 +39,13 @@ const Buyer = () => {
       y: Math.max(0, Math.min(100, y)),
     });
   };
+  const navigate = useNavigate();
 
   return (
+
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-[1400px] mx-auto px-4 py-8">
-        <button className="w-[110px] bg-gray-200 text-black px-4 py-2 rounded-full flex items-center justify-center gap-2 font-semibold border hover:bg-gray-500 transition border-transparent">
+        <button onClick={(() => navigate("/page1"))} className="w-[110px] bg-gray-200 text-black px-4 py-2 rounded-full flex items-center justify-center gap-2 font-semibold border hover:bg-gray-500 transition border-transparent">
           <FaArrowLeft size={14} />
           Back
         </button>

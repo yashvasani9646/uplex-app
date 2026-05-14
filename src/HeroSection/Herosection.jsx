@@ -14,34 +14,36 @@ import img4 from "../premium_photo-1776981820574-8e9e3ba40109.avif";
 
 const images = [img1, img2, img3, img4];
 
+// Images repeat kar di taaki slider me blank gap na aaye
+const sliderImages = [...images, ...images, ...images];
+
 const Herosection = () => {
   return (
     <div className="w-full bg-gray-100 py-10 mt-[10px]">
-
       <div className="max-w-[1500px] mx-auto px-4">
-
         <div className="relative">
-
           {/* Left Arrow */}
-          <button className="hero-prev absolute left-6 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full bg-white text-3xl flex items-center justify-center shadow-md">
+          <button className="hero-prev absolute left-6 top-1/2 -translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white text-3xl flex items-center justify-center shadow-md">
             <IoChevronBack />
           </button>
 
           {/* Right Arrow */}
-          <button className="hero-next absolute right-6 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full bg-white text-3xl flex items-center justify-center shadow-md">
+          <button className="hero-next absolute right-6 top-1/2 -translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white text-3xl flex items-center justify-center shadow-md">
             <IoChevronForward />
           </button>
 
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={25}
-            slidesPerView={1.2}
+            slidesPerView={1.18}
             centeredSlides={true}
+            spaceBetween={-110}
             loop={true}
-            speed={800}
+            speed={1000}
+            watchSlidesProgress={true}
             autoplay={{
-              delay: 3000,
+              delay: 4500,
               disableOnInteraction: false,
+              pauseOnMouseEnter: true,
             }}
             navigation={{
               nextEl: ".hero-next",
@@ -52,51 +54,56 @@ const Herosection = () => {
             }}
             breakpoints={{
               640: {
-                slidesPerView: 1.2,
+                slidesPerView: 1.05,
+                spaceBetween: -40,
               },
               1024: {
-                slidesPerView: 1.3,
+                slidesPerView: 1.18,
+                spaceBetween: -110,
               },
             }}
           >
-            {images.map((img, index) => (
-              <SwiperSlide key={index}>
+            {sliderImages.map((img, index) => (
+              <SwiperSlide key={index} className="group">
+                <div className="px-4">
+                  <div
+                    className="
+                      relative h-[540px] rounded-3xl overflow-hidden shadow-2xl
+                      transition-all duration-700 ease-in-out
 
-                <div className="relative h-[540px] rounded-3xl overflow-hidden shadow-xl">
+                      scale-[0.92] opacity-40
 
-                  <img
-                    src={img}
-                    alt="hero"
-                    className="w-full h-full object-cover"
-                  />
+                      group-[.swiper-slide-active]:scale-100
+                      group-[.swiper-slide-active]:opacity-100
+                    "
+                  >
+                    <img
+                      src={img}
+                      alt="hero"
+                      className="w-full h-full object-cover"
+                    />
 
-                  <div className="absolute inset-0 bg-black/45"></div>
+                    <div className="absolute inset-0 bg-black/45" />
 
-                  <div className="absolute top-1/2 left-20 -translate-y-1/2 text-white max-w-[750px]">
+                    <div className="absolute top-1/2 left-20 -translate-y-1/2 text-white max-w-[750px]">
+                      <h1 className="text-6xl font-bold leading-tight">
+                        India's Rent Easy. List Fast.
+                        <br />
+                        Earn Daily Marketplace
+                      </h1>
 
-                    <h1 className="text-6xl font-bold leading-tight">
-                      India's Rent Easy. List Fast.
-                      <br />
-                      Earn Daily Marketplace
-                    </h1>
-
-                    <p className="mt-6 text-2xl text-gray-200">
-                      Find products and services near you. Rent, buy, or list in
-                      just a few simple steps.
-                    </p>
-
+                      <p className="mt-6 text-2xl text-gray-200 leading-10">
+                        Find products and services near you. Rent, buy, or list
+                        in just a few simple steps.
+                      </p>
+                    </div>
                   </div>
-
                 </div>
-
               </SwiperSlide>
             ))}
           </Swiper>
-
         </div>
-
       </div>
-
     </div>
   );
 };

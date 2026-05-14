@@ -16,3 +16,40 @@
 .animate-slide {
     animation: slide 18s linear infinite;
 }
+
+
+
+
+/* App.css ya Herosection.css me add karo */
+
+/* Pagination container */
+.swiper-pagination {
+    bottom: 12px !important;
+}
+
+/* Normal dots */
+.swiper-pagination-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    background: #cbd5e1 !important;
+    /* light gray-blue */
+    opacity: 1 !important;
+    border-radius: 9999px !important;
+    transition: all 0.3s ease;
+    margin: 0 6px !important;
+}
+
+/* Active dot (pill shape) */
+.swiper-pagination-bullet-active {
+    width: 44px !important;
+    height: 12px !important;
+    background: #0f172a !important;
+    /* dark navy */
+    border-radius: 9999px !important;
+}
+
+
+
+body {
+  font-family: 'Inter', sans-serif;
+}

@@ -97,12 +97,11 @@ const Categoy = () => {
                     </p>
                 </div>
 
-             \
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 mt-12">
                     {categories.map((item, index) => (
                         <div
                             key={index}
-                            className="group relative h-[225px] bg-[#f8f9ff] border border-[#d9cfff] rounded-[22px] px-4 pt-6 pb-5 flex flex-col items-center justify-start hover:-translate-y-3 hover:shadow-xl transition-all duration-300"
+                            className="group relative h-[225px] bg-[#f8f9ff] hover:bg-purple-500/5 border border-[#d9cfff] rounded-[22px] px-4 pt-6 pb-5 flex flex-col items-center justify-start hover:-translate-y-3 hover:shadow-xl transition-all duration-300"
                         >
                             {/* ITEMS BADGE */}
                             <span className="absolute -top-3 px-4 py-1 rounded-full bg-[#12a8f5] text-white text-[13px] font-semibold shadow">
@@ -122,7 +121,7 @@ const Categoy = () => {
                                 {item.name}
                             </p>
 
-                            <button onClick={(() => navigate("/Buyer"))} className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+                            <button onClick={(() => navigate("/page1"))} className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
                             >
                                 View All Products →
                             </button>
