@@ -10,67 +10,68 @@ const categories = [
     {
         name: "Toys",
         image:
-            "public/download.jpg",
+            "/download.jpg",
         items: "1 Items",
     },
+    
     {
         name: "Luggage & Bags",
         image:
-            "public/download (1).jpg",
+            "/download (1).jpg",
         items: "0 Items",
     },
     {
         name: "Home & Kitchen",
         image:
-            "public/Home&Kitchne.jpg",
+            "/Home&Kitchen.jpg",
         items: "1 Items",
     },
     {
         name: "Jewellery",
         image:
-            "public/Jwellery.png",
+            "/Jwellery.png",
         items: "0 Items",
     },
     {
         name: "Fashion",
         image:
-            "public/fashion.png",
+            "/fashion.png",
         items: "0 Items",
     },
     {
         name: "Furniture & Home Decor",
         image:
-            "public/Furniture.png",
+            "/Furniture.png",
         items: "4 Items",
     },
     {
         name: "Electronics & Appliances",
         image:
-            "public/Electronic.png",
+            "/Electronic.png",
         items: "4 Items",
     },
     {
         name: "Mobiles & Tablets",
         image:
-            "public/Mobile&Tablet.png",
+            "/Mobile&Tablet.png",
         items: "0 Items",
     },
     {
         name: "Vehicles",
         image:
-            "public/Vehical.png",
+            "/Vehical.png",
         items: "0 Items",
     },
     {
         name: "Real Estate",
         image:
-            "public/RealEstate.png",
+            "/RealEstate.png",
         items: "0 Items",
     },
     {
         name: "Beauty & Personal Care",
         image:
-            "public/Beauty.png",
+            "/Beauty.png",
         items: "0 Items",
     },
 ];
