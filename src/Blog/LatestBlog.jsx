@@ -2,25 +2,25 @@
 const blogs = [
     {
         image:
-            "/Beuty.png",
+            "/Jwellery.png",
         title: "Nemo in in molestias",
         desc: "Pariatur CupiditatePariatur CupiditatePariatur CupiditatePariatur CupiditatePariatur...",
     },
     {
         image:
-            "/Dataimage.png",
+            "/Mobile&Tablet.png",
         title: "What to Do With Appliances When You Move Cities",
         desc: "What to Do With Appliances When You Move Cities",
     },
     {
         image:
-            "/RealEstate.png",
+            "/fashion.png",
         title: "footwear",
         desc: "Discover the latest footwear trends in 2026, from stylish sneakers to comfortable everyday wear.",
     },
     {
         image:
-            "/Vehical.png",
+            "/Electronic.png",
 
         title: "What is Lorem Ipsum?",
         desc: "What is Lorem Ipsum?",
