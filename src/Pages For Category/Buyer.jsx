@@ -43,6 +43,7 @@ const Buyer = () => {
       y: Math.max(0, Math.min(100, y)),
     });
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -72,7 +73,7 @@ const Buyer = () => {
                   >
                     <div className="relative overflow-hidden cursor-crosshair w-[300px] h-[400px]">
                       <img
-                        src="/Meeting.png"
+                        src="/RealEstate.png"
                         alt="Product"
                         draggable={false}
                         className="w-full h-full object-cover object-top select-none pointer-events-none transition-opacity duration-300"
@@ -104,7 +105,7 @@ const Buyer = () => {
                       <div
                         className="w-full h-full bg-no-repeat"
                         style={{
-                          backgroundImage: `url(${"/Meeting.png"})`,
+                          backgroundImage: `url(${"/RealEstate.png"})`,
                           backgroundSize: "220%", // video jaisa smooth zoom
                           backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
                         }}
