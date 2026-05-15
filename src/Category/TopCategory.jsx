@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const categories = [
     {
         name: "Building materials",
-        image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/44c21c18dc72453bb531449db6092abc.png",
+        image: "/images.jpg",
         items: "0 Items",
     },
     {
@@ -126,7 +125,7 @@ const Categoy = () => {
                                     navigate("/page1");
                                     window.scrollTo({
                                         top: 0,
-                                        behavior: "auto", 
+                                        behavior: "auto",
                                     });
                                 }}
                                 className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
