@@ -17,42 +17,42 @@ const products = [
     {
         name: "Travel Luggage",
         image:
-            "public/Meeting.png",
+            "/Meeting.png",
     },
     {
         name: "Backpacks",
         image:
-            "public/Meeting.png",
+            "/Meeting.png",
     },
     {
         name: "Handbags & Purses",
         image:
-            "public/Meeting.png",
+            "/Meeting.png",
     },
     {
         name: "Duffel & Gym Bags",
         image:
-            "public/Meeting.png",
+            "/Meeting.png",
     },
     {
         name: "Laptop & Office Bags",
         image:
-            "public/Meeting.png",
+            "/Meeting.png",
     },
     {
         name: "Kids Bags",
         image:
-            "public/Meeting.png",
+            "/Meeting.png",
     },
     {
         name: "Travel Accessories",
         image:
-            "public/Meeting.png",
+            "/Meeting.png",
     },
     {
         name: "Specialty Bags",
         image:
-            "public/Meeting.png",
+            "/Meeting.png",
     },
 ];
 

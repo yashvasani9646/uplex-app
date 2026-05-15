@@ -23,7 +23,7 @@ const categories = [
     {
         name: "Home & Kitchen",
         image:
-            "/Home&Kitchen.jpg",
+            "/Mobile&Tablet.png",
         items: "1 Items",
     },
     {

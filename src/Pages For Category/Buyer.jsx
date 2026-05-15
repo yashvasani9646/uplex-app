@@ -72,7 +72,7 @@ const Buyer = () => {
                   >
                     <div className="relative overflow-hidden cursor-crosshair w-[300px] h-[400px]">
                       <img
-                        src="public/Meeting.png"
+                        src="/Meeting.png"
                         alt="Product"
                         draggable={false}
                         className="w-full h-full object-cover object-top select-none pointer-events-none transition-opacity duration-300"
@@ -104,7 +104,7 @@ const Buyer = () => {
                       <div
                         className="w-full h-full bg-no-repeat"
                         style={{
-                          backgroundImage: `url(${"public/Meeting.png"})`,
+                          backgroundImage: `url(${"/Meeting.png"})`,
                           backgroundSize: "220%", // video jaisa smooth zoom
                           backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
                         }}
