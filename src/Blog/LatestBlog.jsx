@@ -2,25 +2,25 @@
 const blogs = [
     {
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/blogs_image/dfb738bcd91a4c3f904dcfc9fcbfa415.jpg",
+            "public/Meeting.png",
         title: "Nemo in in molestias",
         desc: "Pariatur CupiditatePariatur CupiditatePariatur CupiditatePariatur CupiditatePariatur...",
     },
     {
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/blogs_image/5e5d4e33992a4dd6bb15f578086dec8d.jpg",
+            "public/client.png",
         title: "What to Do With Appliances When You Move Cities",
         desc: "What to Do With Appliances When You Move Cities",
     },
     {
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/blogs_image/093ef6894c91488cb40d6d1a20166e33.jpg",
+            "public/Footware.png",
         title: "footwear",
         desc: "Discover the latest footwear trends in 2026, from stylish sneakers to comfortable everyday wear.",
     },
     {
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/blogs_image/48ef8c52dc934fe08798b6f3f0da2905.jpg",
+            "public/Dataimage.png",
 
         title: "What is Lorem Ipsum?",
         desc: "What is Lorem Ipsum?",

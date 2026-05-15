@@ -17,42 +17,42 @@ const products = [
     {
         name: "Travel Luggage",
         image:
-            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop",
+            "public/Meeting.png",
     },
     {
         name: "Backpacks",
         image:
-            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop",
+            "public/Meeting.png",
     },
     {
         name: "Handbags & Purses",
         image:
-            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop",
+            "public/Meeting.png",
     },
     {
         name: "Duffel & Gym Bags",
         image:
-            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop",
+            "public/Meeting.png",
     },
     {
         name: "Laptop & Office Bags",
         image:
-            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop",
+            "public/Meeting.png",
     },
     {
         name: "Kids Bags",
         image:
-            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop",
+            "public/Meeting.png",
     },
     {
         name: "Travel Accessories",
         image:
-            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop",
+            "public/Meeting.png",
     },
     {
         name: "Specialty Bags",
         image:
-            "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop",
+            "public/Meeting.png",
     },
 ];
 

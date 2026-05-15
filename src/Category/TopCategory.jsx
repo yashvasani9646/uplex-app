@@ -10,67 +10,67 @@ const categories = [
     {
         name: "Toys",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/1cff1246f75b416fbcf2e0fd5007ebbd.png",
+            "public/download.jpg",
         items: "1 Items",
     },
     {
         name: "Luggage & Bags",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/b2bacbe5a94d4f4b8708085c21a86071.png",
+            "public/download (1).jpg",
         items: "0 Items",
     },
     {
         name: "Home & Kitchen",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/2933ec8480cd42cf867cc6f649a5900a.png",
+            "public/Home&Kitchne.jpg",
         items: "1 Items",
     },
     {
         name: "Jewellery",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/c6fbd44ff1224ae8bd8ef7ed7508661b.jpeg",
+            "public/Jwellery.png",
         items: "0 Items",
     },
     {
         name: "Fashion",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/104fa6563c7e4dd387dc496056a3f77d.png",
+            "public/fashion.png",
         items: "0 Items",
     },
     {
         name: "Furniture & Home Decor",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/6696ad19650842f2b3dfef39b89b3592.png",
+            "public/Furniture.png",
         items: "4 Items",
     },
     {
         name: "Electronics & Appliances",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/d074845f65404156898c92b70d25db15.png",
+            "public/Electronic.png",
         items: "4 Items",
     },
     {
         name: "Mobiles & Tablets",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/c192f574bd604ec390bbfdcca6b4faa3.png",
+            "public/Mobile&Tablet.png",
         items: "0 Items",
     },
     {
         name: "Vehicles",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/0f0eaf0b472c43ebae4baf3389a44db1.png",
+            "public/Vehical.png",
         items: "0 Items",
     },
     {
         name: "Real Estate",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/c2f0bfdd7fad41ac912ad207148a45c9.png",
+            "public/RealEstate.png",
         items: "0 Items",
     },
     {
         name: "Beauty & Personal Care",
         image:
-            "https://service.digitalks.co.in/s3docs/upleex/categories_image/1b7262d03b794781aa7f7b8988527569.png",
+            "public/Beauty.png",
         items: "0 Items",
     },
 ];

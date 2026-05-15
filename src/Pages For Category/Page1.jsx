@@ -85,7 +85,7 @@ const Page1 = () => {
                                     <div className="rounded-[16px] overflow-hidden group ">
                                         <div className="rounded-[16px] overflow-hidden group flex justify-center">
                                             <img
-                                                src="https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg"
+                                                src="public/Meeting.png"
                                                 alt="3-D Miniature Photoframe"
                                                 className="w-[175px] h-[240px] object-cover transition-transform duration-500 group-hover:scale-110"
                                             />
