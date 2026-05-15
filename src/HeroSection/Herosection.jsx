@@ -19,7 +19,7 @@ const sliderImages = [...images, ...images, ...images];
 
 const Herosection = () => {
   return (
-    <div className="w-full bg-gray-100 py-10 mt-[10px]">
+    <div className="w-full bg-gray-100 py-10 mt-[10px] cursor-pointer">
       <div className="max-w-[1500px] mx-auto px-4">
         <div className="relative">
           {/* Left Arrow */}
@@ -51,6 +51,14 @@ const Herosection = () => {
             }}
             pagination={{
               clickable: true,
+              dynamicBullets: false, // sirf fixed bullets
+              renderBullet: (index, className) => {
+                // maximum 3 bullets hi dikhaye
+                if (index < 3) {
+                  return `<span class="${className}"></span>`;
+                }
+                return "";
+              },
             }}
             breakpoints={{
               640: {

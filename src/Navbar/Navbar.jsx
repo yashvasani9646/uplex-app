@@ -48,11 +48,11 @@ const Navbar = () => {
     return (
         <header className="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50">
             {/* Same container for both top navbar and category navbar */}
-            <div className="max-w-[1360px] mx-auto px-6 lg:px-8">
+            <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
                 {/* ================= TOP NAVBAR ================= */}
                 <div className="h-[75px] flex items-center justify-between gap-6">
                     {/* Left Section */}
-                    <div className="flex items-center gap-8 flex-1">
+                    <div className="flex items-center gap-8 flex-1 cursor-pointer">
                         {/* Logo */}
                         <img
                             src={logo}
@@ -61,7 +61,7 @@ const Navbar = () => {
                         />
 
 
-                        <div className="hidden lg:flex flex-1 max-w-[500px] h-[45px] border border-gray-300 bg-white overflow-hidden">
+                        <div className="hidden lg:flex flex-1 max-w-[650px] h-[45px] border border-gray-300 bg-white overflow-hidden  ">
                             {/* City Selector */}
                             <div className="w-[210px] px-4 flex items-center gap-3 border-r border-gray-300 text-gray-700">
                                 <CiLocationOn className="text-[22px] text-indigo-500" />
@@ -82,21 +82,21 @@ const Navbar = () => {
                     </div>
 
                     {/* Desktop Right Menu */}
-                    <div className="hidden lg:flex items-center text-[15px] font-medium text-gray-700 shrink-0">
-                        <button className="flex items-center gap-2 px-4 border-r border-gray-300 hover:text-indigo-600">
+                    <div className="hidden lg:flex items-center text-[15px] font-medium text-gray-700 shrink-0 ">
+                        <button className="flex items-center gap-2 px-4 border-r border-gray-300 hover:text-indigo-600 cursor-pointer">
                             <CiMobile1 className="text-[20px]" />
                             Download App
                         </button>
 
-                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600">
+                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600 cursor-pointer">
                             Plan
                         </button>
 
-                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600 whitespace-nowrap">
+                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600 cursor-pointer whitespace-nowrap">
                             Partner With Us
                         </button>
 
-                        <button className="ml-4 px-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-lg hover:scale-105 transition duration-300 whitespace-nowrap ">
+                        <button className="ml-4 px-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-lg hover:scale-105 transition duration-300 whitespace-nowrap cursor-pointer">
                             Login / Sign Up
                         </button>
                     </div>
@@ -110,36 +110,43 @@ const Navbar = () => {
                     </button>
                 </div>
 
-                {/* ================= CATEGORY NAVBAR ================= */}
-                <div className="hidden lg:flex items-center gap-1.5 pb-3 max-w-[1100px] w-full ">
-                    {categories.map((item, index) => (
-                        <div
-                            key={index}
-                            className="relative"
-                            onMouseEnter={() => setOpenMenu(index)}
-                            onMouseLeave={() => setOpenMenu(null)}
 
-                        >
-                            <button className="h-[50px] px-4 bg-[#f5f5f7] rounded-lg flex items-center gap-2 text-[15px] font-medium text-[#334155] whitespace-nowrap hover:bg-indigo-600 hover:text-white">
-                                {item.title}
-                                <IoChevronDownOutline className="text-[14px] text-gray-400 shrink-0" />
-                            </button>
+                <div className="hidden lg:flex items-center justify-between pb-3">
+                    {/* Left Side Categories */}
+                    <div className="flex items-center gap-1.5">
+                        {categories.map((item, index) => (
+                            <div
+                                key={index}
+                                className="relative"
+                                onMouseEnter={() => setOpenMenu(index)}
+                                onMouseLeave={() => setOpenMenu(null)}
+                            >
+                                <button className="h-[38px] px-4 bg-[#f5f5f7] rounded-lg flex items-center gap-1.5 text-[13px] font-medium text-[#334155] whitespace-nowrap hover:bg-indigo-600 hover:text-white transition cursor-pointer">
+                                    {item.title}
+                                    <IoChevronDownOutline className="text-[12px] text-gray-400 shrink-0" />
+                                </button>
+                                {/* Dropdown */}
+                                {openMenu === index && (
+                                    <div className="absolute top-[52px] left-0 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 py-2 z-50">
+                                        {item.submenu.map((sub, i) => (
+                                            <div
+                                                key={i}
+                                                className="px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 cursor-pointer"
+                                            >
+                                                {sub}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
 
-                            {/* Dropdown */}
-                            {openMenu === index && (
-                                <div className="absolute top-[56px] left-0 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 py-2 z-50 ">
-                                    {item.submenu.map((sub, i) => (
-                                        <div
-                                            key={i}
-                                            className="px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 cursor-pointer"
-                                        >
-                                            {sub}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    ))}
+                    {/* Right Side Button */}
+                    <button className="cursor-pointer ml-6 h-[38px] px-5 rounded-full border-2 border-indigo-500 text-indigo-600 text-[13px] font-semibold hover:bg-indigo-50 transition whitespace-nowrap flex items-center gap-1.5">
+                        View All Categories
+                        <span className="text-base">›</span>
+                    </button>
                 </div>
             </div>
 

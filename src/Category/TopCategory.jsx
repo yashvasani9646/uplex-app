@@ -97,7 +97,7 @@ const Categoy = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 mt-12">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 mt-12 cursor-pointer">
                     {categories.map((item, index) => (
                         <div
                             key={index}
@@ -121,7 +121,15 @@ const Categoy = () => {
                                 {item.name}
                             </p>
 
-                            <button onClick={(() => navigate("/page1"))} className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+                            <button
+                                onClick={() => {
+                                    navigate("/page1");
+                                    window.scrollTo({
+                                        top: 0,
+                                        behavior: "auto", 
+                                    });
+                                }}
+                                className="mt-2 text-[12px] text-gray-500 font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
                             >
                                 View All Products →
                             </button>

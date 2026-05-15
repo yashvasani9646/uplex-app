@@ -117,7 +117,7 @@ const Page1 = () => {
                                         </span>
                                     </div>
 
-                                    <button className="mt-5 w-full py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 hover:opacity-90 transition">
+                                    <button className=" cursor-pointer mt-5 w-full py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 hover:opacity-90 transition">
                                         Buy Now
                                     </button>
                                 </div>
