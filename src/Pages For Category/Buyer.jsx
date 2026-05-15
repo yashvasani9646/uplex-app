@@ -17,11 +17,11 @@ import { useNavigate } from "react-router-dom";
 
 const Buyer = () => {
   const thumbnails = [
-    "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg",
-    "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg",
-    "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg",
-    "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg",
-    "https://service.digitalks.co.in/s3docs/upleex/product_main_images/a144a0dd2939486d963a488910b7a86a.jpeg",
+    "/RealEstate.png",
+    "/RealEstate.png",
+    "/RealEstate.png",
+    "/RealEstate.png",
+    "/RealEstate.png",
   ];
 
   const [showZoom, setShowZoom] = useState(false);
@@ -43,7 +43,7 @@ const Buyer = () => {
       y: Math.max(0, Math.min(100, y)),
     });
   };
-  
+
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -101,7 +101,7 @@ const Buyer = () => {
       pointer-events-none
     "
                     >
-                 
+
                       <div
                         className="w-full h-full bg-no-repeat"
                         style={{
