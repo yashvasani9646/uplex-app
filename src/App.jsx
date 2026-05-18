@@ -42,6 +42,7 @@ function App() {
           <Route path="/page1" element={<Page1 />} />
           <Route path="/Buyer" element={<Buyer />} />
 
+
         </Routes>
       </div>
     </div >
