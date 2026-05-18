@@ -63,8 +63,8 @@ const Page1 = () => {
                             <button
                                 key={index}
                                 className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition ${index === 0
-                                        ? "bg-[#5b61ff] text-white shadow"
-                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                    ? "bg-[#5b61ff] text-white shadow"
+                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                                     }`}
                             >
                                 {item}
@@ -84,7 +84,8 @@ const Page1 = () => {
                     </button>
 
                     {/* Filters */}
-                    <div className="mt-6 flex flex-col sm:flex-row sm:items-start gap-4">
+                    {/* Filters */}
+                    <div className="mt-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                         {/* All Types */}
                         <button className="w-full sm:w-[220px] h-11 bg-white border border-gray-200 rounded-full px-4 flex items-center justify-between text-sm text-gray-600 shadow-sm">
                             <span className="flex items-center gap-2">
@@ -99,7 +100,7 @@ const Page1 = () => {
 
                         {/* Duration Dropdown */}
                         <div
-                            className="relative w-full sm:w-[260px]"
+                            className="relative w-full sm:w-[260px] sm:ml-auto"
                             ref={durationRef}
                         >
                             <button
@@ -135,14 +136,12 @@ const Page1 = () => {
                             </button>
 
                             {isDurationOpen && (
-                                <div className="absolute top-[52px] left-0 w-full bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-50">
+                                <div className="absolute top-[52px] right-0 w-full sm:w-[260px] bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-50">
                                     {durationOptions.map((option) => (
                                         <button
                                             key={option}
                                             onClick={() => {
-                                                setSelectedDuration(
-                                                    option
-                                                );
+                                                setSelectedDuration(option);
                                                 setIsDurationOpen(false);
                                             }}
                                             className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-[14px] font-medium transition ${selectedDuration === option

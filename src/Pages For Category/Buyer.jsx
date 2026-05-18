@@ -52,7 +52,7 @@ const Buyer = () => {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "auto", // ya "smooth"
+      behavior: "auto", 
     });
   }, []);
 
@@ -234,7 +234,10 @@ const Buyer = () => {
                       </div>
                     </div>
 
-                    <button className="px-4 py-1.5 rounded-full border-2 border-indigo-500 text-indigo-600 text-[13px] font-semibold hover:bg-indigo-50 transition whitespace-nowrap self-start sm:self-auto">
+                    <button
+                      onClick={() => navigate("/shop")}
+                      className="px-4 py-1.5 rounded-full border-2 border-indigo-500 text-indigo-600 text-[13px] font-semibold hover:bg-indigo-50 transition whitespace-nowrap self-start sm:self-auto"
+                    >
                       View Shop
                     </button>
                   </div>
