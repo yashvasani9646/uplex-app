@@ -9,7 +9,7 @@ const Banner = () => {
   const sliderLogos = [...logos, ...logos, ...logos];
 
   return (
-    <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16 lg:mt-24 overflow-hidden">
+    <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16 lg:mt-24 py-8 sm:py-10 lg:py-12 overflow-hidden">
       {/* Heading */}
       <div className="text-center max-w-3xl mx-auto">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight bg-gradient-to-r from-indigo-500 to-sky-500 bg-clip-text text-transparent">
@@ -33,7 +33,8 @@ const Banner = () => {
                 lg:w-[220px] lg:h-[110px]
                 bg-white rounded-2xl shadow-md
                 flex items-center justify-center
-                shrink-0 px-4 sm:px-6
+                shrink-0
+                px-4 sm:px-6
               "
             >
               <img
