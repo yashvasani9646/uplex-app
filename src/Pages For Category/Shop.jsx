@@ -7,21 +7,47 @@ import {
     LogIn,
     SlidersHorizontal,
     ChevronDown,
+    ChevronUp,
     Heart,
+    Check,
 } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import Footer from "../Footer/Footer";
 
 const Shop = () => {
     const navigate = useNavigate();
+
+    // All Types Dropdown
+    const [isTypeOpen, setIsTypeOpen] = useState(false);
+    const [selectedType, setSelectedType] = useState("All Types");
+    const typeRef = useRef(null);
+
+    const typeOptions = ["All Types", "Rent", "Sell"];
 
     useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: "auto",
         });
-    }, []);
 
+        const handleClickOutside = (event) => {
+            if (
+                typeRef.current &&
+                !typeRef.current.contains(event.target)
+            ) {
+                setIsTypeOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
+        };
+    }, []);
 
     return (
         <>
@@ -63,7 +89,8 @@ const Shop = () => {
                                         size={12}
                                         className="text-pink-500 mt-0.5 shrink-0"
                                     />
-                                    Ghanshyam Complex Radhe Shyam Society Vadinath Chowk
+                                    Ghanshyam Complex Radhe Shyam Society
+                                    Vadinath Chowk
                                 </p>
 
                                 <div className="flex items-center gap-2">
@@ -88,17 +115,71 @@ const Shop = () => {
 
                     {/* Products Box */}
                     <div className="mt-5 bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 shadow-sm min-h-[420px]">
-                        {/* Filter */}
-                        <button className="w-full sm:w-[180px] h-11 rounded-full border border-gray-200 bg-white px-4 flex items-center justify-between text-sm text-gray-600 shadow-sm">
-                            <span className="flex items-center gap-2">
-                                <SlidersHorizontal
-                                    size={15}
-                                    className="text-[#5b61ff]"
-                                />
-                                All Types
-                            </span>
-                            <ChevronDown size={15} />
-                        </button>
+                        {/* Filter Dropdown */}
+                        <div
+                            className="relative w-full sm:w-[180px]"
+                            ref={typeRef}
+                        >
+                            <button
+                                onClick={() =>
+                                    setIsTypeOpen(!isTypeOpen)
+                                }
+                                className={`w-full h-11 rounded-full bg-white px-4 flex items-center justify-between text-sm shadow-sm border-2 transition-all duration-300 ${isTypeOpen
+                                        ? "border-[#5b61ff] shadow-[0_8px_20px_rgba(91,97,255,0.12)]"
+                                        : "border-gray-200"
+                                    }`}
+                            >
+                                <span className="flex items-center gap-2">
+                                    <SlidersHorizontal
+                                        size={15}
+                                        className="text-[#5b61ff]"
+                                    />
+                                    <span className="font-medium text-black">
+                                        {selectedType}
+                                    </span>
+                                </span>
+
+                                {isTypeOpen ? (
+                                    <ChevronUp
+                                        size={15}
+                                        className="text-[#5b61ff]"
+                                    />
+                                ) : (
+                                    <ChevronDown
+                                        size={15}
+                                        className="text-[#5b61ff]"
+                                    />
+                                )}
+                            </button>
+
+                            {isTypeOpen && (
+                                <div className="absolute top-[52px] left-0 w-full bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-[#ece9ff] z-50">
+                                    {typeOptions.map((option) => (
+                                        <button
+                                            key={option}
+                                            onClick={() => {
+                                                setSelectedType(option);
+                                                setIsTypeOpen(false);
+                                            }}
+                                            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-[14px] font-medium transition ${selectedType === option
+                                                    ? "bg-[#f5f2ff] text-[#5b61ff]"
+                                                    : "text-gray-600 hover:bg-gray-50"
+                                                }`}
+                                        >
+                                            <span>{option}</span>
+
+                                            {selectedType ===
+                                                option && (
+                                                    <Check
+                                                        size={16}
+                                                        className="text-[#5b61ff]"
+                                                    />
+                                                )}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
 
                         {/* Product Card */}
                         <div className="mt-6">
@@ -162,9 +243,8 @@ const Shop = () => {
                 </div>
             </div>
 
-            <Footer/>
+            <Footer />
         </>
-
     );
 };
 

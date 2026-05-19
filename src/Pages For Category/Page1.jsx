@@ -1,7 +1,3 @@
-// Responsive updates applied to your Page1 component.
-// Fixed widths were converted to fluid layouts, spacing was adjusted,
-// and the product card now scales properly on all screen sizes.
-
 import {
     ArrowLeft,
     SlidersHorizontal,
@@ -20,6 +16,12 @@ const Page1 = () => {
     const categories = ["All", "Building Materials"];
     const navigate = useNavigate();
 
+    // All Types Dropdown
+    const [isTypeOpen, setIsTypeOpen] = useState(false);
+    const [selectedType, setSelectedType] = useState("All Types");
+    const typeRef = useRef(null);
+
+    // Duration Dropdown
     const [isDurationOpen, setIsDurationOpen] = useState(false);
     const [selectedDuration, setSelectedDuration] =
         useState("All Durations");
@@ -33,8 +35,17 @@ const Page1 = () => {
         "Hourly",
     ];
 
+    const typeOptions = ["All Types", "Rent", "Sell"];
+
     useEffect(() => {
         const handleClickOutside = (event) => {
+            if (
+                typeRef.current &&
+                !typeRef.current.contains(event.target)
+            ) {
+                setIsTypeOpen(false);
+            }
+
             if (
                 durationRef.current &&
                 !durationRef.current.contains(event.target)
@@ -63,8 +74,8 @@ const Page1 = () => {
                             <button
                                 key={index}
                                 className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition ${index === 0
-                                    ? "bg-[#5b61ff] text-white shadow"
-                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                        ? "bg-[#5b61ff] text-white shadow"
+                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                                     }`}
                             >
                                 {item}
@@ -84,19 +95,72 @@ const Page1 = () => {
                     </button>
 
                     {/* Filters */}
-                    {/* Filters */}
                     <div className="mt-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                        {/* All Types */}
-                        <button className="w-full sm:w-[220px] h-11 bg-white border border-gray-200 rounded-full px-4 flex items-center justify-between text-sm text-gray-600 shadow-sm">
-                            <span className="flex items-center gap-2">
-                                <SlidersHorizontal
-                                    size={16}
-                                    className="text-[#5b61ff]"
-                                />
-                                All Types
-                            </span>
-                            <ChevronDown size={16} />
-                        </button>
+                        {/* All Types Dropdown */}
+                        <div
+                            className="relative w-full sm:w-[220px]"
+                            ref={typeRef}
+                        >
+                            <button
+                                onClick={() =>
+                                    setIsTypeOpen(!isTypeOpen)
+                                }
+                                className={`w-full h-11 bg-white rounded-full px-4 flex items-center justify-between border-2 transition-all duration-300 shadow-sm ${isTypeOpen
+                                        ? "border-[#5b61ff] shadow-[0_8px_20px_rgba(91,97,255,0.12)]"
+                                        : "border-gray-200"
+                                    }`}
+                            >
+                                <span className="flex items-center gap-2">
+                                    <SlidersHorizontal
+                                        size={16}
+                                        className="text-[#5b61ff]"
+                                    />
+                                    <span className="text-[14px] font-medium text-black">
+                                        {selectedType}
+                                    </span>
+                                </span>
+
+                                {isTypeOpen ? (
+                                    <ChevronUp
+                                        size={16}
+                                        className="text-[#5b61ff]"
+                                    />
+                                ) : (
+                                    <ChevronDown
+                                        size={16}
+                                        className="text-[#5b61ff]"
+                                    />
+                                )}
+                            </button>
+
+                            {isTypeOpen && (
+                                <div className="absolute top-[52px] left-0 w-full bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-50 border border-[#ece9ff]">
+                                    {typeOptions.map((option) => (
+                                        <button
+                                            key={option}
+                                            onClick={() => {
+                                                setSelectedType(option);
+                                                setIsTypeOpen(false);
+                                            }}
+                                            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-[14px] font-medium transition ${selectedType === option
+                                                    ? "bg-[#f5f2ff] text-[#5b61ff]"
+                                                    : "text-gray-600 hover:bg-gray-50"
+                                                }`}
+                                        >
+                                            <span>{option}</span>
+
+                                            {selectedType ===
+                                                option && (
+                                                    <Check
+                                                        size={16}
+                                                        className="text-[#5b61ff]"
+                                                    />
+                                                )}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
 
                         {/* Duration Dropdown */}
                         <div
@@ -136,7 +200,7 @@ const Page1 = () => {
                             </button>
 
                             {isDurationOpen && (
-                                <div className="absolute top-[52px] right-0 w-full sm:w-[260px] bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-50">
+                                <div className="absolute top-[52px] right-0 w-full sm:w-[260px] bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-50 border border-[#ece9ff]">
                                     {durationOptions.map((option) => (
                                         <button
                                             key={option}
@@ -151,12 +215,13 @@ const Page1 = () => {
                                         >
                                             <span>{option}</span>
 
-                                            {selectedDuration === option && (
-                                                <Check
-                                                    size={16}
-                                                    className="text-[#5b61ff]"
-                                                />
-                                            )}
+                                            {selectedDuration ===
+                                                option && (
+                                                    <Check
+                                                        size={16}
+                                                        className="text-[#5b61ff]"
+                                                    />
+                                                )}
                                         </button>
                                     ))}
                                 </div>
