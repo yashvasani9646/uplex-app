@@ -31,7 +31,7 @@ const LatestBlog = () => {
                 </h1>
 
                 <div className="sm:absolute sm:right-0 flex justify-center sm:justify-end">
-                    <button className="h-10 sm:h-11 px-5 sm:px-7 border-2 border-indigo-500 text-indigo-500 rounded-full text-sm sm:text-base font-medium hover:bg-indigo-50 transition-all duration-300">
+                    <button className="h-10 sm:h-11 px-5 sm:px-7 border-2 border-indigo-500 text-indigo-500 rounded-full text-sm sm:text-base font-medium hover:bg-indigo-50 transition-all duration-300 cursor-pointer">
                         View All
                     </button>
                 </div>

@@ -9,7 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#06122d] mt-16">
+    <footer className="w-full bg-[#06122d] ">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
         {/* Top Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
@@ -96,7 +96,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 mt-12 pt-5 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <p className="text-sm sm:text-[15px] text-slate-500">
-            © 2026 Upleex. All rights reserved.
+            © 2026 Upleex. All rights reserved.l
           </p>
 
           <p className="text-sm sm:text-[15px] text-slate-500 flex items-center gap-2">

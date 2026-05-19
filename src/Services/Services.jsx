@@ -39,7 +39,7 @@ const Services = () => {
                     products on <span className="font-semibold">Upleex.</span>
                 </p>
 
-                <button className="mt-8 sm:mt-10 h-11 sm:h-12 px-8 sm:px-12 lg:px-20 bg-white text-black font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 transition-all duration-300">
+                <button className="mt-8 sm:mt-10 h-11 sm:h-12 px-8 sm:px-12 lg:px-20 bg-white text-black font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer">
                     Explore Services
                 </button>
             </div>

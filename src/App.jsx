@@ -14,6 +14,7 @@ import Services from "./Services/Services";
 import Page1 from "./Pages For Category/Page1";
 import Buyer from "./Pages For Category/Buyer";
 import Shop from "./Pages For Category/Shop";
+import Login from "./LoginPage/Login";
 
 function Home() {
   return (
@@ -43,6 +44,8 @@ function App() {
           <Route path="/page1" element={<Page1 />} />
           <Route path="/Buyer" element={<Buyer />} />
           <Route path="/shop" element={<Shop/>} />
+          <Route path="/login" element={<Login/>} />
+
 
 
         </Routes>

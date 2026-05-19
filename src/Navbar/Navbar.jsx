@@ -13,6 +13,7 @@ import {
     IoChevronDownOutline,
     IoCloseOutline,
 } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [openMenu, setOpenMenu] = useState(null);
@@ -44,9 +45,9 @@ const Navbar = () => {
             submenu: ["Clothing", "Shoes", "Accessories"],
         },
     ];
-
+    const navigate = useNavigate();
     return (
-        <header className="fixed top-0 left-0 z-50 w-full bg-white border-b border-gray-200">
+        <header className="fixed top-0 left-0 z-50 w-full bg-white border-b border-gray-200 overflow-visible">
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Top Navbar */}
                 <div className="h-[72px] flex items-center justify-between gap-4">
@@ -84,22 +85,26 @@ const Navbar = () => {
 
                     {/* Desktop Right Menu */}
                     <div className="hidden lg:flex items-center text-[14px] font-medium text-gray-700 shrink-0">
-                        <button className="flex items-center gap-2 px-4 border-r border-gray-300 hover:text-indigo-600 transition">
+                        <button className="flex items-center gap-2 px-4 border-r border-gray-300 hover:text-indigo-600 transition cursor-pointer">
                             <CiMobile1 className="text-[20px]" />
                             Download App
                         </button>
 
-                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600 transition">
+                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600 transition cursor-pointer">
                             Plan
                         </button>
 
-                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600 transition whitespace-nowrap">
+                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600 transition whitespace-nowrap cursor-pointer">
                             Partner With Us
                         </button>
 
-                        <button className="ml-4 px-5 xl:px-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-lg hover:opacity-90 transition whitespace-nowrap">
+                        <button onClick={() => navigate("/login")} className="ml-4 px-5 xl:px-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-lg hover:opacity-90 transition whitespace-nowrap cursor-pointer">
                             Login / Sign Up
                         </button>
+
+
+
+
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -124,31 +129,43 @@ const Navbar = () => {
                 </div>
 
                 {/* Desktop Categories */}
-                <div className="hidden lg:flex items-center justify-between pb-3 gap-4">
+                <div className="hidden lg:flex items-center justify-between pb-3 gap-4 relative z-[999] ">
                     {/* Categories */}
-                    <div className="flex items-center gap-1.5 flex-1 min-w-0 overflow-x-auto scrollbar-hide">
+                    <div className="flex items-center gap-1.5 flex-1 min-w-0 overflow-visible ">
                         {categories.map((item, index) => (
                             <div
                                 key={index}
-                                className="relative shrink-0"
+                                className="relative shrink-0 cursor-pointer"
                                 onMouseEnter={() => setOpenMenu(index)}
                                 onMouseLeave={() => setOpenMenu(null)}
                             >
-                                <button className="h-[38px] px-4 bg-[#f5f5f7] rounded-lg flex items-center gap-1.5 text-[13px] font-medium text-[#334155] whitespace-nowrap hover:bg-indigo-600 hover:text-white transition">
+                                {/* Category Button */}
+                                <button
+                                    type="button"
+                                    className="h-[38px] px-4 bg-[#f5f5f7] rounded-lg flex items-center gap-1.5 text-[13px] font-medium text-[#334155] whitespace-nowrap hover:bg-indigo-600 hover:text-white transition cursor-pointer"
+                                >
                                     {item.title}
                                     <IoChevronDownOutline className="text-[12px] shrink-0" />
                                 </button>
 
+                                {/* Dropdown */}
                                 {openMenu === index && (
-                                    <div className="absolute top-[52px] left-0 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 py-2 z-50">
-                                        {item.submenu.map((sub, i) => (
-                                            <div
-                                                key={i}
-                                                className="px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 cursor-pointer"
-                                            >
-                                                {sub}
-                                            </div>
-                                        ))}
+                                    <div
+                                        className="absolute left-0 top-full pt-2 w-64 z-[9999] "
+                                        onMouseEnter={() => setOpenMenu(index)}
+                                        onMouseLeave={() => setOpenMenu(null)}
+                                    >
+                                        <div className="bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-100 py-2">
+                                            {item.submenu.map((sub, i) => (
+                                                <button
+                                                    key={i}
+                                                    type="button"
+                                                    className="w-full text-left px-5 py-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition"
+                                                >
+                                                    {sub}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
                             </div>
@@ -156,7 +173,10 @@ const Navbar = () => {
                     </div>
 
                     {/* View All Categories */}
-                    <button className="shrink-0 h-[38px] px-5 rounded-full border-2 border-indigo-500 text-indigo-600 text-[13px] font-semibold hover:bg-indigo-50 transition whitespace-nowrap flex items-center gap-1.5">
+                    <button
+                        type="button"
+                        className="shrink-0 h-[38px] px-5 rounded-full border-2 border-indigo-500 text-indigo-600 text-[13px] font-semibold hover:bg-indigo-50 transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer"
+                    >
                         View All Categories
                         <span className="text-base">›</span>
                     </button>
