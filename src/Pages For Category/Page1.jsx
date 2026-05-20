@@ -40,7 +40,6 @@ const Page1 = () => {
     // ===== APNE useEffect KO ISSE REPLACE KARO =====
     useEffect(() => {
         const handleClickOutside = (event) => {
-            // All Types Dropdown Close
             if (
                 typeRef.current &&
                 !typeRef.current.contains(event.target)
@@ -48,7 +47,7 @@ const Page1 = () => {
                 setIsTypeOpen(false);
             }
 
-            // Duration Dropdown Close
+
             if (
                 durationRef.current &&
                 !durationRef.current.contains(event.target)
@@ -111,8 +110,8 @@ const Page1 = () => {
                                 <button
                                     onClick={() => setIsTypeOpen(!isTypeOpen)}
                                     className={`w-full h-11 bg-white rounded-full px-4 flex items-center justify-between border-2 transition-all duration-300 shadow-sm ${isTypeOpen
-                                            ? "border-[#5b61ff] shadow-[0_8px_20px_rgba(91,97,255,0.12)]"
-                                            : "border-gray-200"
+                                        ? "border-[#5b61ff] shadow-[0_8px_20px_rgba(91,97,255,0.12)]"
+                                        : "border-gray-200"
                                         }`}
                                 >
                                     <span className="flex items-center gap-2">
@@ -148,8 +147,8 @@ const Page1 = () => {
                                                     setIsTypeOpen(false);
                                                 }}
                                                 className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-[14px] font-medium transition ${selectedType === option
-                                                        ? "bg-[#f5f2ff] text-[#5b61ff]"
-                                                        : "text-gray-600 hover:bg-gray-50"
+                                                    ? "bg-[#f5f2ff] text-[#5b61ff]"
+                                                    : "text-gray-600 hover:bg-gray-50"
                                                     }`}
                                             >
                                                 <span>{option}</span>
@@ -167,7 +166,7 @@ const Page1 = () => {
                             </div>
 
                             {/* Duration Dropdown */}
-                           
+
                         </div>
 
                         {/* Duration Dropdown */}

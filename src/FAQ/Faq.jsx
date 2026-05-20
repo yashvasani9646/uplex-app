@@ -44,7 +44,6 @@ const Faq = () => {
                 </h1>
             </div>
 
-            {/* FAQ List */}
             <div className="mt-8 sm:mt-10 lg:mt-14 space-y-4 sm:space-y-5">
                 {faqData.map((item, index) => (
                     <div
@@ -66,7 +65,6 @@ const Faq = () => {
                             </span>
                         </button>
 
-                        {/* Answer */}
                         {open === index && (
                             <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-xl text-slate-500 leading-relaxed pr-2">
                                 {item.answer}

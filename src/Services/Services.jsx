@@ -39,7 +39,7 @@ const Services = () => {
                     products on <span className="font-semibold">Upleex.</span>
                 </p>
 
-                <button className="mt-8 sm:mt-10 h-11 sm:h-12 px-8 sm:px-12 lg:px-20 bg-white text-black font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer">
+                <button className="mt-8 sm:mt-10 h-11 sm:h-12 px-8 sm:px-12 lg:px-20 bg-white text-black font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 transition-all duration-300">
                     Explore Services
                 </button>
             </div>
@@ -51,16 +51,26 @@ const Services = () => {
                         key={index}
                         className="max-w-[320px] mx-auto hover:-translate-y-1 transition-all duration-300"
                     >
+                        {/* Icon Box */}
                         <div
-                            className={`w-14 h-14 sm:w-[59px] sm:h-[59px] mx-auto rounded-[15px] ${card.bg} flex items-center justify-center`}
+                            className={`
+          w-14 h-14 sm:w-[59px] sm:h-[59px]
+          mx-auto rounded-[15px]
+          ${card.bg}
+          flex items-center justify-center
+          transition-transform duration-500 ease-in-out
+          hover:rotate-[555deg]
+        `}
                         >
                             {card.icon}
                         </div>
 
+                        {/* Title */}
                         <h2 className="mt-6 sm:mt-8 text-xl sm:text-2xl font-bold text-[#0b1633]">
                             {card.title}
                         </h2>
 
+                        {/* Description */}
                         <p className="mt-3 sm:mt-4 text-sm sm:text-[15px] leading-7 text-slate-500">
                             {card.description}
                         </p>
