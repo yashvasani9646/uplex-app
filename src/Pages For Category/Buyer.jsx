@@ -52,7 +52,7 @@ const Buyer = () => {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "auto", 
+      behavior: "auto",
     });
   }, []);
 
@@ -182,6 +182,7 @@ const Buyer = () => {
                   </div>
 
                   <div className="flex items-center gap-5 bg-[#f8f9fb] px-4 py-2 rounded-[10px] min-w-[130px] justify-center self-start sm:self-auto">
+                    {/* Minus Button */}
                     <button
                       onClick={() =>
                         setQuantity((prev) => Math.max(1, prev - 1))
@@ -191,12 +192,16 @@ const Buyer = () => {
                       <Minus size={16} />
                     </button>
 
+                    {/* Quantity */}
                     <span className="text-[15px] font-bold text-[#081c4a] min-w-[20px] text-center">
                       {quantity}
                     </span>
 
+                    {/* Plus Button */}
                     <button
-                      onClick={() => setQuantity((prev) => prev + 1)}
+                      onClick={() =>
+                        setQuantity((prev) => Math.min(12, prev + 1))
+                      }
                       className="text-gray-500 hover:text-blue-600 transition"
                     >
                       <Plus size={16} />

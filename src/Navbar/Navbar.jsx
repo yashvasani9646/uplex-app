@@ -94,7 +94,7 @@ const Navbar = () => {
                             Plan
                         </button>
 
-                        <button className="px-4 border-r border-gray-300 hover:text-indigo-600 transition whitespace-nowrap cursor-pointer">
+                        <button onClick={() => navigate("/partner")} className="px-4 border-r border-gray-300 hover:text-indigo-600 transition whitespace-nowrap cursor-pointer">
                             Partner With Us
                         </button>
 

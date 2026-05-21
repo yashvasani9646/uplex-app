@@ -80,9 +80,9 @@ const Categoy = () => {
             <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0b1633] leading-tight">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0b1633] leading-tight">
                         Explore{" "}
-                        <span className="bg-gradient-to-r from-indigo-500 to-sky-500 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-indigo-500 to-sky-500 bg-clip-text text-transparent font-extrabold">
                             Premium
                         </span>{" "}
                         Categories
