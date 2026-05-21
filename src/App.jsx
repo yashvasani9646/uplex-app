@@ -18,6 +18,7 @@ import Login from "./LoginPage/Login";
 import PartnerWithus from "./Partnerwith_us/PartnerWithus";
 import PartnerNavbar from "../src/Partnerwith_us/PartnerNavbar";
 import Signin from "./Partnerwith_us/Signin";
+import Startrating from "./Partnerwith_us/Startrating";
 
 function Home() {
   return (
@@ -39,13 +40,11 @@ function AppContent() {
   return (
     <div>
 
-      {/* Navbar Hide on Signin */}
-      {location.pathname === "/signin" ? null : location.pathname === "/partner" ? (
+      {location.pathname === "/signin" || location.pathname === "/Startrating" ? null : location.pathname === "/partner" ? (
         <PartnerNavbar />
       ) : (
         <Navbar />
       )}
-
       <div className={location.pathname === "/signin" ? "" : "pt-32"}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -56,6 +55,8 @@ function AppContent() {
           <Route path="/login" element={<Login />} />
           <Route path="/partner" element={<PartnerWithus />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/Startrating" element={<Startrating />} />
+
         </Routes>
       </div>
 

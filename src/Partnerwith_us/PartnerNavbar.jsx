@@ -1,10 +1,17 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "../assets/upleex-logo-dark.webp";
 
 const PartnerNavbar = () => {
     const [mobileMenu, setMobileMenu] = useState(false);
+    const navigate = useNavigate();
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "auto",
+        });
+    }, []);
 
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200 shadow-sm">
@@ -54,7 +61,7 @@ const PartnerNavbar = () => {
                             Login
                         </Link>
 
-                        <button className="px-4 lg:px-6 py-2.5 rounded-lg text-[14px] lg:text-[16px] font-semibold text-white bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 transition cursor-pointer whitespace-nowrap">
+                        <button onClick={() => navigate("/Startrating")} className="px-4 lg:px-6 py-2.5 rounded-lg text-[14px] lg:text-[16px] font-semibold text-white bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 transition cursor-pointer whitespace-nowrap">
                             Start Renting
                         </button>
                     </div>
