@@ -104,12 +104,19 @@ const PartnerNavbar = () => {
                             <div className="flex flex-col gap-3 pt-4">
                                 <Link
                                     to="/signin"
+                                    onClick={() => setMobileMenu(false)}
                                     className="w-full text-center px-5 py-3 rounded-lg border border-gray-300 text-[15px] font-semibold text-[#081c4a] hover:bg-gray-50 transition"
                                 >
                                     Login
                                 </Link>
 
-                                <button className="w-full px-5 py-3 rounded-lg text-[15px] font-semibold text-white bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 transition">
+                                <button
+                                    onClick={() => {
+                                        navigate("/Startrating");
+                                        setMobileMenu(false);
+                                    }}
+                                    className="w-full px-5 py-3 rounded-lg text-[15px] font-semibold text-white bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 transition"
+                                >
                                     Start Renting
                                 </button>
                             </div>

@@ -229,14 +229,28 @@ const Navbar = () => {
                             <button className="block w-full text-left hover:text-indigo-600">
                                 Plan
                             </button>
-                            <button className="block w-full text-left hover:text-indigo-600">
+                            <button
+                                onClick={() => {
+                                    navigate("/partner");
+                                    setMobileMenu(false);
+                                }}
+                                className="block w-full text-left hover:text-indigo-600"
+                            >
                                 Partner With Us
                             </button>
-                            <button className="block w-full text-left hover:text-indigo-600">
+
+                            <button
+                                onClick={() => {
+                                    navigate("/login");
+                                    setMobileMenu(false);
+                                }}
+                                className="block w-full text-left hover:text-indigo-600"
+                            >
                                 Login / Sign Up
                             </button>
                         </div>
 
+                        {/* Categories */}
                         {/* Categories */}
                         <div className="mt-8 pt-6 border-t border-gray-200">
                             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
@@ -247,9 +261,36 @@ const Navbar = () => {
                                 {categories.map((item, index) => (
                                     <div
                                         key={index}
-                                        className="text-sm font-medium text-gray-700"
+                                        className="border border-gray-200 rounded-xl overflow-hidden"
                                     >
-                                        {item.title}
+                                        {/* CATEGORY BUTTON */}
+                                        <button
+                                            onClick={() =>
+                                                setOpenMenu(openMenu === index ? null : index)
+                                            }
+                                            className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-gray-700 bg-white"
+                                        >
+                                            {item.title}
+
+                                            <IoChevronDownOutline
+                                                className={`transition duration-300 ${openMenu === index ? "rotate-180" : ""
+                                                    }`}
+                                            />
+                                        </button>
+
+                                        {/* SUBMENU */}
+                                        {openMenu === index && (
+                                            <div className="bg-gray-50 border-t border-gray-200">
+                                                {item.submenu.map((sub, i) => (
+                                                    <button
+                                                        key={i}
+                                                        className="block w-full text-left px-5 py-3 text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600"
+                                                    >
+                                                        {sub}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
                                 ))}
                             </div>
