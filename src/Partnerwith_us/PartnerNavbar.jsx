@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 import logo from "../assets/upleex-logo-dark.webp";
 
 const PartnerNavbar = () => {
     const [mobileMenu, setMobileMenu] = useState(false);
+
     const navigate = useNavigate();
+
+    const { t } = useTranslation();
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -34,21 +40,21 @@ const PartnerNavbar = () => {
                             href="#how-it-works"
                             className="text-[14px] lg:text-[15px] font-medium text-slate-600 hover:text-blue-600 transition"
                         >
-                            How it works
+                            {t("how_it_works")}
                         </a>
 
                         <a
                             href="#benefits"
                             className="text-[14px] lg:text-[15px] font-medium text-slate-600 hover:text-blue-600 transition"
                         >
-                            Benefits
+                            {t("benefits")}
                         </a>
 
                         <a
                             href="#categories"
                             className="text-[14px] lg:text-[15px] font-medium text-slate-600 hover:text-blue-600 transition"
                         >
-                            Categories
+                            {t("categories")}
                         </a>
                     </nav>
 
@@ -58,11 +64,14 @@ const PartnerNavbar = () => {
                             to="/signin"
                             className="px-4 lg:px-6 py-2.5 rounded-lg border border-gray-300 text-[14px] lg:text-[16px] font-semibold text-[#081c4a] hover:bg-gray-50 transition cursor-pointer hover:border-indigo-500 hover:text-indigo-500 whitespace-nowrap"
                         >
-                            Login
+                            {t("login")}
                         </Link>
 
-                        <button onClick={() => navigate("/Startrating")} className="px-4 lg:px-6 py-2.5 rounded-lg text-[14px] lg:text-[16px] font-semibold text-white bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 transition cursor-pointer whitespace-nowrap">
-                            Start Renting
+                        <button
+                            onClick={() => navigate("/Startrating")}
+                            className="px-4 lg:px-6 py-2.5 rounded-lg text-[14px] lg:text-[16px] font-semibold text-white bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 transition cursor-pointer whitespace-nowrap"
+                        >
+                            {t("start_renting")}
                         </button>
                     </div>
 
@@ -84,21 +93,21 @@ const PartnerNavbar = () => {
                                 href="#how-it-works"
                                 className="text-[15px] font-medium text-slate-700 hover:text-blue-600"
                             >
-                                How it works
+                                {t("how_it_works")}
                             </a>
 
                             <a
                                 href="#benefits"
                                 className="text-[15px] font-medium text-slate-700 hover:text-blue-600"
                             >
-                                Benefits
+                                {t("benefits")}
                             </a>
 
                             <a
                                 href="#categories"
                                 className="text-[15px] font-medium text-slate-700 hover:text-blue-600"
                             >
-                                Categories
+                                {t("categories")}
                             </a>
 
                             <div className="flex flex-col gap-3 pt-4">
@@ -107,7 +116,7 @@ const PartnerNavbar = () => {
                                     onClick={() => setMobileMenu(false)}
                                     className="w-full text-center px-5 py-3 rounded-lg border border-gray-300 text-[15px] font-semibold text-[#081c4a] hover:bg-gray-50 transition"
                                 >
-                                    Login
+                                    {t("login")}
                                 </Link>
 
                                 <button
@@ -117,7 +126,7 @@ const PartnerNavbar = () => {
                                     }}
                                     className="w-full px-5 py-3 rounded-lg text-[15px] font-semibold text-white bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 transition"
                                 >
-                                    Start Renting
+                                    {t("start_renting")}
                                 </button>
                             </div>
 

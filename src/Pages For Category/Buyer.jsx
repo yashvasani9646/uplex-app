@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import { useEffect } from "react";
 
+import { useTranslation } from "react-i18next";
+
 
 
 
@@ -55,8 +57,9 @@ const Buyer = () => {
       behavior: "auto",
     });
   }, []);
-
+  const { t } = useTranslation();
   return (
+
     <>
       <div className="min-h-screen bg-gray-50">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
@@ -66,7 +69,7 @@ const Buyer = () => {
             className="w-fit min-w-[110px] bg-gray-200 text-black px-4 py-2 rounded-full flex items-center justify-center gap-2 font-semibold border border-transparent hover:bg-gray-300 transition"
           >
             <FaArrowLeft size={14} />
-            Back
+            {t("back")}
           </button>
 
           {/* Main Card */}
@@ -89,7 +92,7 @@ const Buyer = () => {
                           alt="Product"
                           draggable={false}
                           className="w-full h-full object-cover object-top select-none pointer-events-none"
-                        />
+                        />  
                       </div>
                     </div>
 
@@ -132,7 +135,7 @@ const Buyer = () => {
               <div className="p-4 sm:p-6">
                 <div className="flex justify-between items-start gap-4 max-w-[620px]">
                   <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">
-                    3-D Miniature Photoframe
+                    {t("photoframe")}
                   </h1>
 
                   <button className="w-10 h-10 rounded-full border bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-red-500 hover:shadow-md transition shrink-0">
@@ -141,7 +144,7 @@ const Buyer = () => {
                 </div>
 
                 <p className="inline-block text-sm text-blue-600 mt-2 font-medium px-3 py-1 rounded-2xl bg-sky-100">
-                  Toys
+                  {t("toys")}
                 </p>
 
                 <div className="mt-5 w-full max-w-[620px] min-h-[95px] border border-[#c7dbff] rounded-[14px] px-4 sm:px-5 py-4 bg-[#f8fbff] shadow-sm relative overflow-hidden">
@@ -150,17 +153,17 @@ const Buyer = () => {
                   <div className="relative z-10 flex items-center gap-2">
                     <span className="w-1 h-4 bg-[#19a7ff] rounded-full"></span>
                     <p className="text-[14px] font-semibold text-[#1797f2]">
-                      Selling Price
+                      {t("selling_price")}
                     </p>
                   </div>
 
                   <div className="relative z-10 flex items-end gap-2 mt-2 flex-wrap">
                     <span className="text-2xl sm:text-[30px] leading-none font-extrabold text-[#081c4a]">
-                      ₹2,000
+                      {t("price")}
                     </span>
 
                     <span className="text-base sm:text-[18px] leading-none font-medium text-[#a0a9b8] line-through mb-0.5">
-                      ₹2,500
+                      {t("original_price")}
                     </span>
                   </div>
                 </div>
@@ -169,15 +172,15 @@ const Buyer = () => {
                 <div className="mt-5 border border-black rounded-[14px] px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white shadow-sm w-full max-w-[620px]">
                   <div>
                     <h3 className="text-[14px] font-bold text-[#081c4a] leading-none">
-                      Quantity
+                      {t("quantity")}
                     </h3>
 
                     <p className="text-[10px] text-gray-500 mt-1 leading-none">
-                      Select units
+                      {t("select_units")}
                     </p>
 
                     <p className="text-[10px] text-[#ff6b00] font-medium mt-1 leading-none">
-                      12 available
+                      {t("units_available", { count: 12 })}
                     </p>
                   </div>
 
@@ -212,7 +215,7 @@ const Buyer = () => {
                 {/* Add To Cart */}
                 <button className="mt-4 w-full max-w-[620px] py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 hover:shadow-lg transition flex items-center justify-center gap-3">
                   <ShoppingCart size={20} />
-                  <span className="cursor-pointer">Add To Cart</span>
+                  <span className="cursor-pointer">{t("add_to_cart")}</span>
                   <ArrowRight size={18} />
                 </button>
 
@@ -226,15 +229,15 @@ const Buyer = () => {
 
                       <div className="flex-1 min-w-0">
                         <p className="text-[12px] text-gray-500 font-bold">
-                          Sold By
+                          {t("sold_by")}
                         </p>
 
                         <h3 className="text-[15px] font-bold text-gray-900 leading-tight mt-1">
-                          Shreeji Gift & Toys
+                          {t("seller_name")}
                         </h3>
 
                         <p className="text-[12px] text-gray-500 mt-1 leading-relaxed">
-                          📍 Ghanshyam Complex, Radhe Shyam Society, Vadinath Chowk, Surat
+                          📍 {t("seller_location")}
                         </p>
                       </div>
                     </div>
@@ -243,7 +246,7 @@ const Buyer = () => {
                       onClick={() => navigate("/shop")}
                       className="px-4 py-1.5 rounded-full border-2 border-indigo-500 text-indigo-600 text-[13px] font-semibold hover:bg-indigo-50 transition whitespace-nowrap self-start sm:self-auto"
                     >
-                      View Shop
+                      {t("view_shop")}
                     </button>
                   </div>
                 </div>
@@ -255,9 +258,9 @@ const Buyer = () => {
                       <ShieldCheck size={16} className="text-sky-500" />
                     </div>
                     <p className="text-[12px] font-semibold text-gray-800 leading-4">
-                      KYC
+                      ({t("kyc")})
                       <br />
-                      Verified
+                      {t("verified")}
                     </p>
                   </div>
 
@@ -266,9 +269,9 @@ const Buyer = () => {
                       <ShieldCheck size={16} className="text-green-500" />
                     </div>
                     <p className="text-[12px] font-semibold text-gray-800 leading-4">
-                      Secure
+                      ({t("secure")})
                       <br />
-                      Payment
+                      {t("payment")}
                     </p>
                   </div>
 
@@ -277,9 +280,9 @@ const Buyer = () => {
                       <Truck size={16} className="text-orange-500" />
                     </div>
                     <p className="text-[12px] font-semibold text-gray-800 leading-4">
-                      Verified
+                      ({t("verified")})
                       <br />
-                      Product
+                      {t("product")}
                     </p>
                   </div>
 
@@ -288,9 +291,9 @@ const Buyer = () => {
                       <RotateCcw size={16} className="text-purple-500" />
                     </div>
                     <p className="text-[12px] font-semibold text-gray-800 leading-4">
-                      100%
+                      ({t("refund")})
                       <br />
-                      Refund
+                      {t("policy")}
                     </p>
                   </div>
 
@@ -311,7 +314,7 @@ const Buyer = () => {
                     : "text-gray-600 hover:text-blue-600"
                     }`}
                 >
-                  Description
+                  {t("description")}
                 </button>
 
                 <button
@@ -321,7 +324,7 @@ const Buyer = () => {
                     : "text-gray-600 hover:text-blue-600"
                     }`}
                 >
-                  Product Details
+                  {t("product_details")}
                 </button>
 
                 <button
@@ -331,7 +334,7 @@ const Buyer = () => {
                     : "text-gray-600 hover:text-blue-600"
                     }`}
                 >
-                  Reviews & Ratings
+                  {t("reviews_and_ratings")}
                 </button>
               </div>
 
@@ -340,9 +343,9 @@ const Buyer = () => {
                 {/* Description */}
                 {activeTab === "description" && (
                   <div className="text-[15px] text-[#081c4a]">
-                    <p>This is 8×10 inch size 3d miniature photoframe</p>
-                    <p>acrylic material with LED lights.</p>
-                    <p>customised 3d miniature photoframe.</p>
+                    <p>{t("product_description_1")}</p>
+                    <p>{t("product_description_2")}</p>
+                    <p>{t("product_description_3")}</p>
                   </div>
                 )}
 
@@ -373,15 +376,15 @@ const Buyer = () => {
                       </div>
 
                       <h3 className="mt-6 text-[18px] md:text-[20px] font-bold text-[#081c4a]">
-                        No Product Details Available
+                        {t("no_product_details")}
                       </h3>
 
                       <p className="mt-4 text-[14px] leading-7 text-gray-500 max-w-[320px] mx-auto">
-                        Detailed specifications for this product have not been added yet.
+                        {t("product_details_not_available")}  
                       </p>
 
                       <p className="mt-1 text-[14px] leading-7 text-gray-500 max-w-[320px] mx-auto">
-                        Please check back later or contact the seller for more information.
+                        {t("please_check_back_later_or_contact_seller")}
                       </p>
                     </div>
                   </div>
@@ -407,7 +410,7 @@ const Buyer = () => {
                           </div>
 
                           <p className="mt-1 text-[13px] text-gray-500">
-                            0 reviews
+                            {t("zero_reviews")}
                           </p>
                         </div>
 
@@ -427,16 +430,16 @@ const Buyer = () => {
                     {/* Write Review */}
                     <div className="mt-8 bg-white border border-gray-200 rounded-2xl px-4 sm:px-6 py-4">
                       <h3 className="text-[20px] font-bold text-[#081c4a]">
-                        Write a Review
+                        {t("write_a_review")}
                       </h3>
 
                       <div className="text-center py-5">
                         <p className="text-gray-500 text-[16px] mb-3">
-                          Please login to write a review
+                          {t("please_login_to_write_a_review")}
                         </p>
 
                         <button className="px-8 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 transition">
-                          Login to Review
+                          {t("login_to_review")}
                         </button>
                       </div>
                     </div>
@@ -444,7 +447,7 @@ const Buyer = () => {
                     {/* Customer Reviews */}
                     <div className="mt-8">
                       <h3 className="text-[20px] font-bold text-[#081c4a]">
-                        Customer Reviews (0)
+                        {t("customer_reviews")} (0)
                       </h3>
 
                       <div className="mt-4 bg-gray-100 border border-gray-100 rounded-2xl py-6 text-center">
@@ -452,7 +455,7 @@ const Buyer = () => {
                           <User size={48} strokeWidth={1.5} />
                         </div>
                         <p className="mt-2 text-[16px] text-gray-500">
-                          No reviews yet. Be the first to review!
+                          {t("no_reviews_yet")}
                         </p>
                       </div>
                     </div>
@@ -473,7 +476,7 @@ const Buyer = () => {
             <div className="px-6 py-5 border-b border-gray-100 flex items-center gap-3">
               <span className="w-1.5 h-7 bg-blue-600 rounded-full"></span>
               <h2 className="text-[20px] font-bold text-[#081c4a]">
-                You May Also Like
+                {t("you_may_also_like")}
               </h2>
             </div>
 
@@ -486,7 +489,7 @@ const Buyer = () => {
                   <div className="relative p-3 pb-0">
                     {/* Sell Badge */}
                     <div className="absolute top-[8px] left-[-20px] w-[80px] bg-orange-500 text-white text-[10px] font-bold text-center py-1 rotate-[-45deg] shadow-md z-10">
-                      Sell
+                      {t("sell")}
                     </div>
 
                     {/* Wishlist Icon */}
@@ -506,11 +509,11 @@ const Buyer = () => {
                     {/* Category + Price */}
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                       <span className="bg-white text-[#081c4a] text-[11px] font-medium px-2.5 py-1 rounded-full shadow-sm">
-                        Toys
+                        {t("toys")}
                       </span>
 
                       <span className="bg-gradient-to-r from-indigo-500 to-sky-500 text-white text-[16px] font-bold px-3 py-1 rounded-full shadow-md">
-                        ₹599
+                        {t("price", { amount: 599 })}
                       </span>
                     </div>
                   </div>
@@ -519,25 +522,25 @@ const Buyer = () => {
                   <div className="p-3 pt-3">
                     {/* New Badge */}
                     <span className="inline-block bg-green-100 text-green-600 text-[10px] font-semibold px-2.5 py-1 rounded-md">
-                      NEW
+                      {t("new")}
                     </span>
 
                     {/* Product Title */}
                     <h3 className="mt-3 text-[14px] font-bold text-[#081c4a] leading-5 hover:text-blue-400">
-                      48 PCS CAR CONTAINER
+                      {t("48_pcs_car_container")}
                     </h3>
 
                     {/* Location + Old Price */}
                     <div className="mt-2 flex items-center justify-between text-[12px]">
-                      <span className="text-gray-500">📍 Surat</span>
+                      <span className="text-gray-500">📍 {t("surat")}</span>
                       <span className="text-gray-400 line-through">
-                        ₹1000/Sell
+                        {t("price", { amount: 1000 })}
                       </span>
                     </div>
 
                     {/* Buy Button */}
                     <button className="mt-4 w-full py-2.5 rounded-lg text-white text-[14px] font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 transition cursor-pointer">
-                      Buy Now
+                      {t("buy_now")}
                     </button>
                   </div>
                 </div>

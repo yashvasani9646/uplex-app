@@ -6,42 +6,48 @@ import {
     TrendingUp,
     Play,
 } from "lucide-react";
+
+import { useTranslation } from "react-i18next";
+
 import Footer from "../Footer/Footer";
 
 const PartnerWithus = () => {
+
+    const { t } = useTranslation();
+
     const stats = [
-        { value: "2,000+", label: "Active Partners" },
-        { value: "5,000+", label: "Products Listed" },
-        { value: "10,000+", label: "Orders Completed" },
-        { value: "100+", label: "Cities Covered" },
+        { value: "2,000+", label: t("active_partners") },
+        { value: "5,000+", label: t("products_listed") },
+        { value: "10,000+", label: t("orders_completed") },
+        { value: "100+", label: t("cities_covered") },
     ];
 
     const features = [
         {
             icon: <Wallet size={22} className="text-blue-600" />,
-            title: "Competitive Pricing",
+            title: t("competitive_pricing"),
             description:
-                "Set your own rental prices and maximize your revenue.",
+                t("competitive_pricing_desc"),
         },
         {
             icon: <Shield size={22} className="text-blue-600" />,
-            title: "Secure Transactions",
+            title: t("secure_transactions"),
             description:
-                "All transactions are secure and protected. Get paid on time.",
+                t("secure_transactions_desc"),
         },
         {
             icon: <TrendingUp size={22} className="text-blue-600" />,
-            title: "Growth for Every Partner",
+            title: t("growth_partner"),
             description:
-                "From small to large businesses, Upleex fuels growth for all partners.",
+                t("growth_partner_desc"),
         },
         {
             icon: <CheckCircle size={22} className="text-blue-600" />,
-            title: "Ease of Doing Business",
+            title: t("ease_business"),
             points: [
-                "Easy Product Listing",
-                "Real-time Order Management",
-                "Fast Payment Processing",
+                t("easy_product_listing"),
+                t("real_time_order"),
+                t("fast_payment"),
             ],
         },
     ];
@@ -49,64 +55,64 @@ const PartnerWithus = () => {
     const testimonials = [
         {
             name: "Rajesh Kumar",
-            role: "Construction Equipment Partner",
+            role: t("construction_partner"),
             text:
-                "Our business has grown beyond our imagination, getting up to multiple orders consistently during peak seasons. We are now constantly bringing new products thanks to Upleex's insights.",
+                t("testimonial_1"),
         },
         {
             name: "Priya Sharma",
-            role: "Electronics Rental Dealer",
+            role: t("electronics_partner"),
             text:
-                "I started renting on Upleex with 2-3 orders on the very first day. In no time I was getting over multiple orders a day, like a dream come true.",
+                t("testimonial_2"),
         },
         {
             name: "Amit Patel",
-            role: "Event Equipment Manager",
+            role: t("event_manager"),
             text:
-                "Upleex made it extremely simple to transition to online business. Suddenly we were all over India to our surprise, seeing up to 5X growth on peak days.",
+                t("testimonial_3"),
         },
     ];
 
     const steps = [
         {
             number: "1",
-            title: "Create Account",
-            description: "Sign up and complete your business profile.",
+            title: t("create_account"),
+            description: t("create_account_desc"),
         },
         {
             number: "2",
-            title: "List Products",
-            description: "List the products you want to rent in your partner panel.",
+            title: t("list_products"),
+            description: t("list_products_desc"),
             active: true,
         },
         {
             number: "3",
-            title: "Get Orders",
-            description: "Start getting rental orders from customers.",
+            title: t("get_orders"),
+            description: t("get_orders_desc"),
         },
         {
             number: "4",
-            title: "Manage Orders",
-            description: "Accept orders and manage deliveries through our dashboard.",
+            title: t("manage_orders"),
+            description: t("manage_orders_desc"),
         },
         {
             number: "5",
-            title: "Receive Payments",
-            description: "Payments are deposited directly to your bank account.",
+            title: t("receive_payments"),
+            description: t("receive_payments_desc"),
         },
     ];
 
     const categories = [
-        "Furniture",
-        "Electronics",
-        "Home Appliances",
-        "Event Equipment",
-        "Medical Equipment",
-        "Automobile",
-        "Musical Instruments",
-        "Tools & Machinery",
-        "Generator",
-        "And More",
+        t("furniture"),
+        t("electronics"),
+        t("home_appliances"),
+        t("event_equipment"),
+        t("medical_equipment"),
+        t("automobile"),
+        t("musical_instruments"),
+        t("tools_machinery"),
+        t("generator"),
+        t("and_more"),
     ];
 
     return (
@@ -122,21 +128,22 @@ const PartnerWithus = () => {
                             {/* Left Content */}
                             <div className="text-center lg:text-left">
                                 <h1 className="text-[34px] sm:text-[48px] lg:text-[60px] font-bold leading-[1.1] text-[#0b1633]">
-                                    More Orders.
+                                    {t("more_orders")}
                                     <br />
-                                    Less Effort.
+                                    {t("less_effort")}
                                     <br />
+
                                     <span className="bg-gradient-to-r from-indigo-500 to-sky-500 bg-clip-text text-transparent">
-                                        Real Growth.
+                                        {t("real_growth")}
                                     </span>
                                 </h1>
 
                                 <p className="mt-5 text-[16px] sm:text-[18px] leading-8 text-slate-600 max-w-[520px] mx-auto lg:mx-0">
-                                    Become an Upleex partner and grow your rental business across India.
+                                    {t("partner_hero_desc")}
                                 </p>
 
                                 <button className="mt-7 inline-flex items-center gap-3 px-7 py-3.5 rounded-xl text-white text-[16px] font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-[0_12px_30px_rgba(59,130,246,0.25)] hover:opacity-90 transition cursor-pointer hover:-translate-y-1">
-                                    Start Renting
+                                    {t("start_renting")}
                                     <ArrowRight size={18} />
                                 </button>
                             </div>
@@ -151,7 +158,7 @@ const PartnerWithus = () => {
 
                                     <div className="absolute inset-0 flex items-center justify-center">
                                         <h2 className="text-[58px] sm:text-[90px] lg:text-[132px] font-extrabold tracking-tight text-[#dbe7ff] select-none">
-                                            Partner
+                                            {t("partner")}
                                         </h2>
                                     </div>
 
@@ -190,12 +197,11 @@ const PartnerWithus = () => {
 
                         <div className="text-center">
                             <h1 className="text-4xl sm:text-5xl font-bold text-blue-500">
-                                Why Partners Love Upleex
+                                {t("why_partner_love")}
                             </h1>
 
                             <p className="mt-4 text-gray-500 max-w-2xl mx-auto">
-                                All the benefits designed to help you rent more and grow your
-                                business.
+                                {t("why_partner_desc")}
                             </p>
                         </div>
 
@@ -251,7 +257,7 @@ const PartnerWithus = () => {
                     <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8">
 
                         <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-bold text-[#3b82f6] mb-16">
-                            Experiences Partners Love to Talk About
+                            {t("partner_experience")}
                         </h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -295,7 +301,7 @@ const PartnerWithus = () => {
                     <div className="max-w-[1350px] mx-auto px-4 sm:px-8 lg:px-16">
 
                         <h2 className="text-center text-[24px] sm:text-[36px] font-bold text-[#3b82f6] mb-16">
-                            How it works
+                            {t("how_it_works")}
                         </h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -304,8 +310,8 @@ const PartnerWithus = () => {
                                 <div
                                     key={index}
                                     className={`relative bg-white border rounded-xl px-7 py-6 shadow-sm transition-all duration-300 ${step.active
-                                            ? "border-blue-300 ring-2 ring-blue-100"
-                                            : "border-gray-200"
+                                        ? "border-blue-300 ring-2 ring-blue-100"
+                                        : "border-gray-200"
                                         }`}
                                 >
 
@@ -325,19 +331,19 @@ const PartnerWithus = () => {
                                         <div className="mt-5 pt-4 border-t border-gray-100">
 
                                             <p className="text-[13px] font-semibold text-[#475569] mb-2">
-                                                All you need is:
+                                                {t("all_you_need")}
                                             </p>
 
                                             <ul className="space-y-1.5 text-[13px] text-[#64748b]">
 
                                                 <li className="flex items-center gap-2">
                                                     <span className="w-1.5 h-1.5 rounded-full bg-[#94a3b8]"></span>
-                                                    Business Details
+                                                    {t("business_details")}
                                                 </li>
 
                                                 <li className="flex items-center gap-2">
                                                     <span className="w-1.5 h-1.5 rounded-full bg-[#94a3b8]"></span>
-                                                    Bank Account
+                                                    {t("bank_account")}
                                                 </li>
 
                                             </ul>
@@ -357,7 +363,7 @@ const PartnerWithus = () => {
                     <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16">
 
                         <h2 className="text-center text-[36px] sm:text-[48px] font-bold bg-gradient-to-r from-[#4f6df5] to-[#1da1f2] bg-clip-text text-transparent mb-14 leading-tight">
-                            Popular Categories to Rent Online
+                            {t("popular_categories")}
                         </h2>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[1400px] mx-auto">
@@ -382,12 +388,11 @@ const PartnerWithus = () => {
                     <div className="max-w-[1000px] mx-auto px-4 sm:px-6 text-center">
 
                         <h2 className="text-4xl sm:text-5xl font-bold text-[#0b1633] leading-tight">
-                            Upleex Partner Support Available 24/7
+                            {t("support_247")}
                         </h2>
 
                         <p className="mt-6 text-lg sm:text-2xl text-gray-500 leading-8 sm:leading-[42px]">
-                            Our partner support team is available to solve all your doubts and
-                            issues before and after you start your rental business.
+                            {t("support_desc")}
                         </p>
 
                         <a

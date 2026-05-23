@@ -7,10 +7,16 @@ import {
     Zap,
     TrendingUp,
 } from "lucide-react";
+
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
 import Footer from "../Footer/Footer";
 
 const Startrating = () => {
+
+    const { t } = useTranslation();
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -27,19 +33,23 @@ const Startrating = () => {
                     <div className="bg-[#16233d] text-white px-5 sm:px-7 lg:px-9 py-8 sm:py-10 flex flex-col justify-between">
                         <div>
                             <h1 className="text-[24px] sm:text-[26px] font-bold mb-6 sm:mb-8">
-                                <span className="text-[#4d7cff]">Partner</span> Hub
+                                <span className="text-[#4d7cff]">
+                                    {t("partner")}
+                                </span>{" "}
+                                Hub
                             </h1>
 
                             <h2 className="text-[34px] sm:text-[40px] lg:text-[46px] font-bold leading-tight mb-4">
-                                Join PartnerHub
+                                {t("join_partnerhub")}
                             </h2>
 
                             <p className="text-[15px] sm:text-[16px] text-gray-300 leading-relaxed max-w-[320px]">
-                                Start your journey with us and expand your business reach.
+                                {t("partnerhub_desc")}
                             </p>
                         </div>
 
                         <div className="mt-8 sm:mt-10 space-y-6">
+
                             {/* ITEM */}
                             <div className="flex items-start gap-4">
                                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
@@ -48,11 +58,11 @@ const Startrating = () => {
 
                                 <div>
                                     <h3 className="text-[16px] sm:text-[17px] font-semibold text-white">
-                                        Instant Activation
+                                        {t("instant_activation")}
                                     </h3>
 
                                     <p className="text-gray-400 text-[14px] sm:text-[15px] leading-relaxed mt-1">
-                                        Get your account approved quickly
+                                        {t("instant_activation_desc")}
                                     </p>
                                 </div>
                             </div>
@@ -65,11 +75,11 @@ const Startrating = () => {
 
                                 <div>
                                     <h3 className="text-[16px] sm:text-[17px] font-semibold text-white">
-                                        Zero Commission
+                                        {t("zero_commission")}
                                     </h3>
 
                                     <p className="text-gray-400 text-[14px] sm:text-[15px] leading-relaxed mt-1 max-w-[260px]">
-                                        Keep 100% of your earnings for first month
+                                        {t("zero_commission_desc")}
                                     </p>
                                 </div>
                             </div>
@@ -82,25 +92,27 @@ const Startrating = () => {
 
                                 <div>
                                     <h3 className="text-[16px] sm:text-[17px] font-semibold text-white">
-                                        Verified Partners
+                                        {t("verified_partners")}
                                     </h3>
 
                                     <p className="text-gray-400 text-[14px] sm:text-[15px] leading-relaxed mt-1">
-                                        Join a trusted community
+                                        {t("verified_partners_desc")}
                                     </p>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
                     {/* RIGHT SIDE */}
                     <div className="px-4 sm:px-5 lg:px-6 py-6 sm:py-8">
+
                         <h2 className="text-[24px] sm:text-[28px] lg:text-[32px] font-bold text-[#0f172a]">
-                            Register as Partner
+                            {t("register_partner")}
                         </h2>
 
                         <p className="text-gray-500 text-sm sm:text-base mt-2 mb-6">
-                            Fill in the details to get started
+                            {t("fill_details")}
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -108,7 +120,7 @@ const Startrating = () => {
                             {/* FULL NAME */}
                             <div>
                                 <label className="block text-sm font-semibold mb-2">
-                                    Full Name <span className="text-red-500">*</span>
+                                    {t("full_name")} <span className="text-red-500">*</span>
                                 </label>
 
                                 <div className="h-[48px] border border-gray-300 rounded-lg px-3 flex items-center gap-2">
@@ -116,7 +128,7 @@ const Startrating = () => {
 
                                     <input
                                         type="text"
-                                        placeholder="John Doe"
+                                        placeholder={t("john_doe")}
                                         className="w-full outline-none text-sm sm:text-base"
                                     />
                                 </div>
@@ -125,7 +137,7 @@ const Startrating = () => {
                             {/* BUSINESS NAME */}
                             <div>
                                 <label className="block text-sm font-semibold mb-2">
-                                    Business Name <span className="text-red-500">*</span>
+                                    {t("business_name")} <span className="text-red-500">*</span>
                                 </label>
 
                                 <div className="h-[48px] border border-gray-300 rounded-lg px-3 flex items-center gap-2">
@@ -133,7 +145,7 @@ const Startrating = () => {
 
                                     <input
                                         type="text"
-                                        placeholder="My Business Ltd"
+                                        placeholder={t("business_placeholder")}
                                         className="w-full outline-none text-sm sm:text-base"
                                     />
                                 </div>
@@ -143,7 +155,7 @@ const Startrating = () => {
                         {/* EMAIL */}
                         <div className="mt-4">
                             <label className="block text-sm font-semibold mb-2">
-                                Email Address <span className="text-red-500">*</span>
+                                {t("email_address")} <span className="text-red-500">*</span>
                             </label>
 
                             <div className="h-[48px] border border-gray-300 rounded-lg px-3 flex items-center gap-2">
@@ -151,7 +163,7 @@ const Startrating = () => {
 
                                 <input
                                     type="email"
-                                    placeholder="john@example.com"
+                                    placeholder={t("email_placeholder")}
                                     className="w-full outline-none text-sm sm:text-base"
                                 />
                             </div>
@@ -162,7 +174,7 @@ const Startrating = () => {
 
                             <div>
                                 <label className="block text-sm font-semibold mb-2">
-                                    Mobile Number <span className="text-red-500">*</span>
+                                    {t("mobile_number")} <span className="text-red-500">*</span>
                                 </label>
 
                                 <div className="h-[48px] border border-gray-300 rounded-lg flex items-center overflow-hidden">
@@ -180,7 +192,7 @@ const Startrating = () => {
 
                             <div>
                                 <label className="block text-sm font-semibold mb-2">
-                                    Alternative Number
+                                    {t("alternative_number")}
                                 </label>
 
                                 <div className="h-[48px] border border-gray-300 rounded-lg flex items-center overflow-hidden">
@@ -190,7 +202,7 @@ const Startrating = () => {
 
                                     <input
                                         type="text"
-                                        placeholder="Optional"
+                                        placeholder={t("optional")}
                                         className="w-full px-3 outline-none text-sm sm:text-base"
                                     />
                                 </div>
@@ -200,7 +212,7 @@ const Startrating = () => {
                         {/* CITY */}
                         <div className="mt-4">
                             <label className="block text-sm font-semibold mb-2">
-                                City / County <span className="text-red-500">*</span>
+                                {t("city_county")} <span className="text-red-500">*</span>
                             </label>
 
                             <div className="h-[48px] border border-gray-300 rounded-lg px-3 flex items-center gap-2">
@@ -208,7 +220,7 @@ const Startrating = () => {
 
                                 <input
                                     type="text"
-                                    placeholder="Ahmedabad, Gujarat"
+                                    placeholder={t("city_placeholder")}
                                     className="w-full outline-none text-sm sm:text-base"
                                 />
                             </div>
@@ -216,21 +228,22 @@ const Startrating = () => {
 
                         {/* BUTTON */}
                         <button className="w-full h-[50px] mt-6 rounded-lg bg-gradient-to-r from-[#5d8dff] to-[#5f84ff] text-white text-sm sm:text-base font-semibold shadow-lg hover:scale-[1.01] duration-300">
-                            Send OTP
+                            {t("send_otp")}
                         </button>
 
                         <p className="text-center text-gray-500 text-sm mt-4">
-                            Already have an account?{" "}
+                            {t("already_account")}{" "}
+
                             <span className="text-[#4d7cff] font-semibold cursor-pointer">
-                                Login here
+                                {t("login_here")}
                             </span>
                         </p>
                     </div>
                 </div>
             </div>
-            <Footer/>
-        </>
 
+            <Footer />
+        </>
     );
 };
 

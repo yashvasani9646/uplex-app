@@ -7,6 +7,8 @@ import "swiper/css/pagination";
 
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
+import { useTranslation } from "react-i18next";
+
 import img1 from "../photo-1773098587088-f0a3aaab48a8.avif";
 import img2 from "../photo-1774095120121-e2fcb529cc2b.avif";
 import img3 from "../photo-1776549821469-e8aab812dba0.avif";
@@ -16,10 +18,14 @@ const images = [img1, img2, img3, img4];
 const sliderImages = [...images, ...images, ...images];
 
 const Herosection = () => {
+
+  const { t } = useTranslation();
+
   return (
     <section className="w-full bg-gray-100 py-6 sm:py-8 lg:py-10 mt-2 cursor-pointer">
       <div className="max-w-[1500px] mx-auto px-3 sm:px-4 lg:px-6">
         <div className="relative">
+
           {/* Left Arrow */}
           <button
             className="
@@ -89,6 +95,7 @@ const Herosection = () => {
             {sliderImages.map((img, index) => (
               <SwiperSlide key={index} className="group">
                 <div className="px-1 sm:px-2 lg:px-4">
+
                   <div
                     className="
                       relative
@@ -118,16 +125,17 @@ const Herosection = () => {
                       "
                     >
                       <div className="text-white max-w-4xl">
+
                         <h1
                           className="
                             text-2xl sm:text-4xl lg:text-6xl
                             font-bold leading-tight
                           "
                         >
-                          India's Rent Easy. List Fast.
+                          {t("hero_title_1")}
                           <br className="hidden sm:block" />
                           <span className="sm:hidden"> </span>
-                          Earn Daily Marketplace
+                          {t("hero_title_2")}
                         </h1>
 
                         <p
@@ -139,12 +147,13 @@ const Herosection = () => {
                             max-w-3xl
                           "
                         >
-                          Find products and services near you. Rent, buy, or
-                          list in just a few simple steps.
+                          {t("hero_desc")}
                         </p>
+
                       </div>
                     </div>
                   </div>
+
                 </div>
               </SwiperSlide>
             ))}
