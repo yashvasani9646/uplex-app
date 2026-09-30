@@ -1,346 +1,278 @@
 import {
-    ArrowLeft,
-    SlidersHorizontal,
-    ChevronDown,
-    ChevronUp,
-    CalendarDays,
-    MapPin,
-    Heart,
-    Check,
+  ArrowLeft,
+  SlidersHorizontal,
+  ChevronDown,
+  ChevronUp,
+  CalendarDays,
+  MapPin,
+  Heart,
+  Check,
 } from "lucide-react";
-
+import axios from "axios";
 import Footer from "../Footer/Footer";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 const Page1 = () => {
+  const { t } = useTranslation();
 
-    const { t } = useTranslation();
+  const categories = [t("all"), t("building_materials")];
+  const navigate = useNavigate();
+  const location = useLocation();
+  const API_URL = import.meta.env.VITE_API_URL;
+  const category = location.state?.category;
 
-    const categories = [
-        t("all"),
-        t("building_materials"),
-    ];
+  const [isDurationOpen, setIsDurationOpen] = useState(false);
 
-    const navigate = useNavigate();
+  const [selectedDuration, setSelectedDuration] = useState(t("all_durations"));
 
-    const [isDurationOpen, setIsDurationOpen] = useState(false);
+  const durationRef = useRef(null);
 
-    const [selectedDuration, setSelectedDuration] =
-        useState(t("all_durations"));
+  const durationOptions = [
+    t("all_durations"),
+    t("daily"),
+    t("monthly"),
+    t("hourly"),
+  ];
 
-    const durationRef = useRef(null);
+  const [isTypeOpen, setIsTypeOpen] = useState(false);
 
-    const durationOptions = [
-        t("all_durations"),
-        t("daily"),
-        t("monthly"),
-        t("hourly"),
-    ];
+  const [selectedType, setSelectedType] = useState(t("all_types"));
+  const [products, setProducts] = useState([]);
+  const typeRef = useRef(null);
 
-    const [isTypeOpen, setIsTypeOpen] = useState(false);
+  const typeOptions = [t("all_types"), t("rent"), t("sell")];
 
-    const [selectedType, setSelectedType] =
-        useState(t("all_types"));
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (typeRef.current && !typeRef.current.contains(event.target)) {
+        setIsTypeOpen(false);
+      }
 
-    const typeRef = useRef(null);
+      if (durationRef.current && !durationRef.current.contains(event.target)) {
+        setIsDurationOpen(false);
+      }
+    };
 
-    const typeOptions = [
-        t("all_types"),
-        t("rent"),
-        t("sell"),
-    ];
+    document.addEventListener("mousedown", handleClickOutside);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/public/products`)
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const filteredProducts = products.filter((item) => {
+    return item.category === category;
+  });
 
-            if (
-                typeRef.current &&
-                !typeRef.current.contains(event.target)
-            ) {
-                setIsTypeOpen(false);
-            }
+  return (
+    <>
+      <div className="min-h-screen bg-[#f8fafc] w-full">
+        {/* Category Tabs */}
+        <div className="border-b border-gray-200 bg-white">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-3 flex items-center gap-3 overflow-x-auto">
+            {categories.map((item, index) => (
+              <button
+                key={index}
+                className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition ${
+                  index === 0
+                    ? "bg-[#5b61ff] text-white shadow"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        </div>
 
-            if (
-                durationRef.current &&
-                !durationRef.current.contains(event.target)
-            ) {
-                setIsDurationOpen(false);
-            }
-        };
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
+          {/* Back Button */}
+          <button
+            onClick={() => navigate("/")}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition shadow-sm"
+          >
+            <ArrowLeft size={16} />
+            {t("back")}
+          </button>
 
-        document.addEventListener("mousedown", handleClickOutside);
+          {/* Filters */}
+          <div className="mt-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+            {/* All Types Dropdown */}
+            <div className="relative w-full sm:w-[220px]" ref={typeRef}>
+              <button
+                onClick={() => setIsTypeOpen(!isTypeOpen)}
+                className={`w-full h-11 bg-white rounded-full px-4 flex items-center justify-between border-2 transition-all duration-300 shadow-sm ${
+                  isTypeOpen
+                    ? "border-[#5b61ff] shadow-[0_8px_20px_rgba(91,97,255,0.12)]"
+                    : "border-gray-200"
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  <SlidersHorizontal size={16} className="text-[#5b61ff]" />
 
-        return () => {
-            document.removeEventListener(
-                "mousedown",
-                handleClickOutside
-            );
-        };
-    }, []);
+                  <span className="text-[14px] font-medium text-black">
+                    {selectedType}
+                  </span>
+                </span>
 
-    return (
-        <>
-            <div className="min-h-screen bg-[#f8fafc] w-full">
+                {isTypeOpen ? (
+                  <ChevronUp size={16} className="text-[#5b61ff]" />
+                ) : (
+                  <ChevronDown size={16} className="text-[#5b61ff]" />
+                )}
+              </button>
 
-                {/* Category Tabs */}
-                <div className="border-b border-gray-200 bg-white">
-
-                    <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-3 flex items-center gap-3 overflow-x-auto">
-
-                        {categories.map((item, index) => (
-                            <button
-                                key={index}
-                                className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition ${
-                                    index === 0
-                                        ? "bg-[#5b61ff] text-white shadow"
-                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                                }`}
-                            >
-                                {item}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
-
-                    {/* Back Button */}
+              {isTypeOpen && (
+                <div className="absolute top-[52px] left-0 w-full bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-50 border border-[#ece9ff]">
+                  {typeOptions.map((option) => (
                     <button
-                        onClick={() => navigate("/")}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition shadow-sm"
+                      key={option}
+                      onClick={() => {
+                        setSelectedType(option);
+                        setIsTypeOpen(false);
+                      }}
+                      className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-[14px] font-medium transition ${
+                        selectedType === option
+                          ? "bg-[#f5f2ff] text-[#5b61ff]"
+                          : "text-gray-600 hover:bg-gray-50"
+                      }`}
                     >
-                        <ArrowLeft size={16} />
-                        {t("back")}
+                      <span>{option}</span>
+
+                      {selectedType === option && (
+                        <Check size={16} className="text-[#5b61ff]" />
+                      )}
                     </button>
-
-                    {/* Filters */}
-                    <div className="mt-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-
-                        {/* All Types Dropdown */}
-                        <div
-                            className="relative w-full sm:w-[220px]"
-                            ref={typeRef}
-                        >
-
-                            <button
-                                onClick={() => setIsTypeOpen(!isTypeOpen)}
-                                className={`w-full h-11 bg-white rounded-full px-4 flex items-center justify-between border-2 transition-all duration-300 shadow-sm ${
-                                    isTypeOpen
-                                        ? "border-[#5b61ff] shadow-[0_8px_20px_rgba(91,97,255,0.12)]"
-                                        : "border-gray-200"
-                                }`}
-                            >
-
-                                <span className="flex items-center gap-2">
-
-                                    <SlidersHorizontal
-                                        size={16}
-                                        className="text-[#5b61ff]"
-                                    />
-
-                                    <span className="text-[14px] font-medium text-black">
-                                        {selectedType}
-                                    </span>
-
-                                </span>
-
-                                {isTypeOpen ? (
-                                    <ChevronUp
-                                        size={16}
-                                        className="text-[#5b61ff]"
-                                    />
-                                ) : (
-                                    <ChevronDown
-                                        size={16}
-                                        className="text-[#5b61ff]"
-                                    />
-                                )}
-                            </button>
-
-                            {isTypeOpen && (
-                                <div className="absolute top-[52px] left-0 w-full bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-50 border border-[#ece9ff]">
-
-                                    {typeOptions.map((option) => (
-                                        <button
-                                            key={option}
-                                            onClick={() => {
-                                                setSelectedType(option);
-                                                setIsTypeOpen(false);
-                                            }}
-                                            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-[14px] font-medium transition ${
-                                                selectedType === option
-                                                    ? "bg-[#f5f2ff] text-[#5b61ff]"
-                                                    : "text-gray-600 hover:bg-gray-50"
-                                            }`}
-                                        >
-
-                                            <span>{option}</span>
-
-                                            {selectedType === option && (
-                                                <Check
-                                                    size={16}
-                                                    className="text-[#5b61ff]"
-                                                />
-                                            )}
-
-                                        </button>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Duration Dropdown */}
-                        <div
-                            className="relative w-full sm:w-[260px] sm:ml-auto"
-                            ref={durationRef}
-                        >
-
-                            <button
-                                onClick={() =>
-                                    setIsDurationOpen(!isDurationOpen)
-                                }
-                                className={`w-full h-11 bg-white rounded-full px-4 flex items-center justify-between border-2 transition-all duration-300 shadow-sm ${
-                                    isDurationOpen
-                                        ? "border-[#5b61ff] shadow-[0_8px_20px_rgba(91,97,255,0.12)]"
-                                        : "border-gray-200"
-                                }`}
-                            >
-
-                                <span className="flex items-center gap-2">
-
-                                    <CalendarDays
-                                        size={16}
-                                        className="text-[#5b61ff]"
-                                    />
-
-                                    <span className="text-[14px] font-medium text-black">
-                                        {selectedDuration}
-                                    </span>
-
-                                </span>
-
-                                {isDurationOpen ? (
-                                    <ChevronUp
-                                        size={16}
-                                        className="text-[#5b61ff]"
-                                    />
-                                ) : (
-                                    <ChevronDown
-                                        size={16}
-                                        className="text-[#5b61ff]"
-                                    />
-                                )}
-                            </button>
-
-                            {isDurationOpen && (
-                                <div className="absolute top-[52px] right-0 w-full sm:w-[260px] bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-50">
-
-                                    {durationOptions.map((option) => (
-                                        <button
-                                            key={option}
-                                            onClick={() => {
-                                                setSelectedDuration(option);
-                                                setIsDurationOpen(false);
-                                            }}
-                                            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-[14px] font-medium transition ${
-                                                selectedDuration === option
-                                                    ? "bg-[#f5f2ff] text-[#5b61ff]"
-                                                    : "text-gray-600 hover:bg-gray-50"
-                                            }`}
-                                        >
-
-                                            <span>{option}</span>
-
-                                            {selectedDuration === option && (
-                                                <Check
-                                                    size={16}
-                                                    className="text-[#5b61ff]"
-                                                />
-                                            )}
-
-                                        </button>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Product Grid */}
-                    <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                        <Link to="/Buyer" className="block">
-
-                            <div className="w-full max-w-[320px] mx-auto bg-white border border-gray-200 rounded-[24px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-
-                                <div className="relative p-4 pb-0">
-
-                                    <div className="absolute top-[10px] left-[-22px] w-[90px] bg-orange-500 text-white text-[12px] font-bold text-center py-1 rotate-[-45deg] shadow-md">
-                                        {t("sell")}
-                                    </div>
-
-                                    <button className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-gray-500 hover:text-red-500">
-                                        <Heart size={18} />
-                                    </button>
-
-                                    <div className="rounded-[16px] overflow-hidden group flex justify-center">
-
-                                        <img
-                                            src="/RealEstate.png"
-                                            alt="3-D Miniature Photoframe"
-                                            className="w-[175px] h-[240px] object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-
-                                    </div>
-
-                                    <div className="absolute bottom-4 left-2 px-4 py-1 rounded-full text-sm font-medium">
-                                        {t("toys")}
-                                    </div>
-
-                                    <div className="absolute bottom-4 right-3 bg-gradient-to-r from-indigo-500 to-sky-500 text-white w-[85px] py-1.5 rounded-full text-sm font-bold shadow text-center">
-                                        ₹2,000
-                                    </div>
-                                </div>
-
-                                <div className="p-5">
-
-                                    <h3 className="text-lg font-medium text-[#0b1633] hover:text-[#5b61ff] transition">
-                                        {t("photoframe")}
-                                    </h3>
-
-                                    <div className="mt-3 flex items-center justify-between text-sm text-gray-500">
-
-                                        <div className="flex items-center gap-1">
-
-                                            <MapPin size={14} />
-
-                                            <span>
-                                                {t("surat")}
-                                            </span>
-
-                                        </div>
-
-                                        <span className="line-through text-gray-400">
-                                            ₹2500/{t("sell")}
-                                        </span>
-
-                                    </div>
-
-                                    <button className="mt-5 w-full py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 hover:opacity-90 transition">
-                                        {t("buy_now")}
-                                    </button>
-
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
+                  ))}
                 </div>
+              )}
             </div>
 
-            <Footer />
-        </>
-    );
+            {/* Duration Dropdown */}
+            <div
+              className="relative w-full sm:w-[260px] sm:ml-auto"
+              ref={durationRef}
+            >
+              <button
+                onClick={() => setIsDurationOpen(!isDurationOpen)}
+                className={`w-full h-11 bg-white rounded-full px-4 flex items-center justify-between border-2 transition-all duration-300 shadow-sm ${
+                  isDurationOpen
+                    ? "border-[#5b61ff] shadow-[0_8px_20px_rgba(91,97,255,0.12)]"
+                    : "border-gray-200"
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  <CalendarDays size={16} className="text-[#5b61ff]" />
+
+                  <span className="text-[14px] font-medium text-black">
+                    {selectedDuration}
+                  </span>
+                </span>
+
+                {isDurationOpen ? (
+                  <ChevronUp size={16} className="text-[#5b61ff]" />
+                ) : (
+                  <ChevronDown size={16} className="text-[#5b61ff]" />
+                )}
+              </button>
+
+              {isDurationOpen && (
+                <div className="absolute top-[52px] right-0 w-full sm:w-[260px] bg-white rounded-[18px] p-2 shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-50">
+                  {durationOptions.map((option) => (
+                    <button
+                      key={option}
+                      onClick={() => {
+                        setSelectedDuration(option);
+                        setIsDurationOpen(false);
+                      }}
+                      className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-[14px] font-medium transition ${
+                        selectedDuration === option
+                          ? "bg-[#f5f2ff] text-[#5b61ff]"
+                          : "text-gray-600 hover:bg-gray-50"
+                      }`}
+                    >
+                      <span>{option}</span>
+
+                      {selectedDuration === option && (
+                        <Check size={16} className="text-[#5b61ff]" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Product Grid */}
+          {filteredProducts.map((item) => (
+            <Link to="/Buyer" className="block" key={item.id}>
+              <div className="w-full max-w-[320px] mx-auto bg-white border border-gray-200 rounded-[24px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                <div className="relative p-4 pb-0">
+                  <div className="absolute top-[10px] left-[-22px] w-[90px] bg-orange-500 text-white text-[12px] font-bold text-center py-1 rotate-[-45deg] shadow-md">
+                    {t("sell")}
+                  </div>
+
+                  <button className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-gray-500 hover:text-red-500">
+                    <Heart size={18} />
+                  </button>
+
+                  <div className="rounded-[16px] overflow-hidden group flex justify-center">
+                    <img
+                      src={`${API_URL}/uploads/${item.image}`}
+                      alt={item.product}
+                      className="w-[175px] h-[240px] object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+
+                  <div className="absolute bottom-4 left-2 px-4 py-1 rounded-full text-sm font-medium">
+                    {item.category}
+                  </div>
+
+                  <div className="absolute bottom-4 right-3 bg-gradient-to-r from-indigo-500 to-sky-500 text-white w-[85px] py-1.5 rounded-full text-sm font-bold shadow text-center">
+                    ₹{item.price}
+                  </div>
+                </div>
+
+                <div className="p-5">
+                  <h3 className="text-lg font-medium text-[#0b1633] hover:text-[#5b61ff] transition">
+                    {item.product}
+                  </h3>
+
+                  <div className="mt-3 flex items-center justify-between text-sm text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <MapPin size={14} />
+                      <span>{t("surat")}</span>
+                    </div>
+
+                    <span className="line-through text-gray-400">
+                      ₹{item.price}/{item.type}
+                    </span>
+                  </div>
+
+                  <button className="mt-5 w-full py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 hover:opacity-90 transition">
+                    {t("buy_now")}
+                  </button>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <Footer />
+    </>
+  );
 };
 
 export default Page1;

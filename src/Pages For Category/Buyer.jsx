@@ -338,7 +338,8 @@ const Buyer = () => {
                 </button>
               </div>
 
-              {/* Tab Content */}
+
+
               <div className="bg-[#fafafa] text-gray-300 px-4 sm:px-9 py-6 sm:py-7 min-h-[140px]">
                 {/* Description */}
                 {activeTab === "description" && (
@@ -349,7 +350,6 @@ const Buyer = () => {
                   </div>
                 )}
 
-                {/* Product Details */}
                 {activeTab === "details" && (
                   <div className="min-h-[360px] flex items-center justify-center">
                     <div className="w-full max-w-[420px] bg-white border border-gray-200 rounded-[18px] shadow-sm px-6 sm:px-8 py-10 sm:py-12 text-center">
@@ -390,7 +390,6 @@ const Buyer = () => {
                   </div>
                 )}
 
-                {/* Reviews & Ratings */}
                 {activeTab === "reviews" && (
                   <div>
                     {/* Rating Summary */}

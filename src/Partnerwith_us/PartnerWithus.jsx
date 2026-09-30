@@ -403,7 +403,7 @@ const PartnerWithus = () => {
                         </a>
 
                     </div>
-                </section>
+                </section> 
 
             </div>
 

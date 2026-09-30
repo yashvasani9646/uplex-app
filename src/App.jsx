@@ -39,8 +39,9 @@ function AppContent() {
 
   return (
     <div>
-
-      {location.pathname === "/signin" || location.pathname === "/Startrating" ? null : location.pathname === "/partner" ? (
+      {location.pathname === "/signin" ||
+      location.pathname === "/Startrating" ? null : location.pathname ===
+        "/partner" ? (
         <PartnerNavbar />
       ) : (
         <Navbar />
@@ -56,10 +57,9 @@ function AppContent() {
           <Route path="/partner" element={<PartnerWithus />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/Startrating" element={<Startrating />} />
-
+          <Route path="/topcategory" element={<Category />} />
         </Routes>
       </div>
-
     </div>
   );
 }
