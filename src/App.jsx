@@ -90,20 +90,7 @@ function AppContent() {
         </Routes>
       </div>
 
-      <ToastContainer
-        className="uplex-toast"
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        pauseOnHover
-        pauseOnFocusLoss
-        draggable
-        draggableDirection="y"
-        theme="light"
-        limit={3}
-      />
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }

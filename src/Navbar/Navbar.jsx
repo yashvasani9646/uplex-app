@@ -13,7 +13,6 @@ import {
 
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -80,9 +79,8 @@ const Navbar = () => {
 
     window.dispatchEvent(new Event("upleex:auth"));
 
-    toast.success("You have been logged out successfully");
 
-    navigate("/mainlogin");
+    navigate("/register");
   };
 
   const categories = [

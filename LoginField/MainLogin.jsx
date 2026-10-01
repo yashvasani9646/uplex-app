@@ -13,7 +13,6 @@ import {
   Loader2,
   AlertCircle,
 } from "lucide-react";
-import { IoArrowBackSharp } from "react-icons/io5";
 import axios from "axios";
 
 import logo from "../src/assets/upleex-logo-dark.webp";
@@ -25,10 +24,10 @@ const Field = ({ label, icon: Icon, error, children }) => (
     </label>
 
     <div
-      className={`flex items-center gap-2.5 h-[46px] sm:h-[50px] px-4 rounded-xl border bg-white transition ${
+      className={`flex items-center gap-2.5 h-[48px] px-4 rounded-xl border bg-white transition ${
         error
-          ? "border-[#ef4444] ring-2 ring-[#ef4444]/10"
-          : "border-gray-200 focus-within:border-[#5b4ffb] focus-within:ring-2 focus-within:ring-[#5b4ffb]/12"
+          ? "border-[#ef4444] ring-4 ring-[#ef4444]/10"
+          : "border-gray-200 focus-within:border-[#5b4ffb] focus-within:ring-4 focus-within:ring-[#5b4ffb]/10"
       }`}
     >
       {Icon && <Icon size={17} className="text-[#94a3b8] shrink-0" />}
@@ -37,8 +36,8 @@ const Field = ({ label, icon: Icon, error, children }) => (
     </div>
 
     {error && (
-      <p className="mt-1.5 text-[12.5px] text-[#ef4444] flex items-center gap-1.5">
-        <AlertCircle size={13} />
+      <p className="mt-2 text-[12.5px] text-[#ef4444] flex items-center gap-1.5">
+        <AlertCircle size={13} className="shrink-0" />
         {error}
       </p>
     )}
@@ -46,7 +45,28 @@ const Field = ({ label, icon: Icon, error, children }) => (
 );
 
 const inputClass =
-  "w-full h-full bg-transparent text-[14px] sm:text-[15px] text-[#0f172a] outline-none placeholder:text-[#a8b2c4]";
+  "w-full h-full min-w-0 bg-transparent text-[14px] sm:text-[15px] text-[#0f172a] outline-none placeholder:text-[#a8b2c4]";
+
+const features = [
+  {
+    icon: Tag,
+    color: "text-[#58a6ff]",
+    title: "Rent. Buy. List.",
+    desc: "One account for every category you love.",
+  },
+  {
+    icon: Truck,
+    color: "text-[#2ef7a0]",
+    title: "Track Every Order",
+    desc: "Live updates from booking to delivery.",
+  },
+  {
+    icon: ShieldCheck,
+    color: "text-[#d66cff]",
+    title: "Secure & Private",
+    desc: "Your data stays protected, always.",
+  },
+];
 
 const MainLogin = () => {
   const navigate = useNavigate();
@@ -80,7 +100,6 @@ const MainLogin = () => {
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      toast.error("Please fix the highlighted errors");
       return;
     }
 
@@ -100,7 +119,7 @@ const MainLogin = () => {
 
         window.dispatchEvent(new Event("upleex:auth"));
 
-        toast.success("Login successful. Redirecting to your dashboard...");
+        toast.success("Login successfull");
 
         setTimeout(() => {
           navigate("/home");
@@ -131,79 +150,67 @@ const MainLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f5f7ff] via-[#f7fbff] to-[#eef7ff] flex items-center justify-center px-3 sm:px-4 py-6 sm:py-10">
-      <div className="relative w-full max-w-[1080px] bg-white rounded-[24px] sm:rounded-[28px] shadow-[0_18px_50px_rgba(15,23,42,0.10)] border border-gray-100 overflow-hidden grid grid-cols-1 lg:grid-cols-[46%_54%]">
-        <div className="h-1.5 w-full bg-gradient-to-r from-[#5b4ffb] to-[#2cc7f0]" />
+    <div className="min-h-screen bg-gradient-to-br from-[#f5f7ff] via-[#f8fbff] to-[#edf6ff] px-3 sm:px-4 py-6 sm:py-10 flex justify-center">
+      <div className="relative w-full max-w-[1080px] my-auto bg-white rounded-[26px] border border-gray-100 shadow-[0_24px_60px_-16px_rgba(15,23,42,0.20)] overflow-hidden grid lg:grid-cols-[45%_55%]">
+        {/* Top Accent Bar */}
+        <div className="absolute top-0 inset-x-0 h-[6px] bg-gradient-to-r from-[#5b4ffb] via-[#7b6bff] to-[#2cc7f0] z-20" />
 
-        {/* ================= LEFT BRAND PANEL ================= */}
-        <div className="relative hidden lg:flex flex-col justify-between bg-[#0b1633] text-white px-10 xl:px-12 py-12 overflow-hidden">
+        {/* ============ MOBILE BRAND BAR ============ */}
+        <div className="lg:hidden relative px-6 pt-8 pb-6 bg-gradient-to-r from-[#5b4ffb] to-[#2cc7f0] text-white">
+          <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/80">
+            Upleex
+          </p>
+
+          <p className="mt-1.5 text-[19px] font-bold leading-snug">
+            India&apos;s Rent Easy. List Fast.
+          </p>
+        </div>
+
+        {/* ============ LEFT BRAND PANEL ============ */}
+        <div className="relative hidden lg:flex flex-col justify-between bg-[#0b1633] text-white px-11 py-12 overflow-hidden">
           <div className="absolute -top-28 -left-24 w-80 h-80 rounded-full bg-[#5b4ffb]/35 blur-3xl" />
           <div className="absolute -bottom-32 -right-20 w-96 h-96 rounded-full bg-[#2cc7f0]/25 blur-3xl" />
 
           <div className="relative">
-            <h2 className="text-3xl font-extrabold tracking-tight">
+            <h2 className="text-[28px] font-extrabold tracking-tight">
               <span className="bg-gradient-to-r from-[#8b8cff] to-[#2cc7f0] bg-clip-text text-transparent">
                 UPLEEX
               </span>
             </h2>
 
             <p className="mt-2 text-[11px] font-semibold tracking-[0.2em] text-[#8b9ac0] uppercase">
-              India's Rent Easy. List Fast.
+              India&apos;s Rent Easy. List Fast.
             </p>
           </div>
 
           <div className="relative">
-            <h3 className="text-[30px] xl:text-[34px] font-bold leading-tight">
+            <h3 className="text-[30px] font-bold leading-[1.15]">
               Welcome back to
               <br />
               your marketplace.
             </h3>
 
-            <p className="mt-4 text-[14px] xl:text-[15px] leading-relaxed text-gray-400 max-w-sm">
+            <p className="mt-4 text-[14px] leading-relaxed text-gray-400 max-w-sm">
               Sign in to track your rentals, manage your listings and discover
               thousands of products near you.
             </p>
 
             <div className="mt-9 space-y-5">
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                  <Tag size={19} className="text-[#58a6ff]" />
-                </div>
-                <div>
-                  <h4 className="text-[15px] font-semibold">Rent. Buy. List.</h4>
-                  <p className="text-[13px] text-gray-400 leading-relaxed mt-0.5">
-                    One account for every category you love.
-                  </p>
-                </div>
-              </div>
+              {features.map(({ icon: Icon, color, title, desc }) => (
+                <div key={title} className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                    <Icon size={19} className={color} />
+                  </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                  <Truck size={19} className="text-[#2ef7a0]" />
-                </div>
-                <div>
-                  <h4 className="text-[15px] font-semibold">
-                    Track Every Order
-                  </h4>
-                  <p className="text-[13px] text-gray-400 leading-relaxed mt-0.5">
-                    Live updates from booking to delivery.
-                  </p>
-                </div>
-              </div>
+                  <div>
+                    <h4 className="text-[15px] font-semibold">{title}</h4>
 
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                  <ShieldCheck size={19} className="text-[#d66cff]" />
+                    <p className="text-[13px] text-gray-400 leading-relaxed mt-0.5">
+                      {desc}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-[15px] font-semibold">
-                    Secure &amp; Private
-                  </h4>
-                  <p className="text-[13px] text-gray-400 leading-relaxed mt-0.5">
-                    Your data stays protected, always.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -212,18 +219,8 @@ const MainLogin = () => {
           </p>
         </div>
 
-        {/* ================= RIGHT FORM PANEL ================= */}
-        <div className="px-5 sm:px-9 xl:px-12 py-7 sm:py-10 flex flex-col">
-          {/* Mobile brand strip */}
-          <div className="lg:hidden -mx-5 sm:-mx-9 xl:mx-0 mb-6 px-5 sm:px-9 py-5 bg-gradient-to-r from-[#5b4ffb] to-[#2cc7f0] text-white">
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/80">
-              Upleex
-            </p>
-            <p className="mt-1 text-[16px] font-bold leading-snug">
-              India's Rent Easy. List Fast.
-            </p>
-          </div>
-
+        {/* ============ RIGHT FORM PANEL ============ */}
+        <div className="px-6 sm:px-10 xl:px-14 py-8 sm:py-12">
           <div className="flex items-center justify-between gap-4">
             <img
               src={logo}
@@ -231,29 +228,27 @@ const MainLogin = () => {
               className="h-10 sm:h-12 object-contain"
             />
 
-            <button
-              type="button"
-              onClick={() => navigate("/home")}
-              aria-label="Back to home"
-              className="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-[#475569] hover:bg-gray-50 hover:border-[#5b4ffb]/40 hover:text-[#5b4ffb] transition"
-            >
-              <IoArrowBackSharp size={18} />
-            </button>
           </div>
 
-          <h1 className="mt-6 sm:mt-8 text-[24px] sm:text-[30px] font-extrabold text-[#081c4a]">
+          <h1 className="mt-7 text-[26px] sm:text-[30px] font-extrabold tracking-tight text-[#081c4a]">
             Welcome Back
           </h1>
 
-          <p className="mt-2 text-[13px] sm:text-[15px] text-[#64748b]">
+          <p className="mt-2 text-[13.5px] sm:text-[15px] text-[#64748b]">
             Login to your Upleex account to continue.
           </p>
 
-          <form onSubmit={handelSubmit} className="mt-6 sm:mt-8 space-y-4 sm:space-y-5">
+          <form
+            onSubmit={handelSubmit}
+            className="mt-7 sm:mt-8 space-y-5"
+            noValidate
+          >
             {/* Email */}
             <Field label="Email Address" icon={Mail} error={errors.email}>
               <input
                 type="email"
+                name="email"
+                autoComplete="email"
                 className={inputClass}
                 placeholder="you@example.com"
                 value={email}
@@ -268,15 +263,14 @@ const MainLogin = () => {
             <Field label="Password" icon={Lock} error={errors.password}>
               <input
                 type={showPassword ? "text" : "password"}
-                className={`${inputClass} pr-2`}
+                name="password"
+                autoComplete="current-password"
+                className={`${inputClass} pr-1`}
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
                   setErrors((prev) => ({ ...prev, password: "" }));
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handelSubmit(e);
                 }}
               />
 
@@ -284,19 +278,21 @@ const MainLogin = () => {
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
-                className="text-[#94a3b8] hover:text-[#5b4ffb] transition shrink-0"
+                className="text-[#94a3b8] hover:text-[#5b4ffb] transition shrink-0 cursor-pointer"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </Field>
 
             {/* Remember me / Forgot */}
-            <div className="flex items-center justify-between gap-3 pt-0.5">
-              <label className="flex items-center gap-2.5 cursor-pointer">
+            <div className="flex items-center justify-between gap-3">
+              <label className="flex items-center gap-2.5 cursor-pointer select-none">
                 <input
                   type="checkbox"
+                  name="remember"
                   className="w-4 h-4 rounded border-gray-300 accent-[#5b4ffb] cursor-pointer"
                 />
+
                 <span className="text-[13px] sm:text-[14px] text-[#475569]">
                   Keep me logged in
                 </span>
@@ -309,7 +305,7 @@ const MainLogin = () => {
                     "A password reset link has been sent to your email."
                   )
                 }
-                className="text-[13px] sm:text-[14px] font-semibold text-[#5b4ffb] hover:underline"
+                className="text-[13px] sm:text-[14px] font-semibold text-[#5b4ffb] hover:underline cursor-pointer"
               >
                 Forgot Password?
               </button>
@@ -319,7 +315,7 @@ const MainLogin = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-[46px] sm:h-[52px] rounded-xl bg-gradient-to-r from-[#5b4ffb] to-[#2cc7f0] text-white text-[14px] sm:text-[16px] font-semibold shadow-lg shadow-[#5b4ffb]/25 flex items-center justify-center gap-2 hover:opacity-90 hover:shadow-xl transition active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full h-[50px] rounded-xl bg-gradient-to-r from-[#5b4ffb] to-[#2cc7f0] text-white text-[15px] font-semibold shadow-[0_10px_25px_-8px_rgba(91,79,251,0.65)] flex items-center justify-center gap-2 hover:opacity-95 hover:shadow-[0_14px_30px_-8px_rgba(91,79,251,0.75)] transition active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? (
                 <>
@@ -335,13 +331,15 @@ const MainLogin = () => {
             </button>
 
             {/* Divider */}
-            <div className="border-t border-gray-100 pt-5 text-center">
-              <p className="text-[13px] sm:text-[14px] text-[#64748b]">
+            <div className="relative pt-1 text-center">
+              <div className="border-t border-gray-100" />
+
+              <p className="mt-5 text-[13px] sm:text-[14px] text-[#64748b]">
                 New to Upleex?{" "}
                 <button
                   type="button"
                   onClick={() => navigate("/register")}
-                  className="font-semibold text-[#5b4ffb] hover:underline"
+                  className="font-semibold text-[#5b4ffb] hover:underline cursor-pointer"
                 >
                   Create an account
                 </button>
