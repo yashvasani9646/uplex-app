@@ -17,7 +17,7 @@ import Page1 from "./Pages For Category/Page1";
 import Buyer from "./Pages For Category/Buyer";
 import Shop from "./Pages For Category/Shop";
 import Login from "./LoginPage/Login";
-import PartnerWithus from "./Partnerwith_us/Partnerwithus";
+import PartnerWithus from "./Partnerwith_us/PartnerWithus";
 import PartnerNavbar from "./Partnerwith_us/PartnerNavbar";
 import Signin from "./Partnerwith_us/Signin";
 import Startrating from "./Partnerwith_us/Startrating";
