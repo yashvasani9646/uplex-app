@@ -53,3 +53,84 @@
 body {
   font-family: 'Inter', sans-serif;
 }
+
+
+/* ============================================
+   REACT TOASTIFY — UPLEEX BRAND STYLING
+   ============================================ */
+
+.uplex-toast {
+  top: 88px;
+  right: 16px;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  z-index: 9999;
+}
+
+.uplex-toast > div {
+  margin-top: 10px;
+}
+
+.Toastify__toast {
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #eef1f6 !important;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12) !important;
+  padding: 12px 14px !important;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.Toastify__toast-icon {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  margin: 0;
+  align-self: flex-start;
+}
+
+.Toastify__toast-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+
+.Toastify__toast-success {
+  border-left: 4px solid #22c55e !important;
+}
+
+.Toastify__toast-error {
+  border-left: 4px solid #ef4444 !important;
+}
+
+.Toastify__toast-info {
+  border-left: 4px solid #5b4ffb !important;
+}
+
+.Toastify__toast-warning {
+  border-left: 4px solid #f59e0b !important;
+}
+
+.Toastify__progress-bar {
+  height: 3px !important;
+}
+
+.Toastify__progress {
+  background: linear-gradient(90deg, #5b4ffb, #2cc7f0) !important;
+}
+
+.Toastify__close-button {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+  padding: 0 2px !important;
+  margin: 0 !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+}
+
+.Toastify__close-button:hover {
+  color: #0f172a !important;
+}
