@@ -88,7 +88,7 @@ const MainLogin = () => {
 
     if (!email.trim()) {
       validationErrors.email = "Email is required";
-    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       validationErrors.email = "Enter a valid email address";
     }
 
@@ -110,7 +110,7 @@ const MainLogin = () => {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/login`,
         { email, password },
-        { headers: { "Content-type": "application/json" } }
+        { headers: { "Content-type": "application/json" } },
       );
 
       if (data.message) {
@@ -143,7 +143,7 @@ const MainLogin = () => {
       } else {
         toast.error(
           error.response?.data?.message ||
-            "Something went wrong. Please try again later."
+            "Something went wrong. Please try again later.",
         );
       }
     }
@@ -227,7 +227,6 @@ const MainLogin = () => {
               alt="Upleex"
               className="h-10 sm:h-12 object-contain"
             />
-
           </div>
 
           <h1 className="mt-7 text-[26px] sm:text-[30px] font-extrabold tracking-tight text-[#081c4a]">
@@ -302,7 +301,7 @@ const MainLogin = () => {
                 type="button"
                 onClick={() =>
                   toast.info(
-                    "A password reset link has been sent to your email."
+                    "A password reset link has been sent to your email.",
                   )
                 }
                 className="text-[13px] sm:text-[14px] font-semibold text-[#5b4ffb] hover:underline cursor-pointer"

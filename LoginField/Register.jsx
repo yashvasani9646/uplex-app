@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -34,9 +33,7 @@ const Field = ({ label, icon: Icon, error, children }) => (
           : "border-gray-200 focus-within:border-[#5b4ffb] focus-within:ring-4 focus-within:ring-[#5b4ffb]/10"
       }`}
     >
-      {Icon && (
-        <Icon size={17} className="text-[#94a3b8] shrink-0" />
-      )}
+      {Icon && <Icon size={17} className="text-[#94a3b8] shrink-0" />}
 
       {children}
     </div>
@@ -59,13 +56,7 @@ const inputClass =
 
 const strengthLabels = ["", "Weak", "Fair", "Good", "Strong"];
 
-const strengthColors = [
-  "",
-  "#ef4444",
-  "#f59e0b",
-  "#3b82f6",
-  "#22c55e",
-];
+const strengthColors = ["", "#ef4444", "#f59e0b", "#3b82f6", "#22c55e"];
 
 const getPasswordStrength = (value) => {
   let score = 0;
@@ -179,8 +170,7 @@ const Register = () => {
     if (!password) {
       validationErrors.password = "Password is required";
     } else if (password.length < 8) {
-      validationErrors.password =
-        "Password must be at least 8 characters";
+      validationErrors.password = "Password must be at least 8 characters";
     }
 
     // ---------- PHONE ----------
@@ -188,15 +178,13 @@ const Register = () => {
     if (!phoneNumber) {
       validationErrors.phoneNumber = "Phone number is required";
     } else if (!/^[6-9]\d{9}$/.test(phoneNumber)) {
-      validationErrors.phoneNumber =
-        "Enter a valid 10-digit phone number";
+      validationErrors.phoneNumber = "Enter a valid 10-digit phone number";
     }
 
     // ---------- VALIDATION FAILED ----------
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-
 
       return;
     }
@@ -226,7 +214,7 @@ const Register = () => {
           params: {
             email: emailValue,
           },
-        }
+        },
       );
 
       const emailCheck = emailCheckResponse.data;
@@ -255,7 +243,7 @@ const Register = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       const data = response.data;
@@ -267,9 +255,7 @@ const Register = () => {
       // Axios considers 2xx response successful.
       // Therefore we don't depend only on data.message.
       if (response.status >= 200 && response.status < 300) {
-        toast.success(
-          data?.message || "Registration successful!"
-        );
+        toast.success(data?.message || "Registration successful!");
 
         setLoading(false);
 
@@ -294,10 +280,7 @@ const Register = () => {
 
       setLoading(false);
 
-      toast.error(
-        data?.message ||
-          "Registration failed. Please try again."
-      );
+      toast.error(data?.message || "Registration failed. Please try again.");
     } catch (error) {
       console.error("Registration error:", error);
 
@@ -311,10 +294,7 @@ const Register = () => {
 
       const serverErrors = responseData?.errors;
 
-      if (
-        serverErrors &&
-        typeof serverErrors === "object"
-      ) {
+      if (serverErrors && typeof serverErrors === "object") {
         setErrors(serverErrors);
       }
 
@@ -337,7 +317,6 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f5f7ff] via-[#f8fbff] to-[#edf6ff] px-3 sm:px-4 py-6 sm:py-10 flex justify-center">
       <div className="relative w-full max-w-[1120px] my-auto bg-white rounded-[26px] border border-gray-100 shadow-[0_24px_60px_-16px_rgba(15,23,42,0.20)] overflow-hidden grid lg:grid-cols-[42%_58%]">
-
         {/* ================= TOP ACCENT ================= */}
 
         <div className="absolute top-0 inset-x-0 h-[6px] bg-gradient-to-r from-[#5b4ffb] via-[#7b6bff] to-[#2cc7f0] z-20" />
@@ -357,7 +336,6 @@ const Register = () => {
         {/* ================= LEFT BRAND PANEL ================= */}
 
         <div className="relative hidden lg:flex flex-col justify-between bg-[#0b1633] text-white px-11 py-12 overflow-hidden">
-
           <div className="absolute -top-28 -left-24 w-80 h-80 rounded-full bg-[#5b4ffb]/35 blur-3xl" />
 
           <div className="absolute -bottom-32 -right-20 w-96 h-96 rounded-full bg-[#2cc7f0]/25 blur-3xl" />
@@ -382,36 +360,26 @@ const Register = () => {
             </h3>
 
             <p className="mt-4 text-[14px] leading-relaxed text-gray-400 max-w-sm">
-              Create your free account and unlock the whole
-              Upleex marketplace built for India.
+              Create your free account and unlock the whole Upleex marketplace
+              built for India.
             </p>
 
             <div className="mt-9 space-y-5">
-              {features.map(
-                ({ icon: Icon, color, title, desc }) => (
-                  <div
-                    key={title}
-                    className="flex items-start gap-4"
-                  >
-                    <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                      <Icon
-                        size={19}
-                        className={color}
-                      />
-                    </div>
-
-                    <div>
-                      <h4 className="text-[15px] font-semibold">
-                        {title}
-                      </h4>
-
-                      <p className="text-[13px] text-gray-400 leading-relaxed mt-0.5">
-                        {desc}
-                      </p>
-                    </div>
+              {features.map(({ icon: Icon, color, title, desc }) => (
+                <div key={title} className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                    <Icon size={19} className={color} />
                   </div>
-                )
-              )}
+
+                  <div>
+                    <h4 className="text-[15px] font-semibold">{title}</h4>
+
+                    <p className="text-[13px] text-gray-400 leading-relaxed mt-0.5">
+                      {desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -423,7 +391,6 @@ const Register = () => {
         {/* ================= RIGHT FORM PANEL ================= */}
 
         <div className="px-6 sm:px-10 xl:px-12 py-8 sm:py-12">
-
           {/* LOGO */}
 
           <div className="flex items-center justify-between gap-4">
@@ -451,14 +418,9 @@ const Register = () => {
             className="mt-7 sm:mt-8 space-y-5"
             noValidate
           >
-
             {/* ================= NAME ================= */}
 
-            <Field
-              label="Full Name"
-              icon={User}
-              error={errors.name}
-            >
+            <Field label="Full Name" icon={User} error={errors.name}>
               <input
                 type="text"
                 name="name"
@@ -475,11 +437,7 @@ const Register = () => {
 
             {/* ================= EMAIL ================= */}
 
-            <Field
-              label="Email Address"
-              icon={Mail}
-              error={errors.email}
-            >
+            <Field label="Email Address" icon={Mail} error={errors.email}>
               <input
                 type="email"
                 name="email"
@@ -496,15 +454,9 @@ const Register = () => {
 
             {/* ================= PASSWORD ================= */}
 
-            <Field
-              label="Password"
-              icon={Lock}
-              error={errors.password}
-            >
+            <Field label="Password" icon={Lock} error={errors.password}>
               <input
-                type={
-                  showPassword ? "text" : "password"
-                }
+                type={showPassword ? "text" : "password"}
                 name="password"
                 autoComplete="new-password"
                 className={`${inputClass} pr-1`}
@@ -518,21 +470,11 @@ const Register = () => {
 
               <button
                 type="button"
-                onClick={() =>
-                  setShowPassword((prev) => !prev)
-                }
-                aria-label={
-                  showPassword
-                    ? "Hide password"
-                    : "Show password"
-                }
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
                 className="text-[#94a3b8] hover:text-[#5b4ffb] transition shrink-0 cursor-pointer"
               >
-                {showPassword ? (
-                  <EyeOff size={18} />
-                ) : (
-                  <Eye size={18} />
-                )}
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </Field>
 
@@ -546,9 +488,7 @@ const Register = () => {
                     className="h-1.5 flex-1 rounded-full transition-colors duration-300"
                     style={{
                       backgroundColor:
-                        bar <= strength
-                          ? strengthColors[strength]
-                          : "#e8ecf3",
+                        bar <= strength ? strengthColors[strength] : "#e8ecf3",
                     }}
                   />
                 ))}
@@ -557,24 +497,16 @@ const Register = () => {
               <span
                 className="text-[12px] font-semibold min-w-[46px] text-right"
                 style={{
-                  color: strength
-                    ? strengthColors[strength]
-                    : "transparent",
+                  color: strength ? strengthColors[strength] : "transparent",
                 }}
               >
-                {strength
-                  ? strengthLabels[strength]
-                  : ""}
+                {strength ? strengthLabels[strength] : ""}
               </span>
             </div>
 
             {/* ================= PHONE ================= */}
 
-            <Field
-              label="Phone Number"
-              icon={Phone}
-              error={errors.phoneNumber}
-            >
+            <Field label="Phone Number" icon={Phone} error={errors.phoneNumber}>
               <span className="text-[14px] font-medium text-[#475569] pr-3 border-r border-gray-200 shrink-0">
                 +91
               </span>
@@ -589,9 +521,7 @@ const Register = () => {
                 placeholder="9876543210"
                 value={phoneNumber}
                 onChange={(e) => {
-                  const value = e.target.value
-                    .replace(/\D/g, "")
-                    .slice(0, 10);
+                  const value = e.target.value.replace(/\D/g, "").slice(0, 10);
 
                   setPhoneNumber(value);
                   clearError("phoneNumber");
@@ -608,10 +538,7 @@ const Register = () => {
             >
               {loading ? (
                 <>
-                  <Loader2
-                    size={18}
-                    className="animate-spin"
-                  />
+                  <Loader2 size={18} className="animate-spin" />
                   Creating account...
                 </>
               ) : (
@@ -626,19 +553,15 @@ const Register = () => {
 
               <p className="mt-5 text-[13px] sm:text-[14px] text-[#64748b]">
                 Already have an account?{" "}
-
                 <button
                   type="button"
-                  onClick={() =>
-                    navigate("/mainlogin")
-                  }
+                  onClick={() => navigate("/mainlogin")}
                   className="font-semibold text-[#5b4ffb] hover:underline cursor-pointer"
                 >
                   Login here
                 </button>
               </p>
             </div>
-
           </form>
         </div>
       </div>
