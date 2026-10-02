@@ -79,8 +79,7 @@ const Navbar = () => {
 
     window.dispatchEvent(new Event("upleex:auth"));
 
-
-    navigate("/register");
+    navigate("/home");
   };
 
   const categories = [
@@ -243,7 +242,7 @@ const Navbar = () => {
               </div>
             ) : (
               <button
-                onClick={() => navigate("/mainlogin")}
+                onClick={() => navigate("/register")}
                 className="ml-4 px-5 xl:px-6 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-lg hover:opacity-90 transition whitespace-nowrap cursor-pointer"
               >
                 {t("login_signup")}

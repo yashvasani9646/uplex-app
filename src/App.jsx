@@ -42,13 +42,7 @@ function Home() {
 function AppContent() {
   const location = useLocation();
 
-  const authPages = [
-    "/",
-    "/register",
-    "/mainlogin",
-    "/signin",
-    "/Startrating",
-  ];
+  const authPages = [ "/register", "/mainlogin", "/signin", "/Startrating"];
 
   const hideNavbar = authPages.includes(location.pathname);
 
@@ -56,17 +50,13 @@ function AppContent() {
     <div>
       {/* Navbar */}
       {!hideNavbar &&
-        (location.pathname === "/partner" ? (
-          <PartnerNavbar />
-        ) : (
-          <Navbar />
-        ))}
+        (location.pathname === "/partner" ? <PartnerNavbar /> : <Navbar />)}
 
       {/* Page Content */}
       <div className={hideNavbar ? "" : "pt-32"}>
         <Routes>
           {/* Register / Login */}
-          <Route path="/" element={<Register />} />
+          <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/mainlogin" element={<MainLogin />} />
 
