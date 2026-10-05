@@ -44,6 +44,27 @@ const Page1 = () => {
 
   const typeOptions = [t("all_types"), t("rent"), t("sell")];
 
+  // =========================
+  // Subcategory
+  // =========================
+  const [categoryData, setCategoryData] = useState(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/public/categories`)
+      .then((res) => {
+        const selectedCategory = res.data.find(
+          (item) => item.category === category,
+        );
+
+        setCategoryData(selectedCategory || null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [API_URL, category]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (typeRef.current && !typeRef.current.contains(event.target)) {
@@ -61,6 +82,7 @@ const Page1 = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   useEffect(() => {
     axios
       .get(`${API_URL}/public/products`)
@@ -70,9 +92,21 @@ const Page1 = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [API_URL]);
+
+  // =========================
+  // Category + Subcategory Filter
+  // =========================
   const filteredProducts = products.filter((item) => {
-    return item.category === category;
+    if (item.category !== category) {
+      return false;
+    }
+
+    if (selectedSubcategory && item.subcategory !== selectedSubcategory) {
+      return false;
+    }
+
+    return true;
   });
 
   return (
@@ -105,6 +139,38 @@ const Page1 = () => {
             <ArrowLeft size={16} />
             {t("back")}
           </button>
+
+          {/* =========================
+              Subcategory
+          ========================= */}
+          {categoryData?.subcategories?.length > 0 && (
+            <div className="mt-6 flex items-center gap-3 overflow-x-auto pb-2">
+              <button
+                onClick={() => setSelectedSubcategory("")}
+                className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition ${
+                  selectedSubcategory === ""
+                    ? "bg-[#5b61ff] text-white shadow"
+                    : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                All
+              </button>
+
+              {categoryData.subcategories.map((subcategory, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedSubcategory(subcategory)}
+                  className={`px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition ${
+                    selectedSubcategory === subcategory
+                      ? "bg-[#5b61ff] text-white shadow"
+                      : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  {subcategory}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Filters */}
           <div className="mt-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
@@ -215,58 +281,61 @@ const Page1 = () => {
           </div>
 
           {/* Product Grid */}
-          {filteredProducts.map((item) => (
-            <Link to="/Buyer" className="block" key={item.id}>
-              <div className="w-full max-w-[320px] mx-auto bg-white border border-gray-200 rounded-[24px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-                <div className="relative p-4 pb-0">
-                  <div className="absolute top-[10px] left-[-22px] w-[90px] bg-orange-500 text-white text-[12px] font-bold text-center py-1 rotate-[-45deg] shadow-md">
-                    {t("sell")}
-                  </div>
-
-                  <button className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-gray-500 hover:text-red-500">
-                    <Heart size={18} />
-                  </button>
-
-                  <div className="rounded-[16px] overflow-hidden group flex justify-center">
-                    <img
-                      src={`${API_URL}/uploads/${item.image}`}
-                      alt={item.product}
-                      className="w-[175px] h-[240px] object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-
-                  <div className="absolute bottom-4 left-2 px-4 py-1 rounded-full text-sm font-medium">
-                    {item.category}
-                  </div>
-
-                  <div className="absolute bottom-4 right-3 bg-gradient-to-r from-indigo-500 to-sky-500 text-white w-[85px] py-1.5 rounded-full text-sm font-bold shadow text-center">
-                    ₹{item.price}
-                  </div>
-                </div>
-
-                <div className="p-5">
-                  <h3 className="text-lg font-medium text-[#0b1633] hover:text-[#5b61ff] transition">
-                    {item.product}
-                  </h3>
-
-                  <div className="mt-3 flex items-center justify-between text-sm text-gray-500">
-                    <div className="flex items-center gap-1">
-                      <MapPin size={14} />
-                      <span>{t("surat")}</span>
+          {/* Product Grid */}
+          <div className="mt-6 flex flex-wrap gap-6 justify-start">
+            {filteredProducts.map((item) => (
+              <Link to="/Buyer" className="block w-[320px]" key={item.id}>
+                <div className="w-full max-w-[320px] bg-white border border-gray-200 rounded-[24px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                  <div className="relative p-4 pb-0">
+                    <div className="absolute top-[10px] left-[-22px] w-[90px] bg-orange-500 text-white text-[12px] font-bold text-center py-1 rotate-[-45deg] shadow-md">
+                      {t("sell")}
                     </div>
 
-                    <span className="line-through text-gray-400">
-                      ₹{item.price}/{item.type}
-                    </span>
+                    <button className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-gray-500 hover:text-red-500">
+                      <Heart size={18} />
+                    </button>
+
+                    <div className="rounded-[16px] overflow-hidden group flex justify-center">
+                      <img
+                        src={`${API_URL}/uploads/${item.image}`}
+                        alt={item.product}
+                        className="w-[175px] h-[240px] object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </div>
+
+                    <div className="absolute bottom-4 left-2 px-4 py-1 rounded-full text-sm font-medium">
+                      {item.category}
+                    </div>
+
+                    <div className="absolute bottom-4 right-3 bg-gradient-to-r from-indigo-500 to-sky-500 text-white w-[85px] py-1.5 rounded-full text-sm font-bold shadow text-center">
+                      ₹{item.price}
+                    </div>
                   </div>
 
-                  <button className="mt-5 w-full py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 hover:opacity-90 transition">
-                    {t("buy_now")}
-                  </button>
+                  <div className="p-5">
+                    <h3 className="text-lg font-medium text-[#0b1633] hover:text-[#5b61ff] transition">
+                      {item.product}
+                    </h3>
+
+                    <div className="mt-3 flex items-center justify-between text-sm text-gray-500">
+                      <div className="flex items-center gap-1">
+                        <MapPin size={14} />
+                        <span>{t("surat")}</span>
+                      </div>
+
+                      <span className="line-through text-gray-400">
+                        ₹{item.price}/{item.type}
+                      </span>
+                    </div>
+
+                    <button className="mt-5 w-full py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 hover:opacity-90 transition">
+                      {t("buy_now")}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
