@@ -1,39 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const Faq = () => {
-
     const { t } = useTranslation();
 
-    const faqData = [
-        {
-            question: t("faq_question_1"),
-            answer:
-                t("faq_answer_1"),
-        },
-        {
-            question: t("faq_question_2"),
-            answer:
-                t("faq_answer_2"),
-        },
-        {
-            question: t("faq_question_3"),
-            answer:
-                t("faq_answer_3"),
-        },
-        {
-            question: t("faq_question_4"),
-            answer:
-                t("faq_answer_4"),
-        },
-        {
-            question: t("faq_question_5"),
-            answer:
-                t("faq_answer_5"),
-        },
-    ];
+    const API_URL = import.meta.env.VITE_API_URL;
 
+    const [faqData, setFaqData] = useState([]);
     const [open, setOpen] = useState(0);
+
+    useEffect(() => {
+        axios
+            .get(`${API_URL}/public/faqs`)
+            .then((res) => {
+                setFaqData(res.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [API_URL]);
 
     const toggleFaq = (index) => {
         setOpen(open === index ? null : index);
@@ -55,7 +41,7 @@ const Faq = () => {
 
                 {faqData.map((item, index) => (
                     <div
-                        key={index}
+                        key={item.id}
                         className="bg-gray-50 rounded-2xl px-5 sm:px-6 lg:px-8 py-5 sm:py-6 hover:bg-gray-100 transition-colors duration-300"
                     >
 
@@ -84,6 +70,7 @@ const Faq = () => {
 
                     </div>
                 ))}
+
             </div>
         </section>
     );

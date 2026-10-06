@@ -3,7 +3,6 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-
 import Banner from "./Banner/Banner";
 import LatestBlog from "./Blog/LatestBlog";
 import Category from "./Category/TopCategory";
@@ -13,6 +12,7 @@ import Footer from "./Footer/Footer";
 import Herosection from "./HeroSection/Herosection";
 import Navbar from "./Navbar/Navbar";
 import Services from "./Services/Services";
+
 import Page1 from "./Pages For Category/Page1";
 import Buyer from "./Pages For Category/Buyer";
 import Shop from "./Pages For Category/Shop";
@@ -24,6 +24,7 @@ import Startrating from "./Partnerwith_us/Startrating";
 
 import Register from "../LoginField/Register";
 import MainLogin from "../LoginField/MainLogin";
+import Blogdetails from "./Blog/Blogdetails";
 
 function Home() {
   return (
@@ -42,7 +43,7 @@ function Home() {
 function AppContent() {
   const location = useLocation();
 
-  const authPages = [ "/register", "/mainlogin", "/signin", "/Startrating"];
+  const authPages = ["/register", "/mainlogin", "/signin", "/Startrating"];
 
   const hideNavbar = authPages.includes(location.pathname);
 
@@ -76,6 +77,7 @@ function AppContent() {
           <Route path="/Startrating" element={<Startrating />} />
 
           {/* Category */}
+          <Route path="/blog/:id" element={<Blogdetails />} />
           <Route path="/topcategory" element={<Category />} />
         </Routes>
       </div>
