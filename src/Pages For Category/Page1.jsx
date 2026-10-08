@@ -297,7 +297,7 @@ const Page1 = () => {
 
                     <div className="rounded-[16px] overflow-hidden group flex justify-center">
                       <img
-                        src={`${API_URL}/uploads/${item.image}`}
+                        src={item.image}
                         alt={item.product}
                         className="w-[175px] h-[240px] object-cover transition-transform duration-500 group-hover:scale-110"
                       />

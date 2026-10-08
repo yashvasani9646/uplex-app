@@ -71,7 +71,7 @@ const Categoy = () => {
               {/* Image */}
               <div className="w-20 h-20 sm:w-[104px] sm:h-[104px] rounded-full overflow-hidden bg-white flex items-center justify-center shadow-sm">
                 <img
-                  src={`${API_URL}/uploads/${item.image}`}
+                 src={item.image}
                   alt={item.category}
                   className="w-full h-full object-cover"
                 />

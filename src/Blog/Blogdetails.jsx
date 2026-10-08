@@ -231,7 +231,7 @@ const Blogdetails = () => {
 
             <div className="mt-7 overflow-hidden rounded-2xl sm:rounded-3xl">
               <img
-                src={`${API_URL}/uploads/${blog.image}`}
+                src={blog.image}
                 alt={blog.title}
                 className="h-[260px] w-full object-cover sm:h-[400px] lg:h-[500px]"
               />
@@ -323,7 +323,7 @@ const Blogdetails = () => {
                     >
 
                       <img
-                        src={`${API_URL}/uploads/${item.image}`}
+                       src={item.image}
                         alt={item.title}
                         className="h-[65px] w-[75px] shrink-0 rounded-xl object-cover"
                       />

@@ -61,7 +61,7 @@ const LatestBlog = () => {
             {/* Image Card */}
             <div className="relative h-[240px] sm:h-[280px] lg:h-[320px] rounded-2xl sm:rounded-3xl overflow-hidden">
               <img
-                src={`${API_URL}/uploads/${item.image}`}
+                src={item.image}
                 alt={item.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
