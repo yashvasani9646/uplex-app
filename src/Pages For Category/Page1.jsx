@@ -284,7 +284,12 @@ const Page1 = () => {
           {/* Product Grid */}
           <div className="mt-6 flex flex-wrap gap-6 justify-start">
             {filteredProducts.map((item) => (
-              <Link to="/Buyer" className="block w-[320px]" key={item.id}>
+              <Link
+                to={`/Buyer?id=${item.id}`}
+                state={{ product: item }}
+                className="block w-[320px]"
+                key={item.id}
+              >
                 <div className="w-full max-w-[320px] bg-white border border-gray-200 rounded-[24px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
                   <div className="relative p-4 pb-0">
                     <div className="absolute top-[10px] left-[-22px] w-[90px] bg-orange-500 text-white text-[12px] font-bold text-center py-1 rotate-[-45deg] shadow-md">
