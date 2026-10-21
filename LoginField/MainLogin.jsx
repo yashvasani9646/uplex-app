@@ -84,11 +84,12 @@ const MainLogin = () => {
   const handelSubmit = async (e) => {
     e.preventDefault();
 
+    const normalizedEmail = email.trim().toLowerCase();
     const validationErrors = {};
 
-    if (!email.trim()) {
+    if (!normalizedEmail) {
       validationErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       validationErrors.email = "Enter a valid email address";
     }
 
@@ -109,30 +110,96 @@ const MainLogin = () => {
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/login`,
-        { email, password },
-        { headers: { "Content-type": "application/json" } },
+        { email: normalizedEmail, password },
+        { headers: { "Content-Type": "application/json" } },
       );
 
-      if (data.message) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-
-        window.dispatchEvent(new Event("upleex:auth"));
-
-        toast.success("Login successfull");
-
-        setTimeout(() => {
-          navigate("/home");
-        }, 1500);
-      } else {
-        setErrors(data.errors || {});
+      // Accept the backend's existing success message, but require a token.
+      if (!data?.token || !(data?.message || data?.user)) {
+        setErrors(data?.errors || {});
         setLoading(false);
-
-        toast.error("Login failed. Please check your details.");
+        toast.error(
+          data?.message || "Login failed. Please check your details.",
+        );
+        return;
       }
+
+      const user = {
+        ...(data.user || {}),
+        email: data.user?.email || normalizedEmail,
+      };
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(user));
+      window.dispatchEvent(new Event("upleex:auth"));
+
+      let redirectPath = "/cart";
+      let pendingProductAdded = false;
+      const pendingProductText = localStorage.getItem("upleex_pending_product");
+
+      if (pendingProductText) {
+        try {
+          const pendingProduct = JSON.parse(pendingProductText);
+          if (pendingProduct && pendingProduct.id != null) {
+            const userIdentifier =
+              user.email || user._id || user.id || user.userId;
+            if (!userIdentifier)
+              throw new Error("Logged-in user identifier is missing.");
+
+            const cartKey = `upleex_cart_${encodeURIComponent(String(userIdentifier).trim().toLowerCase())}`;
+            const savedCart = JSON.parse(localStorage.getItem(cartKey) || "[]");
+            const productId = String(pendingProduct.id);
+            const existingProduct = savedCart.find(
+              (item) => String(item.id) === productId,
+            );
+            const pendingQuantity = Math.max(
+              1,
+              Number(pendingProduct.quantity) || 1,
+            );
+
+            const updatedCart = existingProduct
+              ? savedCart.map((item) =>
+                  String(item.id) === productId
+                    ? {
+                        ...item,
+                        quantity: Math.min(
+                          99,
+                          Number(item.quantity || 1) + pendingQuantity,
+                        ),
+                      }
+                    : item,
+                )
+              : [
+                  ...savedCart,
+                  {
+                    ...pendingProduct,
+                    id: productId,
+                    quantity: Math.min(99, pendingQuantity),
+                  },
+                ];
+
+            localStorage.setItem(cartKey, JSON.stringify(updatedCart));
+            window.dispatchEvent(new Event("upleex:cart"));
+            pendingProductAdded = true;
+            redirectPath = "/cart";
+          }
+          localStorage.removeItem("upleex_pending_product");
+        } catch (cartError) {
+          console.error("Pending product/cart error:", cartError);
+          // Keep the pending product so the user can retry rather than losing it.
+          toast.error(
+            "Login successful, but the product could not be added to cart. Please try again.",
+          );
+        }
+      }
+
+      if (pendingProductAdded) {
+        toast.success("Product added to cart!");
+      } else {
+        toast.success("Login successful!");
+      }
+      navigate(redirectPath, { replace: true });
     } catch (error) {
       const serverErrors = error.response?.data?.errors || {};
-
       setErrors(serverErrors);
       setLoading(false);
 

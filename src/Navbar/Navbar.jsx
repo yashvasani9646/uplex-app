@@ -1,17 +1,18 @@
-// Navbar.jsx
 import { useEffect, useRef, useState } from "react";
 import logo from "../assets/upleex-logo-dark.webp";
 
-import { CiLocationOn, CiSearch, CiMobile1, CiMenuFries } from "react-icons/ci";
+import { CiLocationOn, CiSearch, CiMobile1, CiMenuFries, CiShoppingCart } from "react-icons/ci";
 
 import {
   IoChevronDownOutline,
   IoCloseOutline,
   IoLogOutOutline,
-  IoGridOutline,
+  IoPersonOutline,
+  IoCreateOutline,
+  IoCartOutline,
 } from "react-icons/io5";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
@@ -20,10 +21,12 @@ const Navbar = () => {
 
   const [userMenu, setUserMenu] = useState(false);
   const [user, setUser] = useState(null);
+  const [cartCount, setCartCount] = useState(0);
 
   const userMenuRef = useRef(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { t } = useTranslation();
 
@@ -50,6 +53,37 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    const syncCartCount = () => {
+      try {
+        const token = localStorage.getItem("token");
+        const user = JSON.parse(localStorage.getItem("user") || "null");
+        const identifier = user?.email || user?._id || user?.id || user?.userId;
+        const key = token && identifier
+          ? `upleex_cart_${encodeURIComponent(String(identifier).trim().toLowerCase())}`
+          : null;
+        const savedCart = key ? JSON.parse(localStorage.getItem(key) || "[]") : [];
+        const count = Array.isArray(savedCart)
+          ? savedCart.reduce((total, item) => total + (Number(item.quantity) || 1), 0)
+          : 0;
+        setCartCount(count);
+      } catch {
+        setCartCount(0);
+      }
+    };
+
+    syncCartCount();
+    window.addEventListener("storage", syncCartCount);
+    window.addEventListener("upleex:cart", syncCartCount);
+    window.addEventListener("upleex:auth", syncCartCount);
+
+    return () => {
+      window.removeEventListener("storage", syncCartCount);
+      window.removeEventListener("upleex:cart", syncCartCount);
+      window.removeEventListener("upleex:auth", syncCartCount);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!userMenu) return;
 
     const closeMenu = (e) => {
@@ -63,6 +97,12 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", closeMenu);
   }, [userMenu]);
 
+  // Close the dropdown whenever the user navigates to another page.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setUserMenu(false);
+  }, [location.pathname]);
+
   const isLoggedIn = Boolean(user);
 
   const userName = user?.name || user?.userName || user?.username || "Account";
@@ -70,14 +110,19 @@ const Navbar = () => {
   const userInitial = userName.charAt(0).toUpperCase();
 
   const handleLogout = () => {
+    // Clear login details and this browser's cart on logout.
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("upleex_pending_product");
 
     setUser(null);
+    setCartCount(0);
     setUserMenu(false);
     setMobileMenu(false);
 
+    // Update the navbar and any components listening for auth/cart changes.
     window.dispatchEvent(new Event("upleex:auth"));
+    window.dispatchEvent(new Event("upleex:cart"));
 
     navigate("/home");
   };
@@ -168,6 +213,20 @@ const Navbar = () => {
               {t("partner")}
             </button>
 
+            <button
+              type="button"
+              onClick={() => navigate("/cart")}
+              aria-label="Shopping cart"
+              className="relative ml-3 mr-2 flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200 text-gray-700 hover:text-indigo-600 hover:border-indigo-300 hover:bg-indigo-50 transition cursor-pointer"
+            >
+              <CiShoppingCart className="text-[25px]" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 rounded-full bg-red-500 text-white text-[11px] font-bold flex items-center justify-center">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
+            </button>
+
             {isLoggedIn ? (
               /* ---------- USER CHIP + LOGOUT ---------- */
               <div className="relative ml-4" ref={userMenuRef}>
@@ -219,14 +278,40 @@ const Navbar = () => {
                       <button
                         onClick={() => {
                           setUserMenu(false);
-                          navigate("/home");
+                          navigate("/profile");
                         }}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-[14px] text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition"
+                        className="w-full flex items-center gap-3 px-4 py-3 text-[14px] text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition cursor-pointer"
                       >
-                        <IoGridOutline className="text-[17px] text-indigo-500" />
+                        <IoPersonOutline className="text-[17px] text-indigo-500" />
 
-                        {t("dashboard")}
+                        {t("my_profile")}
                       </button>
+
+                      <button
+                        onClick={() => {
+                          setUserMenu(false);
+                          navigate("/profile/edit");
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-[14px] text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition cursor-pointer"
+                      >
+                        <IoCreateOutline className="text-[17px] text-indigo-500" />
+
+                        {t("edit_profile")}
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setUserMenu(false);
+                          navigate("/cart");
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-[14px] text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition cursor-pointer"
+                      >
+                        <IoCartOutline className="text-[17px] text-indigo-500" />
+
+                        {t("my_cart")}
+                      </button>
+
+                      <div className="my-1 border-t border-gray-100" />
 
                       <button
                         onClick={handleLogout}
@@ -384,6 +469,24 @@ const Navbar = () => {
                 </div>
               )}
 
+              <button
+                onClick={() => {
+                  navigate("/cart");
+                  setMobileMenu(false);
+                }}
+                className="flex w-full items-center gap-3 text-left hover:text-indigo-600"
+              >
+                <span className="relative inline-flex items-center">
+                  <CiShoppingCart className="text-[23px]" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 min-w-[17px] h-[17px] px-1 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">
+                      {cartCount > 99 ? "99+" : cartCount}
+                    </span>
+                  )}
+                </span>
+                Shopping Cart
+              </button>
+
               <button className="block w-full text-left hover:text-indigo-600">
                 {t("download_app")}
               </button>
@@ -406,12 +509,24 @@ const Navbar = () => {
                 <>
                   <button
                     onClick={() => {
-                      navigate("/home");
+                      navigate("/profile");
                       setMobileMenu(false);
                     }}
-                    className="block w-full text-left hover:text-indigo-600"
+                    className="flex w-full items-center gap-3 text-left hover:text-indigo-600"
                   >
-                    {t("dashboard")}
+                    <IoPersonOutline className="text-[20px]" />
+                    {t("my_profile")}
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      navigate("/profile/edit");
+                      setMobileMenu(false);
+                    }}
+                    className="flex w-full items-center gap-3 text-left hover:text-indigo-600"
+                  >
+                    <IoCreateOutline className="text-[20px]" />
+                    {t("edit_profile")}
                   </button>
 
                   <button
@@ -441,6 +556,7 @@ const Navbar = () => {
               <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
                 {t("categories")}
               </h3>
+
 
               <div className="space-y-3">
                 {categories.map((item, index) => (

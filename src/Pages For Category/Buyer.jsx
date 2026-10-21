@@ -18,6 +18,7 @@ import { useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Buyer = () => {
   const navigate = useNavigate();
@@ -412,9 +413,63 @@ const Buyer = () => {
                 </div>
 
                 {/* Add To Cart */}
-                <button className="mt-4 w-full max-w-[620px] py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 hover:shadow-lg transition flex items-center justify-center gap-3">
+                <button
+                  onClick={() => {
+                    try {
+                      const rawProductId = product.id ?? product._id ?? product.productId;
+                      if (rawProductId == null) {
+                        toast.error("Product ID is missing. Please try again.");
+                        return;
+                      }
+
+                      const pendingProduct = {
+                        id: String(rawProductId),
+                        name: product.product || product.name || "Product",
+                        price: Number(product.price || 0),
+                        image: product.image || "",
+                        quantity: Math.min(99, Math.max(1, Number(quantity) || 1)),
+                      };
+
+                      const token = localStorage.getItem("token");
+                      if (!token) {
+                        localStorage.setItem("upleex_pending_product", JSON.stringify(pendingProduct));
+                        toast.info("Please register or log in to add this product to your cart.");
+                        navigate("/register");
+                        return;
+                      }
+
+                      const user = JSON.parse(localStorage.getItem("user") || "{}");
+                      const userIdentifier = user.email || user._id || user.id || user.userId;
+                      if (!userIdentifier) {
+                        toast.error("Please log in again to add products to your cart.");
+                        return;
+                      }
+
+                      const cartKey = `upleex_cart_${encodeURIComponent(String(userIdentifier).trim().toLowerCase())}`;
+                      const savedCart = JSON.parse(localStorage.getItem(cartKey) || "[]");
+                      const existingProduct = savedCart.find((item) => String(item.id) === pendingProduct.id);
+
+                      const updatedCart = existingProduct
+                        ? savedCart.map((item) =>
+                            String(item.id) === pendingProduct.id
+                              ? { ...item, quantity: Math.min(99, Number(item.quantity || 1) + pendingProduct.quantity) }
+                              : item,
+                          )
+                        : [...savedCart, pendingProduct];
+
+                      localStorage.setItem(cartKey, JSON.stringify(updatedCart));
+                      window.dispatchEvent(new Event("upleex:cart"));
+                      toast.success("Product added to cart!");
+                      navigate("/cart", { replace: true });
+                    } catch (error) {
+                      console.error("Add to cart error:", error);
+                      toast.error("Unable to add product to cart. Please try again.");
+                    }
+                  }}
+                  className="mt-4 w-full max-w-[620px] py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-indigo-500 to-sky-500 shadow-md hover:opacity-90 hover:shadow-lg transition flex items-center justify-center gap-3"
+                >
                   <ShoppingCart size={20} />
-                  <span className="cursor-pointer">{t("add_to_cart")}</span>
+                  <span>{t("add_to_cart")}</span>
                   <ArrowRight size={18} />
                 </button>
 
