@@ -45,11 +45,11 @@ export const syncStoredUser = (updatedUser) => {
   const oldEmail = String(current.email || "").trim().toLowerCase();
   const newEmail = String(updatedUser.email || "").trim().toLowerCase();
 
-  // The cart/saved-for-later storage is keyed by the user's email. If the
-  // email changed we must move those keys so the cart follows the user
-  // instead of appearing to be lost.
+  // The cart, saved-for-later and wishlist storage are keyed by the user's
+  // email. If the email changed we must move those keys so the data follows
+  // the user instead of appearing to be lost.
   if (oldEmail && newEmail && oldEmail !== newEmail) {
-    const prefixes = ["upleex_cart_", "upleex_saved_"];
+    const prefixes = ["upleex_cart_", "upleex_saved_", "upleex_wishlist_"];
 
     prefixes.forEach((prefix) => {
       const oldKey = `${prefix}${encodeURIComponent(oldEmail)}`;

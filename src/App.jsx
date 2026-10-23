@@ -28,6 +28,7 @@ import Blogdetails from "./Blog/Blogdetails";
 import Cart from "./Cart/Cart";
 import Profile from "./Profile/Profile";
 import EditProfile from "./Profile/EditProfile";
+import Wishlist from "./Wishlist/Wishlist";
 
 function Home() {
   return (
@@ -97,6 +98,14 @@ function AppContent() {
             element={
               <ProtectedRoute>
                 <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute>
+                <Wishlist />
               </ProtectedRoute>
             }
           />

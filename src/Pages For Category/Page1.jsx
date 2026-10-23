@@ -5,14 +5,16 @@ import {
   ChevronUp,
   CalendarDays,
   MapPin,
-  Heart,
   Check,
 } from "lucide-react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import Footer from "../Footer/Footer";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useWishlist } from "../Wishlist/useWishlist";
+import WishlistButton from "../Wishlist/WishlistButton";
 
 const Page1 = () => {
   const { t } = useTranslation();
@@ -22,6 +24,7 @@ const Page1 = () => {
   const location = useLocation();
   const API_URL = import.meta.env.VITE_API_URL;
   const category = location.state?.category;
+  const { isWishlisted, toggle: toggleWishlist } = useWishlist();
 
   const [isDurationOpen, setIsDurationOpen] = useState(false);
 
@@ -108,6 +111,28 @@ const Page1 = () => {
 
     return true;
   });
+
+  const handleWishlistToggle = (event, product) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    try {
+      const result = toggleWishlist(product);
+
+      if (result.requiresAuth) {
+        toast.info("Please log in to add products to your wishlist.");
+        navigate("/register");
+        return;
+      }
+
+      toast.success(
+        result.added ? "Added to wishlist." : "Removed from wishlist.",
+      );
+    } catch (error) {
+      console.error("Wishlist error:", error);
+      toast.error("Unable to update your wishlist. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -296,9 +321,14 @@ const Page1 = () => {
                       {t("sell")}
                     </div>
 
-                    <button className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-gray-500 hover:text-red-500">
-                      <Heart size={18} />
-                    </button>
+                    <WishlistButton
+                      active={isWishlisted(
+                        item.id ?? item._id ?? item.productId,
+                      )}
+                      onClick={(event) => handleWishlistToggle(event, item)}
+                      size={18}
+                      className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white shadow flex items-center justify-center hover:text-red-500"
+                    />
 
                     <div className="rounded-[16px] overflow-hidden group flex justify-center">
                       <img

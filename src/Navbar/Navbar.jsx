@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import logo from "../assets/upleex-logo-dark.webp";
 
 import { CiLocationOn, CiSearch, CiMobile1, CiMenuFries, CiShoppingCart } from "react-icons/ci";
@@ -10,10 +10,18 @@ import {
   IoPersonOutline,
   IoCreateOutline,
   IoCartOutline,
+  IoHeartOutline,
 } from "react-icons/io5";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import {
+  getWishlistSnapshot,
+  parseWishlistSnapshot,
+  subscribeWishlist,
+} from "../Wishlist/wishlistStore";
+
+const getWishlistServerSnapshot = () => "[]";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -29,6 +37,17 @@ const Navbar = () => {
   const location = useLocation();
 
   const { t } = useTranslation();
+
+  const wishlistSnapshot = useSyncExternalStore(
+    subscribeWishlist,
+    getWishlistSnapshot,
+    getWishlistServerSnapshot,
+  );
+
+  const wishlistCount = useMemo(
+    () => parseWishlistSnapshot(wishlistSnapshot).length,
+    [wishlistSnapshot],
+  );
 
   useEffect(() => {
     const syncUser = () => {
@@ -215,9 +234,23 @@ const Navbar = () => {
 
             <button
               type="button"
+              onClick={() => navigate("/wishlist")}
+              aria-label="Wishlist"
+              className="relative ml-3 flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200 text-gray-700 hover:text-rose-500 hover:border-rose-300 hover:bg-rose-50 transition cursor-pointer"
+            >
+              <IoHeartOutline className="text-[25px]" />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 rounded-full bg-rose-500 text-white text-[11px] font-bold flex items-center justify-center">
+                  {wishlistCount > 99 ? "99+" : wishlistCount}
+                </span>
+              )}
+            </button>
+
+            <button
+              type="button"
               onClick={() => navigate("/cart")}
               aria-label="Shopping cart"
-              className="relative ml-3 mr-2 flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200 text-gray-700 hover:text-indigo-600 hover:border-indigo-300 hover:bg-indigo-50 transition cursor-pointer"
+              className="relative ml-2 mr-2 flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200 text-gray-700 hover:text-indigo-600 hover:border-indigo-300 hover:bg-indigo-50 transition cursor-pointer"
             >
               <CiShoppingCart className="text-[25px]" />
               {cartCount > 0 && (
@@ -309,6 +342,18 @@ const Navbar = () => {
                         <IoCartOutline className="text-[17px] text-indigo-500" />
 
                         {t("my_cart")}
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setUserMenu(false);
+                          navigate("/wishlist");
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-[14px] text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition cursor-pointer"
+                      >
+                        <IoHeartOutline className="text-[17px] text-rose-500" />
+
+                        My Wishlist
                       </button>
 
                       <div className="my-1 border-t border-gray-100" />
@@ -485,6 +530,24 @@ const Navbar = () => {
                   )}
                 </span>
                 Shopping Cart
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate("/wishlist");
+                  setMobileMenu(false);
+                }}
+                className="flex w-full items-center gap-3 text-left hover:text-indigo-600"
+              >
+                <span className="relative inline-flex items-center">
+                  <IoHeartOutline className="text-[23px]" />
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-2 -right-2 min-w-[17px] h-[17px] px-1 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center">
+                      {wishlistCount > 99 ? "99+" : wishlistCount}
+                    </span>
+                  )}
+                </span>
+                My Wishlist
               </button>
 
               <button className="block w-full text-left hover:text-indigo-600">

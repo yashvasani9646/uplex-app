@@ -19,6 +19,8 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useWishlist } from "../Wishlist/useWishlist";
+import WishlistButton from "../Wishlist/WishlistButton";
 
 const Buyer = () => {
   const navigate = useNavigate();
@@ -26,6 +28,7 @@ const Buyer = () => {
   const API_URL = import.meta.env.VITE_API_URL;
 
   const productId = new URLSearchParams(location.search).get("id");
+  const { isWishlisted, toggle: toggleWishlist } = useWishlist();
 
   const [product, setProduct] = useState(location.state?.product || null);
   const [showZoom, setShowZoom] = useState(false);
@@ -220,6 +223,27 @@ const Buyer = () => {
   }, []);
   const { t } = useTranslation();
 
+  const handleWishlistToggle = () => {
+    if (!product) return;
+
+    try {
+      const result = toggleWishlist(product);
+
+      if (result.requiresAuth) {
+        toast.info("Please log in to add products to your wishlist.");
+        navigate("/register");
+        return;
+      }
+
+      toast.success(
+        result.added ? "Added to wishlist." : "Removed from wishlist.",
+      );
+    } catch (error) {
+      console.error("Wishlist error:", error);
+      toast.error("Unable to update your wishlist. Please try again.");
+    }
+  };
+
   if (loading) {
     return (
       <>
@@ -336,9 +360,14 @@ const Buyer = () => {
                     {product?.product || "Product"}
                   </h1>
 
-                  <button className="w-10 h-10 rounded-full border bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-red-500 hover:shadow-md transition shrink-0">
-                    <Heart size={20} />
-                  </button>
+                  <WishlistButton
+                    active={isWishlisted(
+                      product?.id ?? product?._id ?? product?.productId,
+                    )}
+                    onClick={handleWishlistToggle}
+                    size={20}
+                    className="w-10 h-10 rounded-full border bg-white shadow-sm flex items-center justify-center hover:text-red-500 hover:shadow-md shrink-0"
+                  />
                 </div>
 
                 <p className="inline-block text-sm text-blue-600 mt-2 font-medium px-3 py-1 rounded-2xl bg-sky-100">
